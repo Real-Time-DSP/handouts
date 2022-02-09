@@ -92,41 +92,21 @@ $$H(e^{j\omega}) = \text{DTFT} \{ h[n] \} = \left. \mathcal Z \{ h[n] \} \right|
 
 ````
 
+We often write $H(\omega)$ instead of $H(j\omega)$ or $H(e^{j\omega})$.
+
 ### Magnitude and phase response
 
 The frequency response is, in general, complex valued. Typically, we represent it in terms of its magnitude and phase.
 
-````{panels}
-:header: text-center
-**Continuous time**
-^^^
-$ \text {Magnitude response} = $
+$$ \text {Magnitude response} = | H(\omega) | = \sqrt { \text{Re} \{ H(\omega) \} + \text{Im} \{ H(\omega) \} }$$
 
-$$| H(j\omega) | = \sqrt { \text{Re} \{ H(j\omega) \} + \text{Im} \{ H(j\omega) \} }$$
-
-$ \text {Phase response} = $
-
-$$ \angle H(j\omega) = \text{atan2} (\text{Im} \{ H(j\omega) \}, \text{Re} \{ H(j\omega) \})$$
-
----
-
-**Discrete time**
-^^^
-$ \text {Magnitude response} = $
-
-$$| H(e^{j\omega}) | = \sqrt { \text{Re} \{ H(e^{j\omega}) \} + \text{Im} \{ H(e^{j\omega}) \} }$$
-
-$ \text {Phase response} = $
-
-$$ \angle H(e^{j\omega}) = \text{atan2} (\text{Im} \{ H(e^{j\omega}) \}, \text{Re} \{ H(e^{j\omega}) \})$$
-
-````
+$$ \text {Phase response} = \angle H(\omega) = \text{atan2} (\text{Im} \{ H(\omega) \}, \text{Re} \{ H(\omega) \})$$
 
 where $\text{atan2}$ is the [two argument arctangent](https://en.wikipedia.org/wiki/Atan2).
 
 It is common to use the magnitude/phase representation when measuring and plotting the frequency response of a system. Typically, the magnitude response is expressed in decibels
 
-$$\text{Magnitude response in decibels} = 10 \log_{10}{|H_{\text{freq}}(\omega)|^2} = 20 \log_{10}{|H_{\text{freq}}(\omega)|}$$
+$$\text{Magnitude response in decibels} = 10 \log_{10}{|H(\omega)|^2} = 20 \log_{10}{|H(\omega)|}$$
 
 In MATLAB, the `freqz` function will calculate and plot the magnitude and phase response of a discrete-time LTI system.
 

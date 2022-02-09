@@ -361,48 +361,19 @@
 </div>
 </div>
 </div>
+<p>We often write <span class="math notranslate nohighlight">\(H(\omega)\)</span> instead of <span class="math notranslate nohighlight">\(H(j\omega)\)</span> or <span class="math notranslate nohighlight">\(H(e^{j\omega})\)</span>.</p>
 </div>
 <div class="section" id="magnitude-and-phase-response">
 <h3>Magnitude and phase response<a class="headerlink" href="#magnitude-and-phase-response" title="Permalink to this headline">¶</a></h3>
 <p>The frequency response is, in general, complex valued. Typically, we represent it in terms of its magnitude and phase.</p>
-<div class="sphinx-bs container pb-4 docutils">
-<div class="row docutils">
-<div class="d-flex col-lg-6 col-md-6 col-sm-6 col-xs-12 p-2 docutils">
-<div class="card w-100 shadow docutils">
-<div class="card-header text-center docutils">
-<p class="card-text"><strong>Continuous time</strong></p>
-</div>
-<div class="card-body docutils">
-<p class="card-text"><span class="math notranslate nohighlight">\( \text {Magnitude response} = \)</span></p>
 <div class="math notranslate nohighlight">
-\[| H(j\omega) | = \sqrt { \text{Re} \{ H(j\omega) \} + \text{Im} \{ H(j\omega) \} }\]</div>
-<p class="card-text"><span class="math notranslate nohighlight">\( \text {Phase response} = \)</span></p>
+\[ \text {Magnitude response} = | H(\omega) | = \sqrt { \text{Re} \{ H(\omega) \} + \text{Im} \{ H(\omega) \} }\]</div>
 <div class="math notranslate nohighlight">
-\[ \angle H(j\omega) = \text{atan2} (\text{Im} \{ H(j\omega) \}, \text{Re} \{ H(j\omega) \})\]</div>
-</div>
-</div>
-</div>
-<div class="d-flex col-lg-6 col-md-6 col-sm-6 col-xs-12 p-2 docutils">
-<div class="card w-100 shadow docutils">
-<div class="card-header text-center docutils">
-<p class="card-text"><strong>Discrete time</strong></p>
-</div>
-<div class="card-body docutils">
-<p class="card-text"><span class="math notranslate nohighlight">\( \text {Magnitude response} = \)</span></p>
-<div class="math notranslate nohighlight">
-\[| H(e^{j\omega}) | = \sqrt { \text{Re} \{ H(e^{j\omega}) \} + \text{Im} \{ H(e^{j\omega}) \} }\]</div>
-<p class="card-text"><span class="math notranslate nohighlight">\( \text {Phase response} = \)</span></p>
-<div class="math notranslate nohighlight">
-\[ \angle H(e^{j\omega}) = \text{atan2} (\text{Im} \{ H(e^{j\omega}) \}, \text{Re} \{ H(e^{j\omega}) \})\]</div>
-</div>
-</div>
-</div>
-</div>
-</div>
+\[ \text {Phase response} = \angle H(\omega) = \text{atan2} (\text{Im} \{ H(\omega) \}, \text{Re} \{ H(\omega) \})\]</div>
 <p>where <span class="math notranslate nohighlight">\(\text{atan2}\)</span> is the <a class="reference external" href="https://en.wikipedia.org/wiki/Atan2">two argument arctangent</a>.</p>
 <p>It is common to use the magnitude/phase representation when measuring and plotting the frequency response of a system. Typically, the magnitude response is expressed in decibels</p>
 <div class="math notranslate nohighlight">
-\[\text{Magnitude response in decibels} = 10 \log_{10}{|H_{\text{freq}}(\omega)|^2} = 20 \log_{10}{|H_{\text{freq}}(\omega)|}\]</div>
+\[\text{Magnitude response in decibels} = 10 \log_{10}{|H(\omega)|^2} = 20 \log_{10}{|H(\omega)|}\]</div>
 <p>In MATLAB, the <code class="docutils literal notranslate"><span class="pre">freqz</span></code> function will calculate and plot the magnitude and phase response of a discrete-time LTI system.</p>
 </div>
 </div>
