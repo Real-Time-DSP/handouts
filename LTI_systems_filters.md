@@ -1,6 +1,6 @@
 # LTI filters and frequency selectivity
 
-Linear time-invariant (LTI) systems have many [useful properties](#properties-of-LTI-systems). We can utilize these properties to design [frequency selective](#frequency-selectivity) filters. For a filter be be realizable and operate in real-time, it must be [causal](#causality). Typical frequency selective filters are [stable systems](#stability). However, unstable LTI systems can also be useful (e.g. oscillators).
+Linear time-invariant (LTI) systems have many [useful properties](#properties-of-LTI-systems). We can utilize these properties to design [frequency selective](#frequency-selectivity) filters.
 
 ## Mathematical definitions
 
@@ -25,10 +25,6 @@ Let $x(t)$ be an arbitrary input to a system $\mathcal{S}$ and let $y(t)$ be the
 $$\mathcal S \left\{x(t-\tau)\right\} = y(t-\tau)$$
 
 A common violation of the time-invariance condition occurs when a system has non-zero initial conditions.
-
-## Related system properties
-### Causality
-### Stability
 
 ## Properties of LTI systems
 
@@ -97,8 +93,6 @@ $$H(e^{j\omega}) = \text{DTFT} \{ h[n] \}$$
 ````
 
 ### Magnitude and phase response
-
-
 
 ## Frequency selectivity
 

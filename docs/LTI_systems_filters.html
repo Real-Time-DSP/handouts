@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Linear time-invariant systems and filters &#8212; Real Time DSP Handouts</title>
+    <title>LTI filters and frequency selectivity &#8212; Real Time DSP Handouts</title>
     
   <link href="_static/css/theme.css" rel="stylesheet">
   <link href="_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
@@ -100,7 +100,7 @@
 <ul class="current nav bd-sidenav">
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   Linear time-invariant systems and filters
+   LTI filters and frequency selectivity
   </a>
  </li>
 </ul>
@@ -194,30 +194,6 @@
   <a class="reference internal nav-link" href="#mathematical-definitions">
    Mathematical definitions
   </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#linearity">
-     Linearity
-    </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#additivity">
-       Additivity
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#homogeneity">
-       Homogeneity
-      </a>
-     </li>
-    </ul>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#time-invariance">
-     Time-invariance
-    </a>
-   </li>
-  </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#properties-of-lti-systems">
@@ -230,52 +206,13 @@
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#exponentials-as-eigenfunctions">
-     Exponentials as eigenfunctions
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#related-properties">
-   Related properties
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#causality">
-     Causality
+    <a class="reference internal nav-link" href="#frequency-response">
+     Frequency response
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#stability">
-     Stability
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#frequency-analysis">
-   Frequency analysis
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#fourier-transform">
-     Fourier transform
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#discrete-time-fourier-transform">
-     Discrete-time Fourier transform
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#laplace-transform">
-     Laplace transform
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#z-transform">
-     Z transform
+    <a class="reference internal nav-link" href="#magnitude-and-phase-response">
+     Magnitude and phase response
     </a>
    </li>
   </ul>
@@ -284,6 +221,38 @@
   <a class="reference internal nav-link" href="#frequency-selectivity">
    Frequency selectivity
   </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#lowpass">
+     Lowpass
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#highpass">
+     Highpass
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#bandpass">
+     Bandpass
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#bandstop">
+     Bandstop
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#notch">
+     Notch
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#all-pass">
+     All-pass
+    </a>
+   </li>
+  </ul>
  </li>
 </ul>
 
@@ -295,7 +264,7 @@
         <div class="col-12 col-md-9 pl-md-3 pr-md-0">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Linear time-invariant systems and filters</h1>
+                <h1>LTI filters and frequency selectivity</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
@@ -309,30 +278,6 @@
   <a class="reference internal nav-link" href="#mathematical-definitions">
    Mathematical definitions
   </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#linearity">
-     Linearity
-    </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#additivity">
-       Additivity
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#homogeneity">
-       Homogeneity
-      </a>
-     </li>
-    </ul>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#time-invariance">
-     Time-invariance
-    </a>
-   </li>
-  </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#properties-of-lti-systems">
@@ -345,52 +290,13 @@
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#exponentials-as-eigenfunctions">
-     Exponentials as eigenfunctions
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#related-properties">
-   Related properties
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#causality">
-     Causality
+    <a class="reference internal nav-link" href="#frequency-response">
+     Frequency response
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#stability">
-     Stability
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#frequency-analysis">
-   Frequency analysis
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#fourier-transform">
-     Fourier transform
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#discrete-time-fourier-transform">
-     Discrete-time Fourier transform
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#laplace-transform">
-     Laplace transform
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#z-transform">
-     Z transform
+    <a class="reference internal nav-link" href="#magnitude-and-phase-response">
+     Magnitude and phase response
     </a>
    </li>
   </ul>
@@ -399,6 +305,38 @@
   <a class="reference internal nav-link" href="#frequency-selectivity">
    Frequency selectivity
   </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#lowpass">
+     Lowpass
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#highpass">
+     Highpass
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#bandpass">
+     Bandpass
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#bandstop">
+     Bandstop
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#notch">
+     Notch
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#all-pass">
+     All-pass
+    </a>
+   </li>
+  </ul>
  </li>
 </ul>
 
@@ -409,97 +347,132 @@
             
               <div>
                 
-  <div class="tex2jax_ignore mathjax_ignore section" id="linear-time-invariant-systems-and-filters">
-<h1>Linear time-invariant systems and filters<a class="headerlink" href="#linear-time-invariant-systems-and-filters" title="Permalink to this headline">¶</a></h1>
-<p>Adopting a linear time-invariant (LTI) model of a system unlocks several mathematical tools.</p>
-<ul class="simple">
-<li><p>Impulse response and convolution</p></li>
-<li><p>Exponentials as eigenfunctions</p></li>
-</ul>
-<p>Often, we will analyze LTI systems that have other important properties.</p>
-<ul class="simple">
-<li><p>Causality</p></li>
-<li><p>Stability</p></li>
-</ul>
-<p>Depending on a system’s properties and whether it operates in continuous time or discrete time, we often use one or more frequency transforms to analyze LTI systems.</p>
-<ul class="simple">
-<li><p>Fourier transform</p></li>
-<li><p>Discrete-time Fourier transform</p></li>
-<li><p>Laplace transform</p></li>
-<li><p>Z transform</p></li>
-</ul>
-<p>Even if a system does not satisfy the strict mathematical definitions of linearity or time-invariance, we can often approximate the system as LTI and still capture most of the system’s behavior.</p>
-<p>One of the reasons to study LTI systems is to design and analyze LTI filters. LTI filters are often characterized by their frequency selectivity.</p>
-<ul class="simple">
-<li><p>Lowpass</p></li>
-<li><p>Highpass</p></li>
-<li><p>Bandpass</p></li>
-<li><p>Bandstop and notch</p></li>
-<li><p>All-pass</p></li>
-</ul>
+  <div class="tex2jax_ignore mathjax_ignore section" id="lti-filters-and-frequency-selectivity">
+<h1>LTI filters and frequency selectivity<a class="headerlink" href="#lti-filters-and-frequency-selectivity" title="Permalink to this headline">¶</a></h1>
+<p>Linear time-invariant (LTI) systems have many <a class="reference external" href="#properties-of-LTI-systems">useful properties</a>. We can utilize these properties to design <a class="reference external" href="#frequency-selectivity">frequency selective</a> filters.</p>
 <div class="section" id="mathematical-definitions">
 <h2>Mathematical definitions<a class="headerlink" href="#mathematical-definitions" title="Permalink to this headline">¶</a></h2>
-<p>A system is said to be LTI if it satisfies both the linearity condition and the time-invariance condition.</p>
-<p>Using the mathematical definitions is one way to check if a system is LTI. However for systems that are described by a differential equation, difference equation or by their impulse response, there are other ways to check if the system is LTI.</p>
-<div class="section" id="linearity">
-<h3>Linearity<a class="headerlink" href="#linearity" title="Permalink to this headline">¶</a></h3>
-<p>A system is linear if it satisfies additivity and homogeneity.</p>
-<div class="section" id="additivity">
-<h4>Additivity<a class="headerlink" href="#additivity" title="Permalink to this headline">¶</a></h4>
-</div>
-<div class="section" id="homogeneity">
-<h4>Homogeneity<a class="headerlink" href="#homogeneity" title="Permalink to this headline">¶</a></h4>
-</div>
-</div>
-<div class="section" id="time-invariance">
-<h3>Time-invariance<a class="headerlink" href="#time-invariance" title="Permalink to this headline">¶</a></h3>
-<p>Let <span class="math notranslate nohighlight">\(x(t)\)</span> be an arbitrary input to a system <span class="math notranslate nohighlight">\(\mathscr{S}\)</span> and let <span class="math notranslate nohighlight">\(y(t)\)</span> be the corresponding output, i.e., <span class="math notranslate nohighlight">\(\mathscr S \left\{x(t)\right\} = y(t)\)</span>.</p>
-<p>If <span class="math notranslate nohighlight">\(\mathscr S \left\{x(t-\tau)\right\} = y(t-\tau)\)</span> for every possible time shift <span class="math notranslate nohighlight">\(\tau\)</span>, then the system <span class="math notranslate nohighlight">\(\mathscr S\)</span> is time-invariant.</p>
+<p>A system is LTI if it satisfies additivity, homogeneity, and time-invariance.</p>
+<p><strong>Additivity</strong></p>
+<p>Let <span class="math notranslate nohighlight">\(x_1(t)\)</span> and <span class="math notranslate nohighlight">\(x_2(t)\)</span> be an arbitrary input signals to a system <span class="math notranslate nohighlight">\(\mathcal{S}\)</span> and let <span class="math notranslate nohighlight">\(y_1(t)\)</span> and <span class="math notranslate nohighlight">\(y_2(t)\)</span> be the corresponding outputs. The system <span class="math notranslate nohighlight">\(\mathcal S\)</span> satisfies additivity if</p>
+<div class="math notranslate nohighlight">
+\[\mathcal S \left\{x_1(t) + x_2(t)\right\} = y_1(t)+y_2(t)\]</div>
+<p><strong>Homogeneity</strong></p>
+<p>Let <span class="math notranslate nohighlight">\(x(t)\)</span> be an arbitrary input to a system <span class="math notranslate nohighlight">\(\mathcal{S}\)</span> and let <span class="math notranslate nohighlight">\(y(t)\)</span> be the corresponding output. The system <span class="math notranslate nohighlight">\(\mathcal S\)</span> satisfies homogeneity if, for any constant <span class="math notranslate nohighlight">\(a\)</span>,</p>
+<div class="math notranslate nohighlight">
+\[\mathcal S \left\{ax(t)\right\} = ay(t)\]</div>
+<p><strong>Time-invariance</strong></p>
+<p>Let <span class="math notranslate nohighlight">\(x(t)\)</span> be an arbitrary input to a system <span class="math notranslate nohighlight">\(\mathcal{S}\)</span> and let <span class="math notranslate nohighlight">\(y(t)\)</span> be the corresponding output. The system <span class="math notranslate nohighlight">\(\mathcal S\)</span> is time-invariant if, for any time shift <span class="math notranslate nohighlight">\(\tau\)</span>,</p>
+<div class="math notranslate nohighlight">
+\[\mathcal S \left\{x(t-\tau)\right\} = y(t-\tau)\]</div>
 <p>A common violation of the time-invariance condition occurs when a system has non-zero initial conditions.</p>
-</div>
 </div>
 <div class="section" id="properties-of-lti-systems">
 <h2>Properties of LTI systems<a class="headerlink" href="#properties-of-lti-systems" title="Permalink to this headline">¶</a></h2>
+<p>An LTI system is <a class="reference external" href="#impulse-response-and-convolution">uniquely characterized by its impulse response</a>. The <a class="reference external" href="#frequency-response">Frequency response</a> of an LTI system is the Fourier transform of its impulse response.</p>
 <div class="section" id="impulse-response-and-convolution">
 <h3>Impulse response and convolution<a class="headerlink" href="#impulse-response-and-convolution" title="Permalink to this headline">¶</a></h3>
+<div class="sphinx-bs container pb-4 docutils">
+<div class="row docutils">
+<div class="d-flex col-lg-6 col-md-6 col-sm-6 col-xs-12 p-2 docutils">
+<div class="card w-100 shadow docutils">
+<div class="card-header text-center docutils">
+<p class="card-text"><strong>Continuous time</strong></p>
 </div>
-<div class="section" id="exponentials-as-eigenfunctions">
-<h3>Exponentials as eigenfunctions<a class="headerlink" href="#exponentials-as-eigenfunctions" title="Permalink to this headline">¶</a></h3>
+<div class="card-body docutils">
+<p class="card-text">A continuous time impulse, (also known as the Dirac delta) can be defined as a limit.</p>
+<div class="math notranslate nohighlight">
+\[\delta(t) = \lim_{\epsilon \to 0}{\frac{\text{rect}(t/\epsilon)}{\epsilon}}\]</div>
+<p class="card-text">If a system is LTI, then its impulse response <span class="math notranslate nohighlight">\(h(t) = \mathcal S \{ \delta(t) \}\)</span> uniquely characterizes the system. The output <span class="math notranslate nohighlight">\(y(t)\)</span> of an LTI system is the convolution between the input <span class="math notranslate nohighlight">\(x(t)\)</span> and the system’s impulse response <span class="math notranslate nohighlight">\(h(t)\)</span>.</p>
+<div class="math notranslate nohighlight">
+\[ y(t) = x(t) * h(t) = \int_{-\infty}^{\infty}{x(t-\tau)h(\tau) d \tau}\]</div>
 </div>
 </div>
-<div class="section" id="related-properties">
-<h2>Related properties<a class="headerlink" href="#related-properties" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="causality">
-<h3>Causality<a class="headerlink" href="#causality" title="Permalink to this headline">¶</a></h3>
 </div>
-<div class="section" id="stability">
-<h3>Stability<a class="headerlink" href="#stability" title="Permalink to this headline">¶</a></h3>
+<div class="d-flex col-lg-6 col-md-6 col-sm-6 col-xs-12 p-2 docutils">
+<div class="card w-100 shadow docutils">
+<div class="card-header text-center docutils">
+<p class="card-text"><strong>Discrete time</strong></p>
+</div>
+<div class="card-body docutils">
+<p class="card-text">A discrete time impulse, (also known as the Kronecker delta) can be defined as a piecewise function.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\delta[n] = \left\{ \begin{array}{ll} 1 &amp; \quad n = 0 \\ 0 &amp; \quad n \neq 0 \end{array} \right.\end{split}\]</div>
+<p class="card-text">If a system is LTI, then its impulse response <span class="math notranslate nohighlight">\(h[n] = \mathcal S \{ \delta[n] \}\)</span> uniquely characterizes the system. The output <span class="math notranslate nohighlight">\(y[n]\)</span> of an LTI system is the convolution between the input <span class="math notranslate nohighlight">\(x[n]\)</span> and the system’s impulse response <span class="math notranslate nohighlight">\(h[n]\)</span>.</p>
+<div class="math notranslate nohighlight">
+\[ y[n] = x[n] * h[n] = \sum_{-\infty}^{\infty}{x[n-m]h[m]}\]</div>
 </div>
 </div>
-<div class="section" id="frequency-analysis">
-<h2>Frequency analysis<a class="headerlink" href="#frequency-analysis" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="fourier-transform">
-<h3>Fourier transform<a class="headerlink" href="#fourier-transform" title="Permalink to this headline">¶</a></h3>
 </div>
-<div class="section" id="discrete-time-fourier-transform">
-<h3>Discrete-time Fourier transform<a class="headerlink" href="#discrete-time-fourier-transform" title="Permalink to this headline">¶</a></h3>
 </div>
-<div class="section" id="laplace-transform">
-<h3>Laplace transform<a class="headerlink" href="#laplace-transform" title="Permalink to this headline">¶</a></h3>
 </div>
-<div class="section" id="z-transform">
-<h3>Z transform<a class="headerlink" href="#z-transform" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="frequency-response">
+<h3>Frequency response<a class="headerlink" href="#frequency-response" title="Permalink to this headline">¶</a></h3>
+<p>Complex exponentials are eigenfunctions of LTI systems. Combined with the previous property, This allows us to uniquely characterize a system by its frequency response.</p>
+<div class="admonition-eigenfunction admonition">
+<p class="admonition-title">Eigenfunction</p>
+<p>If application of the system <span class="math notranslate nohighlight">\(\mathcal S\)</span> to the signal <span class="math notranslate nohighlight">\(x(t)\)</span> simply results in a scaling ( i.e. <span class="math notranslate nohighlight">\(\mathcal S \{x(t)\} = \lambda x(t) \)</span> ) then we say that <span class="math notranslate nohighlight">\(x(t)\)</span> is an eigenfunction of the system.</p>
+</div>
+<div class="sphinx-bs container pb-4 docutils">
+<div class="row docutils">
+<div class="d-flex col-lg-6 col-md-6 col-sm-6 col-xs-12 p-2 docutils">
+<div class="card w-100 shadow docutils">
+<div class="card-header text-center docutils">
+<p class="card-text"><strong>Continuous time</strong></p>
+</div>
+<div class="card-body docutils">
+<p class="card-text">If the input to an LTI system is a complex exponential <span class="math notranslate nohighlight">\(x(t) = e^{j \omega t}\)</span>, then the corresponding output is</p>
+<div class="math notranslate nohighlight">
+\[ y(t) = H(j \omega) e^{j\omega t} \]</div>
+<p class="card-text">where <span class="math notranslate nohighlight">\(H(j\omega)\)</span> (called the frequency response) is the Fourier transform of the impulse response</p>
+<div class="math notranslate nohighlight">
+\[H(j\omega) = \mathcal F \{ h(t) \}\]</div>
+</div>
+</div>
+</div>
+<div class="d-flex col-lg-6 col-md-6 col-sm-6 col-xs-12 p-2 docutils">
+<div class="card w-100 shadow docutils">
+<div class="card-header text-center docutils">
+<p class="card-text"><strong>Discrete time</strong></p>
+</div>
+<div class="card-body docutils">
+<p class="card-text">If the input to an LTI system is a complex exponential <span class="math notranslate nohighlight">\(x[n] = e^{j \omega n}\)</span>, then the corresponding output is</p>
+<div class="math notranslate nohighlight">
+\[ y[n] = H(e^{j\omega}) e^{j\omega n} \]</div>
+<p class="card-text">where <span class="math notranslate nohighlight">\(H(e^{j\omega})\)</span> (called the frequency response) is the Discrete-time Fourier transform of the impulse response</p>
+<div class="math notranslate nohighlight">
+\[H(e^{j\omega}) = \text{DTFT} \{ h[n] \}\]</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="magnitude-and-phase-response">
+<h3>Magnitude and phase response<a class="headerlink" href="#magnitude-and-phase-response" title="Permalink to this headline">¶</a></h3>
 </div>
 </div>
 <div class="section" id="frequency-selectivity">
 <h2>Frequency selectivity<a class="headerlink" href="#frequency-selectivity" title="Permalink to this headline">¶</a></h2>
-<ul class="simple">
-<li><p>Lowpass</p></li>
-<li><p>Highpass</p></li>
-<li><p>Bandpass</p></li>
-<li><p>Bandstop and notch</p></li>
-<li><p>All-pass</p></li>
-</ul>
+<div class="section" id="lowpass">
+<h3>Lowpass<a class="headerlink" href="#lowpass" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="highpass">
+<h3>Highpass<a class="headerlink" href="#highpass" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="bandpass">
+<h3>Bandpass<a class="headerlink" href="#bandpass" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="bandstop">
+<h3>Bandstop<a class="headerlink" href="#bandstop" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="notch">
+<h3>Notch<a class="headerlink" href="#notch" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="all-pass">
+<h3>All-pass<a class="headerlink" href="#all-pass" title="Permalink to this headline">¶</a></h3>
+</div>
 </div>
 </div>
 
