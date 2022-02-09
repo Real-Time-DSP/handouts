@@ -1,94 +1,104 @@
 # LTI filters and frequency selectivity
 
-Adopting a linear time-invariant (LTI) model of a system can simplify analysis for three (related) reasons
-
-1. [An LTI system is uniquely characterized by its impulse response](#impulse-response-and-convolution)
-2. [Complex exponentials (including sinusoids) are eigenfunctions of LTI systems
-3. [The Fourier transform of the impulse response is the frequency response](#frequency-analysis)
-
-We can utilize these properties to design LTI filters based on a desired [frequency selectivity](#frequency-selectivity).
-
-* [Lowpass](#lowpass)
-* [Highpass](#highpass)
-* [Bandpass](#bandpass)
-* [Bandstop](#bandstop)
-* [Notch](#notch)
-* [All-pass](#all-pass)
-
-Even if a system does not satisfy the strict mathematical definitions of linearity or time-invariance, we can often approximate the system as LTI and still capture much of the system's behavior.
-
-For a filter be be realizable and operate in real-time, it must be [causal](#causality). Typical frequency selective filters are [stable systems](#stability). However, unstable LTI systems can also be useful (e.g. oscillators).
+Linear time-invariant (LTI) systems have many [useful properties](#properties-of-LTI-systems). We can utilize these properties to design [frequency selective](#frequency-selectivity) filters. For a filter be be realizable and operate in real-time, it must be [causal](#causality). Typical frequency selective filters are [stable systems](#stability). However, unstable LTI systems can also be useful (e.g. oscillators).
 
 ## Mathematical definitions
 
-A system is said to be LTI if it satisfies both the linearity condition and the time-invariance condition.
-
-Using the mathematical definitions is one way to check if a system is LTI. However for systems that are described by a differential equation, difference equation or by their impulse response, there are other ways to check if the system is LTI.
-
-### Linearity
-
-A system is linear if it satisfies additivity and homogeneity.
+A system is LTI if it satisfies additivity, homogeneity, and time-invariance.
 
 **Additivity**
 
-Let $x_1(t)$ and $x_2(t)$ be an arbitrary input signals to a system $\mathcal{T}$ and let $y_1(t)$ and $y_2(t)$ be the corresponding outputs.
+Let $x_1(t)$ and $x_2(t)$ be an arbitrary input signals to a system $\mathcal{S}$ and let $y_1(t)$ and $y_2(t)$ be the corresponding outputs. The system $\mathcal S$ satisfies additivity if
 
-The system $\mathcal T$ satisfies additivity if
-
-$$\mathcal T \left\{x_1(t) + x_2(t)\right\} = y_1(t)+y_2(t)$$
+$$\mathcal S \left\{x_1(t) + x_2(t)\right\} = y_1(t)+y_2(t)$$
 
 **Homogeneity**
 
-Let $x(t)$ be an arbitrary input to a system $\mathcal{T}$ and let $y(t)$ be the corresponding output.
+Let $x(t)$ be an arbitrary input to a system $\mathcal{S}$ and let $y(t)$ be the corresponding output. The system $\mathcal S$ satisfies homogeneity if, for any constant $a$,
 
-The system $\mathcal T$ satisfies homogeneity if, for any constant $a$,
+$$\mathcal S \left\{ax(t)\right\} = ay(t)$$
 
-$$\mathcal T \left\{ax(t)\right\} = ay(t)$$
+**Time-invariance**
 
-### Time-invariance
+Let $x(t)$ be an arbitrary input to a system $\mathcal{S}$ and let $y(t)$ be the corresponding output. The system $\mathcal S$ is time-invariant if, for any time shift $\tau$,
 
-Let $x(t)$ be an arbitrary input to a system $\mathcal{T}$ and let $y(t)$ be the corresponding output.
-
-The system $\mathcal T$ is time-invariant if, for any time shift $\tau$,
-
-$$\mathcal T \left\{x(t-\tau)\right\} = y(t-\tau)$$
+$$\mathcal S \left\{x(t-\tau)\right\} = y(t-\tau)$$
 
 A common violation of the time-invariance condition occurs when a system has non-zero initial conditions.
 
+## Related system properties
+### Causality
+### Stability
+
 ## Properties of LTI systems
 
-If a system is LTI, then it can be uniquely described by its impulse response. The
+An LTI system is [uniquely characterized by its impulse response](#impulse-response-and-convolution). The [Frequency response](#frequency-response) of an LTI system is the Fourier transform of its impulse response.
 
 ### Impulse response and convolution
 
-| Continuous Time | Discrete Time |
-| :-------------: | :-----------: |
-| test            | test          |
+````{panels}
+:header: text-center
+**Continuous time**
+^^^
+A continuous time impulse, (also known as the Dirac delta) can be defined as a limit.
 
-### Exponentials as eigenfunctions
+$$\delta(t) = \lim_{\epsilon \to 0}{\frac{\text{rect}(t/\epsilon)}{\epsilon}}$$
 
-## Related system properties
+If a system is LTI, then its impulse response $h(t) = \mathcal S \{ \delta(t) \}$ uniquely characterizes the system. The output $y(t)$ of an LTI system is the convolution between the input $x(t)$ and the system's impulse response $h(t)$.
 
-### Causality
+$$ y(t) = x(t) * h(t) = \int_{-\infty}^{\infty}{x(t-\tau)h(\tau) d \tau}$$
 
-### Stability
+---
 
-## Frequency analysis
+**Discrete time**
+^^^
+A discrete time impulse, (also known as the Kronecker delta) can be defined as a piecewise function.
 
-Depending on a system's properties and whether it operates in continuous time or discrete time, we often use one or more frequency transforms to analyze LTI systems.
+$$\delta[n] = \left\{ \begin{array}{ll} 1 & \quad n = 0 \\ 0 & \quad n \neq 0 \end{array} \right.$$
 
-* Fourier transform
-* Discrete-time Fourier transform
-* Laplace transform
-* Z transform
+If a system is LTI, then its impulse response $h[n] = \mathcal S \{ \delta[n] \}$ uniquely characterizes the system. The output $y[n]$ of an LTI system is the convolution between the input $x[n]$ and the system's impulse response $h[n]$.
 
-### Fourier transform
+$$ y[n] = x[n] * h[n] = \sum_{-\infty}^{\infty}{x[n-m]h[m]}$$
 
-### Discrete-time Fourier transform
+````
 
-### Laplace transform
+### Frequency response
 
-### Z transform
+Complex exponentials are eigenfunctions of LTI systems. Combined with the previous property, This allows us to uniquely characterize a system by its frequency response.
+
+```{admonition} Eigenfunction
+If application of the system $\mathcal S$ to the signal $x(t)$ simply results in a scaling ( i.e. $\mathcal S \{x(t)\} = \lambda x(t) $ ) then we say that $x(t)$ is an eigenfunction of the system. 
+```
+
+````{panels}
+:header: text-center
+**Continuous time**
+^^^
+If the input to an LTI system is a complex exponential $x(t) = e^{j \omega t}$, then the corresponding output is
+
+$$ y(t) = H(j \omega) e^{j\omega t} $$
+
+where $H(j\omega)$ (called the frequency response) is the Fourier transform of the impulse response
+
+$$H(j\omega) = \mathcal F \{ h(t) \}$$
+
+---
+
+**Discrete time**
+^^^
+If the input to an LTI system is a complex exponential $x[n] = e^{j \omega n}$, then the corresponding output is
+
+$$ y[n] = H(e^{j\omega}) e^{j\omega n} $$
+
+where $H(e^{j\omega})$ (called the frequency response) is the Discrete-time Fourier transform of the impulse response
+
+$$H(e^{j\omega}) = \text{DTFT} \{ h[n] \}$$
+
+````
+
+### Magnitude and phase response
+
+
 
 ## Frequency selectivity
 
@@ -98,3 +108,4 @@ Depending on a system's properties and whether it operates in continuous time or
 ### Bandstop
 ### Notch
 ### All-pass
+
