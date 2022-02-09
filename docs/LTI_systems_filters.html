@@ -41,9 +41,9 @@
     <script src="_static/clipboard.min.js"></script>
     <script src="_static/copybutton.js"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
-    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script src="_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
     <script>
         const thebe_selector = ".thebe"
@@ -149,7 +149,7 @@
                 data-placement="left">.md</button></a>
         <!-- Download PDF via print -->
         <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
-                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
     </div>
 </div>
 
@@ -183,7 +183,7 @@
         </div>
 
         <!-- Table of contents -->
-        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+        <div class="d-none d-md-block col-md-2 bd-toc show">
             
             <div class="tocsection onthispage pt-5 pb-3">
                 <i class="fas fa-list"></i> Contents
@@ -262,89 +262,7 @@
 </div>
     <div id="main-content" class="row">
         <div class="col-12 col-md-9 pl-md-3 pr-md-0">
-            <!-- Table of contents that is only displayed when printing the page -->
-            <div id="jb-print-docs-body" class="onlyprint">
-                <h1>LTI filters and frequency selectivity</h1>
-                <!-- Table of contents -->
-                <div id="print-main-content">
-                    <div id="jb-print-toc">
-                        
-                        <div>
-                            <h2> Contents </h2>
-                        </div>
-                        <nav aria-label="Page">
-                            <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#mathematical-definitions">
-   Mathematical definitions
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#properties-of-lti-systems">
-   Properties of LTI systems
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#impulse-response-and-convolution">
-     Impulse response and convolution
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#frequency-response">
-     Frequency response
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#magnitude-and-phase-response">
-     Magnitude and phase response
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#frequency-selectivity">
-   Frequency selectivity
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#lowpass">
-     Lowpass
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#highpass">
-     Highpass
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#bandpass">
-     Bandpass
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#bandstop">
-     Bandstop
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#notch">
-     Notch
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#all-pass">
-     All-pass
-    </a>
-   </li>
-  </ul>
- </li>
-</ul>
-
-                        </nav>
-                    </div>
-                </div>
-            </div>
-            
+        
               <div>
                 
   <div class="tex2jax_ignore mathjax_ignore section" id="lti-filters-and-frequency-selectivity">
@@ -354,15 +272,15 @@
 <h2>Mathematical definitions<a class="headerlink" href="#mathematical-definitions" title="Permalink to this headline">¶</a></h2>
 <p>A system is LTI if it satisfies additivity, homogeneity, and time-invariance.</p>
 <p><strong>Additivity</strong></p>
-<p>Let <span class="math notranslate nohighlight">\(x_1(t)\)</span> and <span class="math notranslate nohighlight">\(x_2(t)\)</span> be an arbitrary input signals to a system <span class="math notranslate nohighlight">\(\mathcal{S}\)</span> and let <span class="math notranslate nohighlight">\(y_1(t)\)</span> and <span class="math notranslate nohighlight">\(y_2(t)\)</span> be the corresponding outputs. The system <span class="math notranslate nohighlight">\(\mathcal S\)</span> satisfies additivity if</p>
+<p>Let <span class="math notranslate nohighlight">\(x_1(t)\)</span> and <span class="math notranslate nohighlight">\(x_2(t)\)</span> be arbitrary input signals to a system <span class="math notranslate nohighlight">\(\mathcal{S}\)</span>. The system satisfies additivity if</p>
 <div class="math notranslate nohighlight">
-\[\mathcal S \left\{x_1(t) + x_2(t)\right\} = y_1(t)+y_2(t)\]</div>
+\[\mathcal S \left\{x_1(t) + x_2(t)\right\} = \mathcal S \{x_1(t)\} + \mathcal S \{x_2(t) \}\]</div>
 <p><strong>Homogeneity</strong></p>
-<p>Let <span class="math notranslate nohighlight">\(x(t)\)</span> be an arbitrary input to a system <span class="math notranslate nohighlight">\(\mathcal{S}\)</span> and let <span class="math notranslate nohighlight">\(y(t)\)</span> be the corresponding output. The system <span class="math notranslate nohighlight">\(\mathcal S\)</span> satisfies homogeneity if, for any constant <span class="math notranslate nohighlight">\(a\)</span>,</p>
+<p>Let <span class="math notranslate nohighlight">\(x(t)\)</span> be an arbitrary input to a system <span class="math notranslate nohighlight">\(\mathcal{S}\)</span>. The system satisfies homogeneity if, for any constant <span class="math notranslate nohighlight">\(a\)</span>,</p>
 <div class="math notranslate nohighlight">
-\[\mathcal S \left\{ax(t)\right\} = ay(t)\]</div>
+\[\mathcal S \left\{ax(t)\right\} = a \mathcal S \{ x(t) \}\]</div>
 <p><strong>Time-invariance</strong></p>
-<p>Let <span class="math notranslate nohighlight">\(x(t)\)</span> be an arbitrary input to a system <span class="math notranslate nohighlight">\(\mathcal{S}\)</span> and let <span class="math notranslate nohighlight">\(y(t)\)</span> be the corresponding output. The system <span class="math notranslate nohighlight">\(\mathcal S\)</span> is time-invariant if, for any time shift <span class="math notranslate nohighlight">\(\tau\)</span>,</p>
+<p>Let <span class="math notranslate nohighlight">\(x(t)\)</span> be an arbitrary input to a system <span class="math notranslate nohighlight">\(\mathcal{S}\)</span> and let <span class="math notranslate nohighlight">\(y(t) = \mathcal S \{ x(t) \}\)</span> be the corresponding output. The system <span class="math notranslate nohighlight">\(\mathcal S\)</span> is time-invariant if, for any time shift <span class="math notranslate nohighlight">\(\tau\)</span>,</p>
 <div class="math notranslate nohighlight">
 \[\mathcal S \left\{x(t-\tau)\right\} = y(t-\tau)\]</div>
 <p>A common violation of the time-invariance condition occurs when a system has non-zero initial conditions.</p>
@@ -380,7 +298,7 @@
 <p class="card-text"><strong>Continuous time</strong></p>
 </div>
 <div class="card-body docutils">
-<p class="card-text">A continuous time impulse, (also known as the Dirac delta) can be defined as a limit.</p>
+<p class="card-text">A continuous time impulse, (also known as the Dirac delta) can be defined as a unit area pulse in the limit that it’s duration approaches zero.</p>
 <div class="math notranslate nohighlight">
 \[\delta(t) = \lim_{\epsilon \to 0}{\frac{\text{rect}(t/\epsilon)}{\epsilon}}\]</div>
 <p class="card-text">If a system is LTI, then its impulse response <span class="math notranslate nohighlight">\(h(t) = \mathcal S \{ \delta(t) \}\)</span> uniquely characterizes the system. The output <span class="math notranslate nohighlight">\(y(t)\)</span> of an LTI system is the convolution between the input <span class="math notranslate nohighlight">\(x(t)\)</span> and the system’s impulse response <span class="math notranslate nohighlight">\(h(t)\)</span>.</p>
@@ -410,9 +328,9 @@
 <div class="section" id="frequency-response">
 <h3>Frequency response<a class="headerlink" href="#frequency-response" title="Permalink to this headline">¶</a></h3>
 <p>Complex exponentials are eigenfunctions of LTI systems. Combined with the previous property, This allows us to uniquely characterize a system by its frequency response.</p>
-<div class="admonition-eigenfunction admonition">
-<p class="admonition-title">Eigenfunction</p>
-<p>If application of the system <span class="math notranslate nohighlight">\(\mathcal S\)</span> to the signal <span class="math notranslate nohighlight">\(x(t)\)</span> simply results in a scaling ( i.e. <span class="math notranslate nohighlight">\(\mathcal S \{x(t)\} = \lambda x(t) \)</span> ) then we say that <span class="math notranslate nohighlight">\(x(t)\)</span> is an eigenfunction of the system.</p>
+<div class="admonition-eigenfunctions admonition">
+<p class="admonition-title">Eigenfunctions</p>
+<p>If application of the system <span class="math notranslate nohighlight">\(\mathcal S\)</span> to the signal <span class="math notranslate nohighlight">\(x(t)\)</span> results in scaling only ( i.e. <span class="math notranslate nohighlight">\(\mathcal S \{x(t)\} = \lambda x(t) \)</span> for some constant <span class="math notranslate nohighlight">\(\lambda\)</span> ) then we say that <span class="math notranslate nohighlight">\(x(t)\)</span> is an eigenfunction of the system and <span class="math notranslate nohighlight">\(\lambda\)</span> is the corresponding eigenvalue.</p>
 </div>
 <div class="sphinx-bs container pb-4 docutils">
 <div class="row docutils">
@@ -425,9 +343,9 @@
 <p class="card-text">If the input to an LTI system is a complex exponential <span class="math notranslate nohighlight">\(x(t) = e^{j \omega t}\)</span>, then the corresponding output is</p>
 <div class="math notranslate nohighlight">
 \[ y(t) = H(j \omega) e^{j\omega t} \]</div>
-<p class="card-text">where <span class="math notranslate nohighlight">\(H(j\omega)\)</span> (called the frequency response) is the Fourier transform of the impulse response</p>
+<p class="card-text">where <span class="math notranslate nohighlight">\(H(j\omega)\)</span> (called the frequency response) is the Fourier transform of the impulse response or, equivalently, the Laplace transform of the impulse response evaluated as <span class="math notranslate nohighlight">\(s=j\omega\)</span>.</p>
 <div class="math notranslate nohighlight">
-\[H(j\omega) = \mathcal F \{ h(t) \}\]</div>
+\[H(j\omega) = \mathcal F \{ h(t) \} = \left. \mathcal L \{ h(t) \} \right| _{s=j\omega}\]</div>
 </div>
 </div>
 </div>
@@ -440,9 +358,9 @@
 <p class="card-text">If the input to an LTI system is a complex exponential <span class="math notranslate nohighlight">\(x[n] = e^{j \omega n}\)</span>, then the corresponding output is</p>
 <div class="math notranslate nohighlight">
 \[ y[n] = H(e^{j\omega}) e^{j\omega n} \]</div>
-<p class="card-text">where <span class="math notranslate nohighlight">\(H(e^{j\omega})\)</span> (called the frequency response) is the Discrete-time Fourier transform of the impulse response</p>
+<p class="card-text">where <span class="math notranslate nohighlight">\(H(e^{j\omega})\)</span> (called the frequency response) is the Discrete-time Fourier transform of the impulse response or, equivalently, the Z transform of the impulse response evaluated at <span class="math notranslate nohighlight">\(z = e^{j\omega}\)</span>.</p>
 <div class="math notranslate nohighlight">
-\[H(e^{j\omega}) = \text{DTFT} \{ h[n] \}\]</div>
+\[H(e^{j\omega}) = \text{DTFT} \{ h[n] \} = \left. \mathcal Z \{ h[n] \} \right| _{z=e^{j\omega}}\]</div>
 </div>
 </div>
 </div>
@@ -451,27 +369,210 @@
 </div>
 <div class="section" id="magnitude-and-phase-response">
 <h3>Magnitude and phase response<a class="headerlink" href="#magnitude-and-phase-response" title="Permalink to this headline">¶</a></h3>
+<p>The frequency response is, in general, complex valued. Typically, we represent it in terms of its magnitude and phase.</p>
+<div class="sphinx-bs container pb-4 docutils">
+<div class="row docutils">
+<div class="d-flex col-lg-6 col-md-6 col-sm-6 col-xs-12 p-2 docutils">
+<div class="card w-100 shadow docutils">
+<div class="card-header text-center docutils">
+<p class="card-text"><strong>Continuous time</strong></p>
+</div>
+<div class="card-body docutils">
+<p class="card-text"><span class="math notranslate nohighlight">\( \text {Magnitude response} = \)</span></p>
+<div class="math notranslate nohighlight">
+\[| H(j\omega) | = \sqrt { \text{Re} \{ H(j\omega) \} + \text{Im} \{ H(j\omega) \} }\]</div>
+<p class="card-text"><span class="math notranslate nohighlight">\( \text {Phase response} = \)</span></p>
+<div class="math notranslate nohighlight">
+\[ \angle H(j\omega) = \text{atan2} (\text{Im} \{ H(j\omega) \}, \text{Re} \{ H(j\omega) \})\]</div>
+</div>
+</div>
+</div>
+<div class="d-flex col-lg-6 col-md-6 col-sm-6 col-xs-12 p-2 docutils">
+<div class="card w-100 shadow docutils">
+<div class="card-header text-center docutils">
+<p class="card-text"><strong>Discrete time</strong></p>
+</div>
+<div class="card-body docutils">
+<p class="card-text"><span class="math notranslate nohighlight">\( \text {Magnitude response} = \)</span></p>
+<div class="math notranslate nohighlight">
+\[| H(e^{j\omega}) | = \sqrt { \text{Re} \{ H(e^{j\omega}) \} + \text{Im} \{ H(e^{j\omega}) \} }\]</div>
+<p class="card-text"><span class="math notranslate nohighlight">\( \text {Phase response} = \)</span></p>
+<div class="math notranslate nohighlight">
+\[ \angle H(e^{j\omega}) = \text{atan2} (\text{Im} \{ H(e^{j\omega}) \}, \text{Re} \{ H(e^{j\omega}) \})\]</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p>where <span class="math notranslate nohighlight">\(\text{atan2}\)</span> is the <a class="reference external" href="https://en.wikipedia.org/wiki/Atan2">two argument arctangent</a>.</p>
+<p>It is common to use the magnitude/phase representation when measuring and plotting the frequency response of a system.</p>
+<p>In MATLAB, the <code class="docutils literal notranslate"><span class="pre">freqz</span></code> function will calculate and plot the magnitude and phase response of a discrete-time LTI system.</p>
 </div>
 </div>
 <div class="section" id="frequency-selectivity">
 <h2>Frequency selectivity<a class="headerlink" href="#frequency-selectivity" title="Permalink to this headline">¶</a></h2>
+<p>The goal of a filter is to suppress or attenuate some signal components while retaining or boosting others. We often group LTI filters into one of six categories based on their frequency selectivity, i.e. the arrangement of frequency bands that are boosted and frequency bands which are attenuated.</p>
 <div class="section" id="lowpass">
 <h3>Lowpass<a class="headerlink" href="#lowpass" title="Permalink to this headline">¶</a></h3>
+<div class="sphinx-bs container pb-4 docutils">
+<div class="row docutils">
+<div class="d-flex col-lg-6 col-md-6 col-sm-6 col-xs-12 p-2 docutils">
+<div class="card w-100 shadow docutils">
+<div class="card-header text-center docutils">
+<p class="card-text"><strong>Continuous time averaging filter</strong></p>
+</div>
+<div class="card-body docutils">
+<p class="card-text">body</p>
+</div>
+</div>
+</div>
+<div class="d-flex col-lg-6 col-md-6 col-sm-6 col-xs-12 p-2 docutils">
+<div class="card w-100 shadow docutils">
+<div class="card-header text-center docutils">
+<p class="card-text"><strong>Discrete time averaging filter</strong></p>
+</div>
+<div class="card-body docutils">
+<p class="card-text">body</p>
+</div>
+</div>
+</div>
+</div>
+</div>
 </div>
 <div class="section" id="highpass">
 <h3>Highpass<a class="headerlink" href="#highpass" title="Permalink to this headline">¶</a></h3>
+<div class="sphinx-bs container pb-4 docutils">
+<div class="row docutils">
+<div class="d-flex col-lg-6 col-md-6 col-sm-6 col-xs-12 p-2 docutils">
+<div class="card w-100 shadow docutils">
+<div class="card-header text-center docutils">
+<p class="card-text"><strong>Continuous time Differentiator</strong></p>
+</div>
+<div class="card-body docutils">
+<p class="card-text">body</p>
+</div>
+</div>
+</div>
+<div class="d-flex col-lg-6 col-md-6 col-sm-6 col-xs-12 p-2 docutils">
+<div class="card w-100 shadow docutils">
+<div class="card-header text-center docutils">
+<p class="card-text"><strong>Discrete time first-order difference</strong></p>
+</div>
+<div class="card-body docutils">
+<p class="card-text">body</p>
+</div>
+</div>
+</div>
+</div>
+</div>
 </div>
 <div class="section" id="bandpass">
 <h3>Bandpass<a class="headerlink" href="#bandpass" title="Permalink to this headline">¶</a></h3>
+<div class="sphinx-bs container pb-4 docutils">
+<div class="row docutils">
+<div class="d-flex col-lg-6 col-md-6 col-sm-6 col-xs-12 p-2 docutils">
+<div class="card w-100 shadow docutils">
+<div class="card-header text-center docutils">
+<p class="card-text"><strong>Continuous time elliptic</strong></p>
+</div>
+<div class="card-body docutils">
+<p class="card-text">body</p>
+</div>
+</div>
+</div>
+<div class="d-flex col-lg-6 col-md-6 col-sm-6 col-xs-12 p-2 docutils">
+<div class="card w-100 shadow docutils">
+<div class="card-header text-center docutils">
+<p class="card-text"><strong>Discrete time Parks–McClellan</strong></p>
+</div>
+<div class="card-body docutils">
+<p class="card-text">body</p>
+</div>
+</div>
+</div>
+</div>
+</div>
 </div>
 <div class="section" id="bandstop">
 <h3>Bandstop<a class="headerlink" href="#bandstop" title="Permalink to this headline">¶</a></h3>
+<div class="sphinx-bs container pb-4 docutils">
+<div class="row docutils">
+<div class="d-flex col-lg-6 col-md-6 col-sm-6 col-xs-12 p-2 docutils">
+<div class="card w-100 shadow docutils">
+<div class="card-header text-center docutils">
+<p class="card-text"><strong>Continuous time</strong></p>
+</div>
+<div class="card-body docutils">
+<p class="card-text">body</p>
+</div>
+</div>
+</div>
+<div class="d-flex col-lg-6 col-md-6 col-sm-6 col-xs-12 p-2 docutils">
+<div class="card w-100 shadow docutils">
+<div class="card-header text-center docutils">
+<p class="card-text"><strong>Discrete time</strong></p>
+</div>
+<div class="card-body docutils">
+<p class="card-text">body</p>
+</div>
+</div>
+</div>
+</div>
+</div>
 </div>
 <div class="section" id="notch">
 <h3>Notch<a class="headerlink" href="#notch" title="Permalink to this headline">¶</a></h3>
+<div class="sphinx-bs container pb-4 docutils">
+<div class="row docutils">
+<div class="d-flex col-lg-6 col-md-6 col-sm-6 col-xs-12 p-2 docutils">
+<div class="card w-100 shadow docutils">
+<div class="card-header text-center docutils">
+<p class="card-text"><strong>Continuous time</strong></p>
+</div>
+<div class="card-body docutils">
+<p class="card-text">body</p>
+</div>
+</div>
+</div>
+<div class="d-flex col-lg-6 col-md-6 col-sm-6 col-xs-12 p-2 docutils">
+<div class="card w-100 shadow docutils">
+<div class="card-header text-center docutils">
+<p class="card-text"><strong>Discrete time</strong></p>
+</div>
+<div class="card-body docutils">
+<p class="card-text">body</p>
+</div>
+</div>
+</div>
+</div>
+</div>
 </div>
 <div class="section" id="all-pass">
 <h3>All-pass<a class="headerlink" href="#all-pass" title="Permalink to this headline">¶</a></h3>
+<div class="sphinx-bs container pb-4 docutils">
+<div class="row docutils">
+<div class="d-flex col-lg-6 col-md-6 col-sm-6 col-xs-12 p-2 docutils">
+<div class="card w-100 shadow docutils">
+<div class="card-header text-center docutils">
+<p class="card-text"><strong>Continuous time</strong></p>
+</div>
+<div class="card-body docutils">
+<p class="card-text">body</p>
+</div>
+</div>
+</div>
+<div class="d-flex col-lg-6 col-md-6 col-sm-6 col-xs-12 p-2 docutils">
+<div class="card w-100 shadow docutils">
+<div class="card-header text-center docutils">
+<p class="card-text"><strong>Discrete time</strong></p>
+</div>
+<div class="card-body docutils">
+<p class="card-text">body</p>
+</div>
+</div>
+</div>
+</div>
+</div>
 </div>
 </div>
 </div>
@@ -498,8 +599,8 @@
 
               </div>
               
-            
-                <!-- Previous / next buttons -->
+        
+            <!-- Previous / next buttons -->
 <div class='prev-next-area'> 
     <a class='left-prev' id="prev-link" href="index.html" title="previous page">
         <i class="fas fa-angle-left"></i>
@@ -509,16 +610,18 @@
         </div>
     </a>
 </div>
-            
+        
         </div>
     </div>
     <footer class="footer">
-  <p>
-    
-      By University of Texas at Austin<br/>
-    
-  </p>
-</footer>
+    <div class="container">
+      <p>
+        
+          By University of Texas at Austin<br/>
+        
+      </p>
+    </div>
+  </footer>
 </main>
 
 
