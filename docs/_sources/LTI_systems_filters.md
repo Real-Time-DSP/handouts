@@ -124,25 +124,37 @@ $$ \angle H(e^{j\omega}) = \text{atan2} (\text{Im} \{ H(e^{j\omega}) \}, \text{R
 
 where $\text{atan2}$ is the [two argument arctangent](https://en.wikipedia.org/wiki/Atan2).
 
-It is common to use the magnitude/phase representation when measuring and plotting the frequency response of a system.
+It is common to use the magnitude/phase representation when measuring and plotting the frequency response of a system. Typically, the magnitude response is expressed in decibels
+
+$$\text{Magnitude response in decibels} = 10 \log_{10}{|H_{\text{freq}}(\omega)|^2} = 20 \log_{10}{|H_{\text{freq}}(\omega)|}$$
 
 In MATLAB, the `freqz` function will calculate and plot the magnitude and phase response of a discrete-time LTI system.
 
 ## Frequency selectivity
 
-The goal of a filter is to suppress or attenuate some signal components while retaining or boosting others. We often group LTI filters into one of six categories based on their frequency selectivity, i.e. the arrangement of frequency bands that are boosted and frequency bands which are attenuated.
+The goal of a filter is to suppress or attenuate some signal components while retaining or boosting others. We often group LTI filters into six categories based on their frequency selectivity, i.e. the arrangement of frequency bands that are boosted relative to the bands which are attenuated.
+
+* [Lowpass](#lowpass)
+* [Highpass](#highpass)
+* [Bandpass](#bandpass)
+* [Bandstop](#bandstop)
+* [Notch](#notch)
+* [Allpass](#allpass)
+
 
 ### Lowpass
 
+![](img/lowpass.svg)
+
 ````{panels}
 :header: text-center
-**Continuous time averaging filter**
+**Continuous time example: averaging filter**
 ^^^
 body
 
 ---
 
-**Discrete time averaging filter**
+**Discrete time example: averaging filter**
 ^^^
 body
 
@@ -150,15 +162,17 @@ body
 
 ### Highpass
 
+![](img/highpass.svg)
+
 ````{panels}
 :header: text-center
-**Continuous time Differentiator**
+**Continuous time example: differentiator**
 ^^^
 body
 
 ---
 
-**Discrete time first-order difference**
+**Discrete time example: first-order difference**
 ^^^
 body
 
@@ -166,15 +180,17 @@ body
 
 ### Bandpass
 
+![](img/bandpass.svg)
+
 ````{panels}
 :header: text-center
-**Continuous time elliptic**
+**Continuous time example**
 ^^^
 body
 
 ---
 
-**Discrete time Parks–McClellan**
+**Discrete time example**
 ^^^
 body
 
@@ -182,15 +198,17 @@ body
 
 ### Bandstop
 
+![](img/bandstop.svg)
+
 ````{panels}
 :header: text-center
-**Continuous time**
+**Continuous time example**
 ^^^
 body
 
 ---
 
-**Discrete time**
+**Discrete time example**
 ^^^
 body
 
@@ -198,31 +216,37 @@ body
 
 ### Notch
 
+![](img/notch.svg)
+
 ````{panels}
 :header: text-center
-**Continuous time**
+**Continuous time example**
 ^^^
 body
 
 ---
 
-**Discrete time**
+**Discrete time example**
 ^^^
 body
 
 ````
 
-### All-pass
+### Allpass
+
+Allpass filters have a flat magnitude response but affect the signal's phase. Two common examples are the [Hilbert transform](https://en.wikipedia.org/wiki/Hilbert_transform) and the ideal delay.
+
+When an [equalizer](https://en.wikipedia.org/wiki/Equalization_(communications)) is applied to correct for distortion, the cascade of the original system and the equalizer may be modeled as an all-pass filter.
 
 ````{panels}
 :header: text-center
-**Continuous time**
+**Continuous time example: Hilbert transform**
 ^^^
 body
 
 ---
 
-**Discrete time**
+**Discrete time example: Delay**
 ^^^
 body
 

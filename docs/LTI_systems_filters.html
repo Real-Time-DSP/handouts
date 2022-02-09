@@ -53,7 +53,7 @@
     <script async="async" src="_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="prev" title="Index" href="index.html" />
+    <link rel="prev" title="Index of handouts" href="index.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -88,15 +88,10 @@
         <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="index.html">
-   Index
+   Index of handouts
   </a>
  </li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Handouts
- </span>
-</p>
 <ul class="current nav bd-sidenav">
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
@@ -248,8 +243,8 @@
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#all-pass">
-     All-pass
+    <a class="reference internal nav-link" href="#allpass">
+     Allpass
     </a>
    </li>
   </ul>
@@ -405,21 +400,32 @@
 </div>
 </div>
 <p>where <span class="math notranslate nohighlight">\(\text{atan2}\)</span> is the <a class="reference external" href="https://en.wikipedia.org/wiki/Atan2">two argument arctangent</a>.</p>
-<p>It is common to use the magnitude/phase representation when measuring and plotting the frequency response of a system.</p>
+<p>It is common to use the magnitude/phase representation when measuring and plotting the frequency response of a system. Typically, the magnitude response is expressed in decibels</p>
+<div class="math notranslate nohighlight">
+\[\text{Magnitude response in decibels} = 10 \log_{10}{|H_{\text{freq}}(\omega)|^2} = 20 \log_{10}{|H_{\text{freq}}(\omega)|}\]</div>
 <p>In MATLAB, the <code class="docutils literal notranslate"><span class="pre">freqz</span></code> function will calculate and plot the magnitude and phase response of a discrete-time LTI system.</p>
 </div>
 </div>
 <div class="section" id="frequency-selectivity">
 <h2>Frequency selectivity<a class="headerlink" href="#frequency-selectivity" title="Permalink to this headline">¶</a></h2>
-<p>The goal of a filter is to suppress or attenuate some signal components while retaining or boosting others. We often group LTI filters into one of six categories based on their frequency selectivity, i.e. the arrangement of frequency bands that are boosted and frequency bands which are attenuated.</p>
+<p>The goal of a filter is to suppress or attenuate some signal components while retaining or boosting others. We often group LTI filters into six categories based on their frequency selectivity, i.e. the arrangement of frequency bands that are boosted relative to the bands which are attenuated.</p>
+<ul class="simple">
+<li><p><a class="reference external" href="#lowpass">Lowpass</a></p></li>
+<li><p><a class="reference external" href="#highpass">Highpass</a></p></li>
+<li><p><a class="reference external" href="#bandpass">Bandpass</a></p></li>
+<li><p><a class="reference external" href="#bandstop">Bandstop</a></p></li>
+<li><p><a class="reference external" href="#notch">Notch</a></p></li>
+<li><p><a class="reference external" href="#allpass">Allpass</a></p></li>
+</ul>
 <div class="section" id="lowpass">
 <h3>Lowpass<a class="headerlink" href="#lowpass" title="Permalink to this headline">¶</a></h3>
+<p><img alt="" src="_images/lowpass.svg" /></p>
 <div class="sphinx-bs container pb-4 docutils">
 <div class="row docutils">
 <div class="d-flex col-lg-6 col-md-6 col-sm-6 col-xs-12 p-2 docutils">
 <div class="card w-100 shadow docutils">
 <div class="card-header text-center docutils">
-<p class="card-text"><strong>Continuous time averaging filter</strong></p>
+<p class="card-text"><strong>Continuous time example: averaging filter</strong></p>
 </div>
 <div class="card-body docutils">
 <p class="card-text">body</p>
@@ -429,7 +435,7 @@
 <div class="d-flex col-lg-6 col-md-6 col-sm-6 col-xs-12 p-2 docutils">
 <div class="card w-100 shadow docutils">
 <div class="card-header text-center docutils">
-<p class="card-text"><strong>Discrete time averaging filter</strong></p>
+<p class="card-text"><strong>Discrete time example: averaging filter</strong></p>
 </div>
 <div class="card-body docutils">
 <p class="card-text">body</p>
@@ -441,12 +447,13 @@
 </div>
 <div class="section" id="highpass">
 <h3>Highpass<a class="headerlink" href="#highpass" title="Permalink to this headline">¶</a></h3>
+<p><img alt="" src="_images/highpass.svg" /></p>
 <div class="sphinx-bs container pb-4 docutils">
 <div class="row docutils">
 <div class="d-flex col-lg-6 col-md-6 col-sm-6 col-xs-12 p-2 docutils">
 <div class="card w-100 shadow docutils">
 <div class="card-header text-center docutils">
-<p class="card-text"><strong>Continuous time Differentiator</strong></p>
+<p class="card-text"><strong>Continuous time example: differentiator</strong></p>
 </div>
 <div class="card-body docutils">
 <p class="card-text">body</p>
@@ -456,7 +463,7 @@
 <div class="d-flex col-lg-6 col-md-6 col-sm-6 col-xs-12 p-2 docutils">
 <div class="card w-100 shadow docutils">
 <div class="card-header text-center docutils">
-<p class="card-text"><strong>Discrete time first-order difference</strong></p>
+<p class="card-text"><strong>Discrete time example: first-order difference</strong></p>
 </div>
 <div class="card-body docutils">
 <p class="card-text">body</p>
@@ -468,12 +475,13 @@
 </div>
 <div class="section" id="bandpass">
 <h3>Bandpass<a class="headerlink" href="#bandpass" title="Permalink to this headline">¶</a></h3>
+<p><img alt="" src="_images/bandpass.svg" /></p>
 <div class="sphinx-bs container pb-4 docutils">
 <div class="row docutils">
 <div class="d-flex col-lg-6 col-md-6 col-sm-6 col-xs-12 p-2 docutils">
 <div class="card w-100 shadow docutils">
 <div class="card-header text-center docutils">
-<p class="card-text"><strong>Continuous time elliptic</strong></p>
+<p class="card-text"><strong>Continuous time example</strong></p>
 </div>
 <div class="card-body docutils">
 <p class="card-text">body</p>
@@ -483,7 +491,7 @@
 <div class="d-flex col-lg-6 col-md-6 col-sm-6 col-xs-12 p-2 docutils">
 <div class="card w-100 shadow docutils">
 <div class="card-header text-center docutils">
-<p class="card-text"><strong>Discrete time Parks–McClellan</strong></p>
+<p class="card-text"><strong>Discrete time example</strong></p>
 </div>
 <div class="card-body docutils">
 <p class="card-text">body</p>
@@ -495,12 +503,13 @@
 </div>
 <div class="section" id="bandstop">
 <h3>Bandstop<a class="headerlink" href="#bandstop" title="Permalink to this headline">¶</a></h3>
+<p><img alt="" src="_images/bandstop.svg" /></p>
 <div class="sphinx-bs container pb-4 docutils">
 <div class="row docutils">
 <div class="d-flex col-lg-6 col-md-6 col-sm-6 col-xs-12 p-2 docutils">
 <div class="card w-100 shadow docutils">
 <div class="card-header text-center docutils">
-<p class="card-text"><strong>Continuous time</strong></p>
+<p class="card-text"><strong>Continuous time example</strong></p>
 </div>
 <div class="card-body docutils">
 <p class="card-text">body</p>
@@ -510,7 +519,7 @@
 <div class="d-flex col-lg-6 col-md-6 col-sm-6 col-xs-12 p-2 docutils">
 <div class="card w-100 shadow docutils">
 <div class="card-header text-center docutils">
-<p class="card-text"><strong>Discrete time</strong></p>
+<p class="card-text"><strong>Discrete time example</strong></p>
 </div>
 <div class="card-body docutils">
 <p class="card-text">body</p>
@@ -522,12 +531,13 @@
 </div>
 <div class="section" id="notch">
 <h3>Notch<a class="headerlink" href="#notch" title="Permalink to this headline">¶</a></h3>
+<p><img alt="" src="_images/notch.svg" /></p>
 <div class="sphinx-bs container pb-4 docutils">
 <div class="row docutils">
 <div class="d-flex col-lg-6 col-md-6 col-sm-6 col-xs-12 p-2 docutils">
 <div class="card w-100 shadow docutils">
 <div class="card-header text-center docutils">
-<p class="card-text"><strong>Continuous time</strong></p>
+<p class="card-text"><strong>Continuous time example</strong></p>
 </div>
 <div class="card-body docutils">
 <p class="card-text">body</p>
@@ -537,7 +547,7 @@
 <div class="d-flex col-lg-6 col-md-6 col-sm-6 col-xs-12 p-2 docutils">
 <div class="card w-100 shadow docutils">
 <div class="card-header text-center docutils">
-<p class="card-text"><strong>Discrete time</strong></p>
+<p class="card-text"><strong>Discrete time example</strong></p>
 </div>
 <div class="card-body docutils">
 <p class="card-text">body</p>
@@ -547,14 +557,16 @@
 </div>
 </div>
 </div>
-<div class="section" id="all-pass">
-<h3>All-pass<a class="headerlink" href="#all-pass" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="allpass">
+<h3>Allpass<a class="headerlink" href="#allpass" title="Permalink to this headline">¶</a></h3>
+<p>Allpass filters have a flat magnitude response but affect the signal’s phase. Two common examples are the <a class="reference external" href="https://en.wikipedia.org/wiki/Hilbert_transform">Hilbert transform</a> and the ideal delay.</p>
+<p>When an <a class="reference external" href="https://en.wikipedia.org/wiki/Equalization_(communications)">equalizer</a> is applied to correct for distortion, the cascade of the original system and the equalizer may be modeled as an all-pass filter.</p>
 <div class="sphinx-bs container pb-4 docutils">
 <div class="row docutils">
 <div class="d-flex col-lg-6 col-md-6 col-sm-6 col-xs-12 p-2 docutils">
 <div class="card w-100 shadow docutils">
 <div class="card-header text-center docutils">
-<p class="card-text"><strong>Continuous time</strong></p>
+<p class="card-text"><strong>Continuous time example: Hilbert transform</strong></p>
 </div>
 <div class="card-body docutils">
 <p class="card-text">body</p>
@@ -564,7 +576,7 @@
 <div class="d-flex col-lg-6 col-md-6 col-sm-6 col-xs-12 p-2 docutils">
 <div class="card w-100 shadow docutils">
 <div class="card-header text-center docutils">
-<p class="card-text"><strong>Discrete time</strong></p>
+<p class="card-text"><strong>Discrete time example: Delay</strong></p>
 </div>
 <div class="card-body docutils">
 <p class="card-text">body</p>
@@ -606,7 +618,7 @@
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Index</p>
+            <p class="prev-next-title">Index of handouts</p>
         </div>
     </a>
 </div>
