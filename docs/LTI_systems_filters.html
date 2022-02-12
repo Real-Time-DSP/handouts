@@ -197,14 +197,70 @@
 <div class="section" id="frequency-selectivity">
 <h2>Frequency selectivity<a class="headerlink" href="#frequency-selectivity" title="Permalink to this headline">¶</a></h2>
 <p>The goal of a filter is to suppress or attenuate some signal components while retaining or boosting others. We often group LTI filters into six categories based on their frequency selectivity, i.e. the arrangement of frequency bands that are boosted relative to the bands which are attenuated.</p>
-<ul class="simple">
-<li><p><a class="reference external" href="#lowpass">Lowpass</a></p></li>
-<li><p><a class="reference external" href="#highpass">Highpass</a></p></li>
-<li><p><a class="reference external" href="#bandpass">Bandpass</a></p></li>
-<li><p><a class="reference external" href="#bandstop">Bandstop</a></p></li>
-<li><p><a class="reference external" href="#notch">Notch</a></p></li>
-<li><p><a class="reference external" href="#allpass">Allpass</a></p></li>
-</ul>
+<div class="sphinx-bs container-lg pb-3 docutils">
+<div class="row docutils">
+<div class="d-flex col-lg-6 col-md-6 col-sm-6 col-xs-12 p-2 docutils">
+<div class="card w-100 shadow docutils">
+<div class="card-header text-center docutils">
+<p class="card-text"><strong><a class="reference external" href="#lowpass">Lowpass</a></strong></p>
+</div>
+<div class="card-body docutils">
+<p class="card-text"><img alt="" src="_images/lowpass.svg" /></p>
+</div>
+</div>
+</div>
+<div class="d-flex col-lg-6 col-md-6 col-sm-6 col-xs-12 p-2 docutils">
+<div class="card w-100 shadow docutils">
+<div class="card-header text-center docutils">
+<p class="card-text"><strong><a class="reference external" href="#highpass">Highpass</a></strong></p>
+</div>
+<div class="card-body docutils">
+<p class="card-text"><img alt="" src="_images/highpass.svg" /></p>
+</div>
+</div>
+</div>
+<div class="d-flex col-lg-6 col-md-6 col-sm-6 col-xs-12 p-2 docutils">
+<div class="card w-100 shadow docutils">
+<div class="card-header text-center docutils">
+<p class="card-text"><strong><a class="reference external" href="#bandpass">Bandpass</a></strong></p>
+</div>
+<div class="card-body docutils">
+<p class="card-text"><img alt="" src="_images/bandpass.svg" /></p>
+</div>
+</div>
+</div>
+<div class="d-flex col-lg-6 col-md-6 col-sm-6 col-xs-12 p-2 docutils">
+<div class="card w-100 shadow docutils">
+<div class="card-header text-center docutils">
+<p class="card-text"><strong><a class="reference external" href="#bandstop">Bandstop</a></strong></p>
+</div>
+<div class="card-body docutils">
+<p class="card-text"><img alt="" src="_images/bandstop.svg" /></p>
+</div>
+</div>
+</div>
+<div class="d-flex col-lg-6 col-md-6 col-sm-6 col-xs-12 p-2 docutils">
+<div class="card w-100 shadow docutils">
+<div class="card-header text-center docutils">
+<p class="card-text"><strong><a class="reference external" href="#notch">Notch</a></strong></p>
+</div>
+<div class="card-body docutils">
+<p class="card-text"><img alt="" src="_images/notch.svg" /></p>
+</div>
+</div>
+</div>
+<div class="d-flex col-lg-6 col-md-6 col-sm-6 col-xs-12 p-2 docutils">
+<div class="card w-100 shadow docutils">
+<div class="card-header text-center docutils">
+<p class="card-text"><strong><a class="reference external" href="#allpass">Allpass</a></strong></p>
+</div>
+<div class="card-body docutils">
+<p class="card-text"><img alt="" src="_images/allpass.svg" /></p>
+</div>
+</div>
+</div>
+</div>
+</div>
 <div class="section" id="lowpass">
 <h3>Lowpass<a class="headerlink" href="#lowpass" title="Permalink to this headline">¶</a></h3>
 <p><img alt="" src="_images/lowpass.svg" /></p>
@@ -213,20 +269,32 @@
 <div class="d-flex col-lg-6 col-md-6 col-sm-6 col-xs-12 p-2 docutils">
 <div class="card w-100 shadow docutils">
 <div class="card-header text-center docutils">
-<p class="card-text"><strong>Continuous time example: averaging filter</strong></p>
+<p class="card-text"><strong>Continuous time RC circuit</strong></p>
 </div>
 <div class="card-body docutils">
-<p class="card-text">body</p>
+<p class="card-text">Impulse response:</p>
+<div class="math notranslate nohighlight">
+\[h(t) = e^{-t} u(t)\]</div>
+<p class="card-text">Frequency response:</p>
+<div class="math notranslate nohighlight">
+\[H(f) = \frac{1}{1+j2\pi f}\]</div>
+<p class="card-text"><img alt="" src="_images/ct_lowpass.svg" /></p>
 </div>
 </div>
 </div>
 <div class="d-flex col-lg-6 col-md-6 col-sm-6 col-xs-12 p-2 docutils">
 <div class="card w-100 shadow docutils">
 <div class="card-header text-center docutils">
-<p class="card-text"><strong>Discrete time example: averaging filter</strong></p>
+<p class="card-text"><strong>Discrete time five point moving average</strong></p>
 </div>
 <div class="card-body docutils">
-<p class="card-text">body</p>
+<p class="card-text">Impulse response:</p>
+<div class="math notranslate nohighlight">
+\[h[n] = \delta[n] + \delta[n-1] + \cdots \delta(n-5)\]</div>
+<p class="card-text">Frequency response:</p>
+<div class="math notranslate nohighlight">
+\[H(\omega) = e^{-2j \omega} \frac{\sin{(5\omega /2)}}{5 \sin{(\omega/2)}}\]</div>
+<p class="card-text"><img alt="" src="_images/dt_lowpass.svg" /></p>
 </div>
 </div>
 </div>
