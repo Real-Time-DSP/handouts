@@ -1,4 +1,0 @@
-# Index of handouts
-
-```{tableofcontents}
-```
