@@ -44,7 +44,7 @@ An LTI system is [uniquely characterized by its impulse response](#impulse-respo
 
 ### Impulse response and convolution
 
-````{panels}
+:::{panels}
 :container: container-lg pb-3
 :header: text-center
 
@@ -69,7 +69,7 @@ If a system is LTI, then its impulse response $h[n] = \mathcal S \{ \delta[n] \}
 
 $$ y[n] = x[n] * h[n] = \sum_{-\infty}^{\infty}{x[n-m]h[m]}$$
 
-````
+:::
 
 ### Frequency response
 
@@ -79,7 +79,7 @@ Complex exponentials are eigenfunctions of LTI systems. Combined with the previo
 If application of the system $\mathcal S$ to the signal $x(t)$ results in scaling only ( i.e. $\mathcal S \{x(t)\} = \lambda x(t) $ for some constant $\lambda$ ) then we say that $x(t)$ is an eigenfunction of the system and $\lambda$ is the corresponding eigenvalue.
 ```
 
-````{panels}
+:::{panels}
 :container: container-lg pb-3
 :header: text-center
 **Continuous time**
@@ -104,7 +104,7 @@ where $H(e^{j\omega})$ (called the frequency response) is the Discrete-time Four
 
 $$H(e^{j\omega}) = \text{DTFT} \{ h[n] \} = \left. \mathcal Z \{ h[n] \} \right| _{z=e^{j\omega}}$$
 
-````
+:::
 
 We often write $H(\omega)$ instead of $H(j\omega)$ or $H(e^{j\omega})$.
 
@@ -128,38 +128,75 @@ In MATLAB, the `freqz` function will calculate and plot the magnitude and phase 
 
 The goal of a filter is to suppress or attenuate some signal components while retaining or boosting others. We often group LTI filters into six categories based on their frequency selectivity, i.e. the arrangement of frequency bands that are boosted relative to the bands which are attenuated.
 
-* [Lowpass](#lowpass)
-* [Highpass](#highpass)
-* [Bandpass](#bandpass)
-* [Bandstop](#bandstop)
-* [Notch](#notch)
-* [Allpass](#allpass)
+:::{panels}
+:container: container-lg pb-3
+:header: text-center
+**[Lowpass](#lowpass)**
+^^^
+![](img/lowpass.svg)
+---
+**[Highpass](#highpass)**
+^^^
+![](img/highpass.svg)
+---
+**[Bandpass](#bandpass)**
+^^^
+![](img/bandpass.svg)
+---
+**[Bandstop](#bandstop)**
+^^^
+![](img/bandstop.svg)
+---
+**[Notch](#notch)**
+^^^
+![](img/notch.svg)
+---
+**[Allpass](#allpass)**
+^^^
+![](img/allpass.svg)
+:::
 
 
 ### Lowpass
 
 ![](img/lowpass.svg)
 
-````{panels}
+:::{panels}
 :container: container-lg pb-3
 :header: text-center
-**Continuous time example: averaging filter**
+**Continuous time RC circuit**
 ^^^
-body
+Impulse response:
+
+$$h(t) = e^{-t} u(t)$$
+
+Frequency response:
+
+$$H(f) = \frac{1}{1+j2\pi f}$$
+
+![](img/ct_lowpass.svg)
 
 ---
 
-**Discrete time example: averaging filter**
+**Discrete time five point moving average**
 ^^^
-body
+Impulse response:
 
-````
+$$h[n] = \delta[n] + \delta[n-1] + \cdots \delta(n-5)$$
+
+Frequency response:
+
+$$H(\omega) = e^{-2j \omega} \frac{\sin{(5\omega /2)}}{5 \sin{(\omega/2)}}$$
+
+![](img/dt_lowpass.svg)
+
+:::
 
 ### Highpass
 
 ![](img/highpass.svg)
 
-````{panels}
+:::{panels}
 :container: container-lg pb-3
 :header: text-center
 **Continuous time example: differentiator**
@@ -172,13 +209,13 @@ body
 ^^^
 body
 
-````
+:::
 
 ### Bandpass
 
 ![](img/bandpass.svg)
 
-````{panels}
+:::{panels}
 :container: container-lg pb-3
 :header: text-center
 **Continuous time example**
@@ -191,13 +228,13 @@ body
 ^^^
 body
 
-````
+:::
 
 ### Bandstop
 
 ![](img/bandstop.svg)
 
-````{panels}
+:::{panels}
 :container: container-lg pb-3
 :header: text-center
 **Continuous time example**
@@ -210,13 +247,13 @@ body
 ^^^
 body
 
-````
+:::
 
 ### Notch
 
 ![](img/notch.svg)
 
-````{panels}
+:::{panels}
 :container: container-lg pb-3
 :header: text-center
 **Continuous time example**
@@ -229,7 +266,7 @@ body
 ^^^
 body
 
-````
+:::
 
 ### Allpass
 
@@ -237,7 +274,7 @@ Allpass filters have a flat magnitude response but affect the signal's phase. Tw
 
 When an [equalizer](https://en.wikipedia.org/wiki/Equalization_(communications)) is applied to correct for distortion, the cascade of the original system and the equalizer may be modeled as an all-pass filter.
 
-````{panels}
+:::{panels}
 :container: container-lg pb-3
 :header: text-center
 **Continuous time example: Hilbert transform**
@@ -250,5 +287,5 @@ body
 ^^^
 body
 
-````
+:::
 
