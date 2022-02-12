@@ -1,6 +1,6 @@
 # LTI filters and frequency selectivity
 
-Linear time-invariant (LTI) systems have many [useful properties](#properties-of-LTI-systems). We can utilize these properties to design [frequency selective](#frequency-selectivity) filters.
+Linear time-invariant (LTI) systems have many [useful properties](#properties-of-lti-systems). We can utilize these properties to design [frequency selective](#frequency-selectivity) filters.
 
 ## Mathematical definitions
 

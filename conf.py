@@ -15,7 +15,6 @@ html_theme = 'alabaster'
 html_theme_options = {
     'page_width': '100%',
     'body_max_width': '960px',
-    'nosidebar': True,
 }
 
 
