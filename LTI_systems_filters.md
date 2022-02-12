@@ -4,27 +4,39 @@ Linear time-invariant (LTI) systems have many [useful properties](#properties-of
 
 ## Mathematical definitions
 
-A system is LTI if it satisfies additivity, homogeneity, and time-invariance.
+::: {panels}
+:container: container-lg pb-4
+:header: text-center
 
 **Additivity**
-
+^^^
 Let $x_1(t)$ and $x_2(t)$ be arbitrary input signals to a system $\mathcal{S}$. The system satisfies additivity if
 
 $$\mathcal S \left\{x_1(t) + x_2(t)\right\} = \mathcal S \{x_1(t)\} + \mathcal S \{x_2(t) \}$$
 
+---
+
 **Homogeneity**
+^^^
 
 Let $x(t)$ be an arbitrary input to a system $\mathcal{S}$. The system satisfies homogeneity if, for any constant $a$,
 
 $$\mathcal S \left\{ax(t)\right\} = a \mathcal S \{ x(t) \}$$
 
-**Time-invariance**
+---
 
+**Time-invariance**
+^^^
 Let $x(t)$ be an arbitrary input to a system $\mathcal{S}$ and let $y(t) = \mathcal S \{ x(t) \}$ be the corresponding output. The system $\mathcal S$ is time-invariant if, for any time shift $\tau$,
 
 $$\mathcal S \left\{x(t-\tau)\right\} = y(t-\tau)$$
 
-A common violation of the time-invariance condition occurs when a system has non-zero initial conditions.
+---
+
+**Linear time-invariant (LTI)**
+^^^
+A system is linear time-invariant (LTI) if it satisfies the additivity, homogeneity, and time-invariance properties. A common way for a system to fail to violate these properties is if the system has has nonzero initial conditions.
+:::
 
 ## Properties of LTI systems
 
@@ -33,7 +45,9 @@ An LTI system is [uniquely characterized by its impulse response](#impulse-respo
 ### Impulse response and convolution
 
 ````{panels}
+:container: container-lg pb-3
 :header: text-center
+
 **Continuous time**
 ^^^
 A continuous time impulse, (also known as the Dirac delta) can be defined as a unit area pulse in the limit that it's duration approaches zero.
@@ -45,7 +59,6 @@ If a system is LTI, then its impulse response $h(t) = \mathcal S \{ \delta(t) \}
 $$ y(t) = x(t) * h(t) = \int_{-\infty}^{\infty}{x(t-\tau)h(\tau) d \tau}$$
 
 ---
-
 **Discrete time**
 ^^^
 A discrete time impulse, (also known as the Kronecker delta) can be defined as a piecewise function.
@@ -67,6 +80,7 @@ If application of the system $\mathcal S$ to the signal $x(t)$ results in scalin
 ```
 
 ````{panels}
+:container: container-lg pb-3
 :header: text-center
 **Continuous time**
 ^^^
@@ -127,6 +141,7 @@ The goal of a filter is to suppress or attenuate some signal components while re
 ![](img/lowpass.svg)
 
 ````{panels}
+:container: container-lg pb-3
 :header: text-center
 **Continuous time example: averaging filter**
 ^^^
@@ -145,6 +160,7 @@ body
 ![](img/highpass.svg)
 
 ````{panels}
+:container: container-lg pb-3
 :header: text-center
 **Continuous time example: differentiator**
 ^^^
@@ -163,6 +179,7 @@ body
 ![](img/bandpass.svg)
 
 ````{panels}
+:container: container-lg pb-3
 :header: text-center
 **Continuous time example**
 ^^^
@@ -181,6 +198,7 @@ body
 ![](img/bandstop.svg)
 
 ````{panels}
+:container: container-lg pb-3
 :header: text-center
 **Continuous time example**
 ^^^
@@ -199,6 +217,7 @@ body
 ![](img/notch.svg)
 
 ````{panels}
+:container: container-lg pb-3
 :header: text-center
 **Continuous time example**
 ^^^
@@ -219,6 +238,7 @@ Allpass filters have a flat magnitude response but affect the signal's phase. Tw
 When an [equalizer](https://en.wikipedia.org/wiki/Equalization_(communications)) is applied to correct for distortion, the cascade of the original system and the equalizer may be modeled as an all-pass filter.
 
 ````{panels}
+:container: container-lg pb-3
 :header: text-center
 **Continuous time example: Hilbert transform**
 ^^^
