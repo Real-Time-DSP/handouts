@@ -269,7 +269,7 @@
 <div class="d-flex col-lg-6 col-md-6 col-sm-6 col-xs-12 p-2 docutils">
 <div class="card w-100 shadow docutils">
 <div class="card-header text-center docutils">
-<p class="card-text"><strong>Continuous time RC circuit</strong></p>
+<p class="card-text"><strong>Continuous time lowpass RC circuit</strong></p>
 </div>
 <div class="card-body docutils">
 <p class="card-text">Impulse response:</p>
@@ -309,20 +309,32 @@
 <div class="d-flex col-lg-6 col-md-6 col-sm-6 col-xs-12 p-2 docutils">
 <div class="card w-100 shadow docutils">
 <div class="card-header text-center docutils">
-<p class="card-text"><strong>Continuous time example: differentiator</strong></p>
+<p class="card-text"><strong>Continuous time highpass RC circuit</strong></p>
 </div>
 <div class="card-body docutils">
-<p class="card-text">body</p>
+<p class="card-text">Impulse response:</p>
+<div class="math notranslate nohighlight">
+\[h(t) = \delta(t) - e^{-t} u(t)\]</div>
+<p class="card-text">Frequency response:</p>
+<div class="math notranslate nohighlight">
+\[H(f) = \frac{2\pi f}{1+j2\pi f}\]</div>
+<p class="card-text"><img alt="" src="_images/ct_highpass.svg" /></p>
 </div>
 </div>
 </div>
 <div class="d-flex col-lg-6 col-md-6 col-sm-6 col-xs-12 p-2 docutils">
 <div class="card w-100 shadow docutils">
 <div class="card-header text-center docutils">
-<p class="card-text"><strong>Discrete time example: first-order difference</strong></p>
+<p class="card-text"><strong>Discrete time first order difference</strong></p>
 </div>
 <div class="card-body docutils">
-<p class="card-text">body</p>
+<p class="card-text">Impulse response:</p>
+<div class="math notranslate nohighlight">
+\[h[n] = \frac{1}{2} \left( \delta[n] - \delta[n-1] \right)\]</div>
+<p class="card-text">Frequency response:</p>
+<div class="math notranslate nohighlight">
+\[H(\omega) = \frac{1}{2} \left( 1 - e^{-j\omega} \right)\]</div>
+<p class="card-text"><img alt="" src="_images/dt_highpass.svg" /></p>
 </div>
 </div>
 </div>

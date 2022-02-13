@@ -164,7 +164,7 @@ The goal of a filter is to suppress or attenuate some signal components while re
 :::{panels}
 :container: container-lg pb-3
 :header: text-center
-**Continuous time RC circuit**
+**Continuous time lowpass RC circuit**
 ^^^
 Impulse response:
 
@@ -199,15 +199,31 @@ $$H(\omega) = e^{-2j \omega} \frac{\sin{(5\omega /2)}}{5 \sin{(\omega/2)}}$$
 :::{panels}
 :container: container-lg pb-3
 :header: text-center
-**Continuous time example: differentiator**
+**Continuous time highpass RC circuit**
 ^^^
-body
+Impulse response:
+
+$$h(t) = \delta(t) - e^{-t} u(t)$$
+
+Frequency response:
+
+$$H(f) = \frac{2\pi f}{1+j2\pi f}$$
+
+![](img/ct_highpass.svg)
 
 ---
 
-**Discrete time example: first-order difference**
+**Discrete time first order difference**
 ^^^
-body
+Impulse response:
+
+$$h[n] = \frac{1}{2} \left( \delta[n] - \delta[n-1] \right)$$
+
+Frequency response:
+
+$$H(\omega) = \frac{1}{2} \left( 1 - e^{-j\omega} \right)$$
+
+![](img/dt_highpass.svg)
 
 :::
 
