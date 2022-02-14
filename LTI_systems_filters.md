@@ -144,11 +144,11 @@ The goal of a filter is to suppress or attenuate some signal components while re
 ^^^
 ![](img/bandpass.svg)
 ---
-**[Bandstop](#bandstop)**
+**[Bandstop](#bandstop-and-notch)**
 ^^^
 ![](img/bandstop.svg)
 ---
-**[Notch](#notch)**
+**[Notch](#bandstop-and-notch)**
 ^^^
 ![](img/notch.svg)
 ---
@@ -165,7 +165,7 @@ The goal of a filter is to suppress or attenuate some signal components while re
 :::{panels}
 :container: container-lg pb-3
 :header: text-center
-**Continuous time lowpass RC circuit**
+**Continuous time lowpass example**
 ^^^
 Impulse response:
 
@@ -200,7 +200,7 @@ $$H(\omega) = e^{-2j \omega} \frac{\sin{(5\omega /2)}}{5 \sin{(\omega/2)}}$$
 :::{panels}
 :container: container-lg pb-3
 :header: text-center
-**Continuous time highpass RC circuit**
+**Continuous time highpass example**
 ^^^
 Impulse response:
 
@@ -235,7 +235,7 @@ $$H(\omega) = \frac{1}{2} \left( 1 - e^{-j\omega} \right)$$
 :::{panels}
 :container: container-lg pb-3
 :header: text-center
-**Continuous time bandpass LC circuit**
+**Continuous time bandpass example**
 ^^^
 Impulse response:
 
@@ -249,7 +249,7 @@ $$H(f) = \frac{2 \pi jf}{(2\pi)^2 + (2 \pi jf)^2}$$
 
 ---
 
-**Discrete time bandpass filter**
+**Discrete time bandpass example**
 ^^^
 Impulse response:
 
@@ -263,41 +263,38 @@ $$H(\omega) = \frac{1}{1+e^{-(2j\omega + ¼)}}$$
 
 :::
 
-### Bandstop
+### Bandstop and notch
 
 ![](img/bandstop.svg)
 
 :::{panels}
 :container: container-lg pb-3
 :header: text-center
-**Continuous time example**
+**Continuous time bandstop example**
 ^^^
-body
+Impulse response:
+
+$$h(t) = \delta(t) - 2e^{-t} (1-t) u(t)$$
+
+Frequency response:
+
+$$H(f) = \frac{(2\pi j f)^2 + 1}{(2\pi j f + 1)^2}$$
+
+![](img/ct_bandstop.svg)
 
 ---
 
-**Discrete time example**
+**Discrete time notch example**
 ^^^
-body
+Impulse response:
 
-:::
+$$h[n] = 2\delta[n] - 2^{-n/2} \cos{\left( \frac{\pi}{2} n \right)} u[n]$$
 
-### Notch
+Frequency response:
 
-![](img/notch.svg)
+$$H(\omega) = \frac{1 + e^{-2j\omega}}{1 + \frac{1}{2}e^{-2j\omega}}$$
 
-:::{panels}
-:container: container-lg pb-3
-:header: text-center
-**Continuous time example**
-^^^
-body
-
----
-
-**Discrete time example**
-^^^
-body
+![](img/dt_notch.svg)
 
 :::
 
@@ -310,7 +307,7 @@ When an [equalizer](https://en.wikipedia.org/wiki/Equalization_(communications))
 :::{panels}
 :container: container-lg pb-3
 :header: text-center
-**Continuous time example: Hilbert transform**
+**Continuous time Hilbert transform**
 ^^^
 body
 
