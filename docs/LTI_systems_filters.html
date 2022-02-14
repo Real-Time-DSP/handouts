@@ -41,7 +41,12 @@
 
           <div class="body" role="main">
             
-  <div class="tex2jax_ignore mathjax_ignore section" id="lti-filters-and-frequency-selectivity">
+  <style>
+@media print {
+    .pagebreak { page-break-before: always; } /* page-break-after works, as well */
+}
+</style>
+<div class="tex2jax_ignore mathjax_ignore section" id="lti-filters-and-frequency-selectivity">
 <h1>LTI filters and frequency selectivity<a class="headerlink" href="#lti-filters-and-frequency-selectivity" title="Permalink to this headline">¶</a></h1>
 <p>Linear time-invariant (LTI) systems have many <a class="reference external" href="#properties-of-lti-systems">useful properties</a>. We can utilize these properties to design <a class="reference external" href="#frequency-selectivity">frequency selective</a> filters.</p>
 <div class="section" id="mathematical-definitions">
@@ -96,10 +101,10 @@
 </div>
 </div>
 </div>
-</div>
 <div class="section" id="properties-of-lti-systems">
-<h2>Properties of LTI systems<a class="headerlink" href="#properties-of-lti-systems" title="Permalink to this headline">¶</a></h2>
+<h3>Properties of LTI systems<a class="headerlink" href="#properties-of-lti-systems" title="Permalink to this headline">¶</a></h3>
 <p>An LTI system is <a class="reference external" href="#impulse-response-and-convolution">uniquely characterized by its impulse response</a>. The <a class="reference external" href="#frequency-response">Frequency response</a> of an LTI system is the Fourier transform of its impulse response.</p>
+</div>
 <div class="section" id="impulse-response-and-convolution">
 <h3>Impulse response and convolution<a class="headerlink" href="#impulse-response-and-convolution" title="Permalink to this headline">¶</a></h3>
 <div class="sphinx-bs container-lg pb-3 docutils">
@@ -192,6 +197,7 @@
 <div class="math notranslate nohighlight">
 \[\text{Magnitude response in decibels} = 10 \log_{10}{|H(\omega)|^2} = 20 \log_{10}{|H(\omega)|}\]</div>
 <p>In MATLAB, the <code class="docutils literal notranslate"><span class="pre">freqz</span></code> function will calculate and plot the magnitude and phase response of a discrete-time LTI system.</p>
+<div class="pagebreak"> </div>
 </div>
 </div>
 <div class="section" id="frequency-selectivity">
@@ -261,6 +267,7 @@
 </div>
 </div>
 </div>
+<div class="pagebreak"> </div>
 <div class="section" id="lowpass">
 <h3>Lowpass<a class="headerlink" href="#lowpass" title="Permalink to this headline">¶</a></h3>
 <p><img alt="" src="_images/lowpass.svg" /></p>
@@ -300,6 +307,7 @@
 </div>
 </div>
 </div>
+<div class="pagebreak"> </div>
 </div>
 <div class="section" id="highpass">
 <h3>Highpass<a class="headerlink" href="#highpass" title="Permalink to this headline">¶</a></h3>
@@ -340,6 +348,7 @@
 </div>
 </div>
 </div>
+<div class="pagebreak"> </div>
 </div>
 <div class="section" id="bandpass">
 <h3>Bandpass<a class="headerlink" href="#bandpass" title="Permalink to this headline">¶</a></h3>
@@ -380,6 +389,7 @@
 </div>
 </div>
 </div>
+<div class="pagebreak"> </div>
 </div>
 <div class="section" id="bandstop-and-notch">
 <h3>Bandstop and notch<a class="headerlink" href="#bandstop-and-notch" title="Permalink to this headline">¶</a></h3>
@@ -423,32 +433,7 @@
 </div>
 <div class="section" id="allpass">
 <h3>Allpass<a class="headerlink" href="#allpass" title="Permalink to this headline">¶</a></h3>
-<p>Allpass filters have a flat magnitude response but affect the signal’s phase. Two common examples are the <a class="reference external" href="https://en.wikipedia.org/wiki/Hilbert_transform">Hilbert transform</a> and the ideal delay.</p>
-<p>When an <a class="reference external" href="https://en.wikipedia.org/wiki/Equalization_(communications)">equalizer</a> is applied to correct for distortion, the cascade of the original system and the equalizer may be modeled as an all-pass filter.</p>
-<div class="sphinx-bs container-lg pb-3 docutils">
-<div class="row docutils">
-<div class="d-flex col-lg-6 col-md-6 col-sm-6 col-xs-12 p-2 docutils">
-<div class="card w-100 shadow docutils">
-<div class="card-header text-center docutils">
-<p class="card-text"><strong>Continuous time Hilbert transform</strong></p>
-</div>
-<div class="card-body docutils">
-<p class="card-text">body</p>
-</div>
-</div>
-</div>
-<div class="d-flex col-lg-6 col-md-6 col-sm-6 col-xs-12 p-2 docutils">
-<div class="card w-100 shadow docutils">
-<div class="card-header text-center docutils">
-<p class="card-text"><strong>Discrete time example: Delay</strong></p>
-</div>
-<div class="card-body docutils">
-<p class="card-text">body</p>
-</div>
-</div>
-</div>
-</div>
-</div>
+<p>Allpass filters have a flat magnitude response but affect the signal’s phase. Two common examples are the ideal delay and the <a class="reference external" href="https://en.wikipedia.org/wiki/Hilbert_transform">Hilbert transform</a>.</p>
 </div>
 </div>
 </div>
@@ -473,7 +458,6 @@
 <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">LTI filters and frequency selectivity</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#mathematical-definitions">Mathematical definitions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#properties-of-lti-systems">Properties of LTI systems</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#frequency-selectivity">Frequency selectivity</a></li>
 </ul>
 </li>
