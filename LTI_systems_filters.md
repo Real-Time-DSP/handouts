@@ -1,3 +1,8 @@
+<style>
+@media print {
+    .pagebreak { page-break-before: always; } /* page-break-after works, as well */
+}
+</style>
 
 # LTI filters and frequency selectivity
 
@@ -39,7 +44,7 @@ $$\mathcal S \left\{x(t-\tau)\right\} = y(t-\tau)$$
 A system is linear time-invariant (LTI) if it satisfies the additivity, homogeneity, and time-invariance properties. A common way for a system to fail to violate these properties is if the system has has nonzero initial conditions.
 :::
 
-## Properties of LTI systems
+### Properties of LTI systems
 
 An LTI system is [uniquely characterized by its impulse response](#impulse-response-and-convolution). The [Frequency response](#frequency-response) of an LTI system is the Fourier transform of its impulse response.
 
@@ -125,6 +130,8 @@ $$\text{Magnitude response in decibels} = 10 \log_{10}{|H(\omega)|^2} = 20 \log_
 
 In MATLAB, the `freqz` function will calculate and plot the magnitude and phase response of a discrete-time LTI system.
 
+<div class="pagebreak"> </div>
+
 ## Frequency selectivity
 
 The goal of a filter is to suppress or attenuate some signal components while retaining or boosting others. We often group LTI filters into six categories based on their frequency selectivity, i.e. the arrangement of frequency bands that are boosted relative to the bands which are attenuated.
@@ -157,6 +164,7 @@ The goal of a filter is to suppress or attenuate some signal components while re
 ![](img/allpass.svg)
 :::
 
+<div class="pagebreak"> </div>
 
 ### Lowpass
 
@@ -193,6 +201,8 @@ $$H(\omega) = e^{-2j \omega} \frac{\sin{(5\omega /2)}}{5 \sin{(\omega/2)}}$$
 
 :::
 
+<div class="pagebreak"> </div>
+
 ### Highpass
 
 ![](img/highpass.svg)
@@ -228,6 +238,8 @@ $$H(\omega) = \frac{1}{2} \left( 1 - e^{-j\omega} \right)$$
 
 :::
 
+<div class="pagebreak"> </div>
+
 ### Bandpass
 
 ![](img/bandpass.svg)
@@ -262,6 +274,8 @@ $$H(\omega) = \frac{1}{1+e^{-(2j\omega + ¼)}}$$
 ![](img/dt_bandpass.svg)
 
 :::
+
+<div class="pagebreak"> </div>
 
 ### Bandstop and notch
 
@@ -300,22 +314,4 @@ $$H(\omega) = \frac{1 + e^{-2j\omega}}{1 + \frac{1}{2}e^{-2j\omega}}$$
 
 ### Allpass
 
-Allpass filters have a flat magnitude response but affect the signal's phase. Two common examples are the [Hilbert transform](https://en.wikipedia.org/wiki/Hilbert_transform) and the ideal delay.
-
-When an [equalizer](https://en.wikipedia.org/wiki/Equalization_(communications)) is applied to correct for distortion, the cascade of the original system and the equalizer may be modeled as an all-pass filter.
-
-:::{panels}
-:container: container-lg pb-3
-:header: text-center
-**Continuous time Hilbert transform**
-^^^
-body
-
----
-
-**Discrete time example: Delay**
-^^^
-body
-
-:::
-
+Allpass filters have a flat magnitude response but affect the signal's phase. Two common examples are the ideal delay and the [Hilbert transform](https://en.wikipedia.org/wiki/Hilbert_transform).
