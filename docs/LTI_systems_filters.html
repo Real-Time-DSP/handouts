@@ -277,7 +277,7 @@
 \[h(t) = e^{-t} u(t)\]</div>
 <p class="card-text">Frequency response:</p>
 <div class="math notranslate nohighlight">
-\[H(f) = \frac{1}{1+j2\pi f}\]</div>
+\[H(f) = \frac{1}{1 + 2\pi jf}\]</div>
 <p class="card-text"><img alt="" src="_images/ct_lowpass.svg" /></p>
 </div>
 </div>
@@ -285,7 +285,7 @@
 <div class="d-flex col-lg-6 col-md-6 col-sm-6 col-xs-12 p-2 docutils">
 <div class="card w-100 shadow docutils">
 <div class="card-header text-center docutils">
-<p class="card-text"><strong>Discrete time five point moving average</strong></p>
+<p class="card-text"><strong>Discrete time moving average</strong></p>
 </div>
 <div class="card-body docutils">
 <p class="card-text">Impulse response:</p>
@@ -317,7 +317,7 @@
 \[h(t) = \delta(t) - e^{-t} u(t)\]</div>
 <p class="card-text">Frequency response:</p>
 <div class="math notranslate nohighlight">
-\[H(f) = \frac{2\pi f}{1+j2\pi f}\]</div>
+\[H(f) = \frac{2\pi jf}{1+2\pi jf}\]</div>
 <p class="card-text"><img alt="" src="_images/ct_highpass.svg" /></p>
 </div>
 </div>
@@ -349,20 +349,32 @@
 <div class="d-flex col-lg-6 col-md-6 col-sm-6 col-xs-12 p-2 docutils">
 <div class="card w-100 shadow docutils">
 <div class="card-header text-center docutils">
-<p class="card-text"><strong>Continuous time example</strong></p>
+<p class="card-text"><strong>Continuous time bandpass LC circuit</strong></p>
 </div>
 <div class="card-body docutils">
-<p class="card-text">body</p>
+<p class="card-text">Impulse response:</p>
+<div class="math notranslate nohighlight">
+\[h(t) = e^{-t} \cos{(2\pi t)} u(t)\]</div>
+<p class="card-text">Frequency response:</p>
+<div class="math notranslate nohighlight">
+\[H(f) = \frac{2 \pi jf}{(2\pi)^2 + (2 \pi jf)^2}\]</div>
+<p class="card-text"><img alt="" src="_images/ct_bandpass.svg" /></p>
 </div>
 </div>
 </div>
 <div class="d-flex col-lg-6 col-md-6 col-sm-6 col-xs-12 p-2 docutils">
 <div class="card w-100 shadow docutils">
 <div class="card-header text-center docutils">
-<p class="card-text"><strong>Discrete time example</strong></p>
+<p class="card-text"><strong>Discrete time bandpass filter</strong></p>
 </div>
 <div class="card-body docutils">
-<p class="card-text">body</p>
+<p class="card-text">Impulse response:</p>
+<div class="math notranslate nohighlight">
+\[h[n] = e^{-n/4} \cos{\left( \frac{\pi}{2} n \right)} u[n]\]</div>
+<p class="card-text">Frequency response:</p>
+<div class="math notranslate nohighlight">
+\[H(\omega) = \frac{1}{1+e^{-(2j\omega + ¼)}}\]</div>
+<p class="card-text"><img alt="" src="_images/dt_bandpass.svg" /></p>
 </div>
 </div>
 </div>
