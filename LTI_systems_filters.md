@@ -1,3 +1,4 @@
+
 # LTI filters and frequency selectivity
 
 Linear time-invariant (LTI) systems have many [useful properties](#properties-of-lti-systems). We can utilize these properties to design [frequency selective](#frequency-selectivity) filters.
@@ -172,13 +173,13 @@ $$h(t) = e^{-t} u(t)$$
 
 Frequency response:
 
-$$H(f) = \frac{1}{1+j2\pi f}$$
+$$H(f) = \frac{1}{1 + 2\pi jf}$$
 
 ![](img/ct_lowpass.svg)
 
 ---
 
-**Discrete time five point moving average**
+**Discrete time moving average**
 ^^^
 Impulse response:
 
@@ -207,7 +208,7 @@ $$h(t) = \delta(t) - e^{-t} u(t)$$
 
 Frequency response:
 
-$$H(f) = \frac{2\pi f}{1+j2\pi f}$$
+$$H(f) = \frac{2\pi jf}{1+2\pi jf}$$
 
 ![](img/ct_highpass.svg)
 
@@ -234,15 +235,31 @@ $$H(\omega) = \frac{1}{2} \left( 1 - e^{-j\omega} \right)$$
 :::{panels}
 :container: container-lg pb-3
 :header: text-center
-**Continuous time example**
+**Continuous time bandpass LC circuit**
 ^^^
-body
+Impulse response:
+
+$$h(t) = e^{-t} \cos{(2\pi t)} u(t)$$
+
+Frequency response:
+
+$$H(f) = \frac{2 \pi jf}{(2\pi)^2 + (2 \pi jf)^2}$$
+
+![](img/ct_bandpass.svg)
 
 ---
 
-**Discrete time example**
+**Discrete time bandpass filter**
 ^^^
-body
+Impulse response:
+
+$$h[n] = e^{-n/4} \cos{\left( \frac{\pi}{2} n \right)} u[n]$$
+
+Frequency response:
+
+$$H(\omega) = \frac{1}{1+e^{-(2j\omega + ¼)}}$$
+
+![](img/dt_bandpass.svg)
 
 :::
 
