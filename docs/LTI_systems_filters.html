@@ -232,7 +232,7 @@
 <div class="d-flex col-lg-6 col-md-6 col-sm-6 col-xs-12 p-2 docutils">
 <div class="card w-100 shadow docutils">
 <div class="card-header text-center docutils">
-<p class="card-text"><strong><a class="reference external" href="#bandstop">Bandstop</a></strong></p>
+<p class="card-text"><strong><a class="reference external" href="#bandstop-and-notch">Bandstop</a></strong></p>
 </div>
 <div class="card-body docutils">
 <p class="card-text"><img alt="" src="_images/bandstop.svg" /></p>
@@ -242,7 +242,7 @@
 <div class="d-flex col-lg-6 col-md-6 col-sm-6 col-xs-12 p-2 docutils">
 <div class="card w-100 shadow docutils">
 <div class="card-header text-center docutils">
-<p class="card-text"><strong><a class="reference external" href="#notch">Notch</a></strong></p>
+<p class="card-text"><strong><a class="reference external" href="#bandstop-and-notch">Notch</a></strong></p>
 </div>
 <div class="card-body docutils">
 <p class="card-text"><img alt="" src="_images/notch.svg" /></p>
@@ -269,7 +269,7 @@
 <div class="d-flex col-lg-6 col-md-6 col-sm-6 col-xs-12 p-2 docutils">
 <div class="card w-100 shadow docutils">
 <div class="card-header text-center docutils">
-<p class="card-text"><strong>Continuous time lowpass RC circuit</strong></p>
+<p class="card-text"><strong>Continuous time lowpass example</strong></p>
 </div>
 <div class="card-body docutils">
 <p class="card-text">Impulse response:</p>
@@ -309,7 +309,7 @@
 <div class="d-flex col-lg-6 col-md-6 col-sm-6 col-xs-12 p-2 docutils">
 <div class="card w-100 shadow docutils">
 <div class="card-header text-center docutils">
-<p class="card-text"><strong>Continuous time highpass RC circuit</strong></p>
+<p class="card-text"><strong>Continuous time highpass example</strong></p>
 </div>
 <div class="card-body docutils">
 <p class="card-text">Impulse response:</p>
@@ -349,7 +349,7 @@
 <div class="d-flex col-lg-6 col-md-6 col-sm-6 col-xs-12 p-2 docutils">
 <div class="card w-100 shadow docutils">
 <div class="card-header text-center docutils">
-<p class="card-text"><strong>Continuous time bandpass LC circuit</strong></p>
+<p class="card-text"><strong>Continuous time bandpass example</strong></p>
 </div>
 <div class="card-body docutils">
 <p class="card-text">Impulse response:</p>
@@ -365,7 +365,7 @@
 <div class="d-flex col-lg-6 col-md-6 col-sm-6 col-xs-12 p-2 docutils">
 <div class="card w-100 shadow docutils">
 <div class="card-header text-center docutils">
-<p class="card-text"><strong>Discrete time bandpass filter</strong></p>
+<p class="card-text"><strong>Discrete time bandpass example</strong></p>
 </div>
 <div class="card-body docutils">
 <p class="card-text">Impulse response:</p>
@@ -381,56 +381,40 @@
 </div>
 </div>
 </div>
-<div class="section" id="bandstop">
-<h3>Bandstop<a class="headerlink" href="#bandstop" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="bandstop-and-notch">
+<h3>Bandstop and notch<a class="headerlink" href="#bandstop-and-notch" title="Permalink to this headline">¶</a></h3>
 <p><img alt="" src="_images/bandstop.svg" /></p>
 <div class="sphinx-bs container-lg pb-3 docutils">
 <div class="row docutils">
 <div class="d-flex col-lg-6 col-md-6 col-sm-6 col-xs-12 p-2 docutils">
 <div class="card w-100 shadow docutils">
 <div class="card-header text-center docutils">
-<p class="card-text"><strong>Continuous time example</strong></p>
+<p class="card-text"><strong>Continuous time bandstop example</strong></p>
 </div>
 <div class="card-body docutils">
-<p class="card-text">body</p>
+<p class="card-text">Impulse response:</p>
+<div class="math notranslate nohighlight">
+\[h(t) = \delta(t) - 2e^{-t} (1-t) u(t)\]</div>
+<p class="card-text">Frequency response:</p>
+<div class="math notranslate nohighlight">
+\[H(f) = \frac{(2\pi j f)^2 + 1}{(2\pi j f + 1)^2}\]</div>
+<p class="card-text"><img alt="" src="_images/ct_bandstop.svg" /></p>
 </div>
 </div>
 </div>
 <div class="d-flex col-lg-6 col-md-6 col-sm-6 col-xs-12 p-2 docutils">
 <div class="card w-100 shadow docutils">
 <div class="card-header text-center docutils">
-<p class="card-text"><strong>Discrete time example</strong></p>
+<p class="card-text"><strong>Discrete time notch example</strong></p>
 </div>
 <div class="card-body docutils">
-<p class="card-text">body</p>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="section" id="notch">
-<h3>Notch<a class="headerlink" href="#notch" title="Permalink to this headline">¶</a></h3>
-<p><img alt="" src="_images/notch.svg" /></p>
-<div class="sphinx-bs container-lg pb-3 docutils">
-<div class="row docutils">
-<div class="d-flex col-lg-6 col-md-6 col-sm-6 col-xs-12 p-2 docutils">
-<div class="card w-100 shadow docutils">
-<div class="card-header text-center docutils">
-<p class="card-text"><strong>Continuous time example</strong></p>
-</div>
-<div class="card-body docutils">
-<p class="card-text">body</p>
-</div>
-</div>
-</div>
-<div class="d-flex col-lg-6 col-md-6 col-sm-6 col-xs-12 p-2 docutils">
-<div class="card w-100 shadow docutils">
-<div class="card-header text-center docutils">
-<p class="card-text"><strong>Discrete time example</strong></p>
-</div>
-<div class="card-body docutils">
-<p class="card-text">body</p>
+<p class="card-text">Impulse response:</p>
+<div class="math notranslate nohighlight">
+\[h[n] = 2\delta[n] - 2^{-n/2} \cos{\left( \frac{\pi}{2} n \right)} u[n]\]</div>
+<p class="card-text">Frequency response:</p>
+<div class="math notranslate nohighlight">
+\[H(\omega) = \frac{1 + e^{-2j\omega}}{1 + \frac{1}{2}e^{-2j\omega}}\]</div>
+<p class="card-text"><img alt="" src="_images/dt_notch.svg" /></p>
 </div>
 </div>
 </div>
@@ -446,7 +430,7 @@
 <div class="d-flex col-lg-6 col-md-6 col-sm-6 col-xs-12 p-2 docutils">
 <div class="card w-100 shadow docutils">
 <div class="card-header text-center docutils">
-<p class="card-text"><strong>Continuous time example: Hilbert transform</strong></p>
+<p class="card-text"><strong>Continuous time Hilbert transform</strong></p>
 </div>
 <div class="card-body docutils">
 <p class="card-text">body</p>
