@@ -20,6 +20,7 @@ html_theme_options = {
 
 html_favicon = "_static/favicon.ico"
 html_static_path = ['_static']
+html_title = 'Dan Jacobellis | University of Texas at Austin | EE 445S Real-time DSP Lab | Spring 2022'
 
 myst_enable_extensions = [
     "amsmath",
