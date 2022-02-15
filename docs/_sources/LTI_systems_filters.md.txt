@@ -118,7 +118,7 @@ We often write $H(\omega)$ instead of $H(j\omega)$ or $H(e^{j\omega})$.
 
 The frequency response is, in general, complex valued. Typically, we represent it in terms of its magnitude and phase.
 
-$$ \text {Magnitude response} = | H(\omega) | = \sqrt { \text{Re} \{ H(\omega) \} + \text{Im} \{ H(\omega) \} }$$
+$$ \text {Magnitude response} = | H(\omega) | = \sqrt { \text{Re} \{ H(\omega) \}^2 + \text{Im} \{ H(\omega) \}^2 }$$
 
 $$ \text {Phase response} = \angle H(\omega) = \text{atan2} (\text{Im} \{ H(\omega) \}, \text{Re} \{ H(\omega) \})$$
 
