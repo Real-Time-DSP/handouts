@@ -115,7 +115,7 @@
 <p class="card-text"><strong>Continuous time</strong></p>
 </div>
 <div class="card-body docutils">
-<p class="card-text">A continuous time impulse, (also known as the Dirac delta) can be defined as a unit area pulse in the limit that it’s duration approaches zero.</p>
+<p class="card-text">A continuous time impulse, (also known as the Dirac delta) can be defined as a unit area pulse in the limit that its duration approaches zero.</p>
 <div class="math notranslate nohighlight">
 \[\delta(t) = \lim_{\epsilon \to 0}{\frac{\text{rect}(t/\epsilon)}{\epsilon}}\]</div>
 <p class="card-text">If a system is LTI, then its impulse response <span class="math notranslate nohighlight">\(h(t) = \mathcal S \{ \delta(t) \}\)</span> uniquely characterizes the system. The output <span class="math notranslate nohighlight">\(y(t)\)</span> of an LTI system is the convolution between the input <span class="math notranslate nohighlight">\(x(t)\)</span> and the system’s impulse response <span class="math notranslate nohighlight">\(h(t)\)</span>.</p>
@@ -196,7 +196,7 @@
 <p>It is common to use the magnitude/phase representation when measuring and plotting the frequency response of a system. Typically, the magnitude response is expressed in decibels</p>
 <div class="math notranslate nohighlight">
 \[\text{Magnitude response in decibels} = 10 \log_{10}{|H(\omega)|^2} = 20 \log_{10}{|H(\omega)|}\]</div>
-<p>In MATLAB, the <code class="docutils literal notranslate"><span class="pre">freqz</span></code> function will calculate and plot the magnitude and phase response of a discrete-time LTI system.</p>
+<p>In MATLAB, the <code class="docutils literal notranslate"><span class="pre">freqz</span></code> function will calculate and plot the magnitude and phase response of a discrete-time LTI system. The freqz function computes the the z-transform and replaces <span class="math notranslate nohighlight">\(z=e^{j\omega}\)</span> to convert to the frequency domain, which might not always be valid.</p>
 <div class="pagebreak"> </div>
 </div>
 </div>
@@ -284,7 +284,7 @@
 \[h(t) = e^{-t} u(t)\]</div>
 <p class="card-text">Frequency response:</p>
 <div class="math notranslate nohighlight">
-\[H(f) = \frac{1}{1 + 2\pi jf}\]</div>
+\[H(f) = \frac{1}{1 + j2\pi f}\]</div>
 <p class="card-text"><img alt="" src="_images/ct_lowpass.svg" /></p>
 </div>
 </div>
@@ -297,7 +297,7 @@
 <div class="card-body docutils">
 <p class="card-text">Impulse response:</p>
 <div class="math notranslate nohighlight">
-\[h[n] = \frac{1}{2} \left( \delta[n] + \delta[n-1] + \cdots \delta[n-4] \right)\]</div>
+\[h[n] = \frac{1}{5} \left( \delta[n] + \delta[n-1] + \cdots \delta[n-4] \right)\]</div>
 <p class="card-text">Frequency response:</p>
 <div class="math notranslate nohighlight">
 \[H(\omega) = e^{-2j \omega} \frac{\sin{(5\omega /2)}}{5 \sin{(\omega/2)}}\]</div>
@@ -325,7 +325,7 @@
 \[h(t) = \delta(t) - e^{-t} u(t)\]</div>
 <p class="card-text">Frequency response:</p>
 <div class="math notranslate nohighlight">
-\[H(f) = \frac{2\pi jf}{1+2\pi jf}\]</div>
+\[H(f) = \frac{j 2\pi f}{1+ j2\pi f}\]</div>
 <p class="card-text"><img alt="" src="_images/ct_highpass.svg" /></p>
 </div>
 </div>
@@ -366,7 +366,7 @@
 \[h(t) = e^{-t} \cos{(2\pi t)} u(t)\]</div>
 <p class="card-text">Frequency response:</p>
 <div class="math notranslate nohighlight">
-\[H(f) = \frac{2 \pi jf}{(2\pi)^2 + (2 \pi jf)^2}\]</div>
+\[H(f) = \frac{j 2 \pi f}{(2\pi)^2 + (j2 \pi f)^2}\]</div>
 <p class="card-text"><img alt="" src="_images/ct_bandpass.svg" /></p>
 </div>
 </div>
