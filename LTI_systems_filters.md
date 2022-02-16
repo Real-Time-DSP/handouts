@@ -62,7 +62,7 @@ $$\delta(t) = \lim_{\epsilon \to 0}{\frac{\text{rect}(t/\epsilon)}{\epsilon}}$$
 
 If a system is LTI, then its impulse response $h(t) = \mathcal S \{ \delta(t) \}$ uniquely characterizes the system. The output $y(t)$ of an LTI system is the convolution between the input $x(t)$ and the system's impulse response $h(t)$.
 
-$$ y(t) = x(t) * h(t) = \int_{-\infty}^{\infty}{x(t-\tau)h(\tau) d \tau}$$
+$$ y(t) = x(t) * h(t) = \int_{\tau = -\infty}^{\infty}{x(t-\tau)h(\tau) d \tau}$$
 
 ---
 **Discrete time**
@@ -73,7 +73,7 @@ $$\delta[n] = \left\{ \begin{array}{ll} 1 & \quad n = 0 \\ 0 & \quad n \neq 0 \e
 
 If a system is LTI, then its impulse response $h[n] = \mathcal S \{ \delta[n] \}$ uniquely characterizes the system. The output $y[n]$ of an LTI system is the convolution between the input $x[n]$ and the system's impulse response $h[n]$.
 
-$$ y[n] = x[n] * h[n] = \sum_{-\infty}^{\infty}{x[n-m]h[m]}$$
+$$ y[n] = x[n] * h[n] = \sum_{m=-\infty}^{\infty}{x[n-m]h[m]}$$
 
 :::
 

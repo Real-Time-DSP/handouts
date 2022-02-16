@@ -120,7 +120,7 @@
 \[\delta(t) = \lim_{\epsilon \to 0}{\frac{\text{rect}(t/\epsilon)}{\epsilon}}\]</div>
 <p class="card-text">If a system is LTI, then its impulse response <span class="math notranslate nohighlight">\(h(t) = \mathcal S \{ \delta(t) \}\)</span> uniquely characterizes the system. The output <span class="math notranslate nohighlight">\(y(t)\)</span> of an LTI system is the convolution between the input <span class="math notranslate nohighlight">\(x(t)\)</span> and the system’s impulse response <span class="math notranslate nohighlight">\(h(t)\)</span>.</p>
 <div class="math notranslate nohighlight">
-\[ y(t) = x(t) * h(t) = \int_{-\infty}^{\infty}{x(t-\tau)h(\tau) d \tau}\]</div>
+\[ y(t) = x(t) * h(t) = \int_{\tau = -\infty}^{\infty}{x(t-\tau)h(\tau) d \tau}\]</div>
 </div>
 </div>
 </div>
@@ -135,7 +135,7 @@
 \[\begin{split}\delta[n] = \left\{ \begin{array}{ll} 1 &amp; \quad n = 0 \\ 0 &amp; \quad n \neq 0 \end{array} \right.\end{split}\]</div>
 <p class="card-text">If a system is LTI, then its impulse response <span class="math notranslate nohighlight">\(h[n] = \mathcal S \{ \delta[n] \}\)</span> uniquely characterizes the system. The output <span class="math notranslate nohighlight">\(y[n]\)</span> of an LTI system is the convolution between the input <span class="math notranslate nohighlight">\(x[n]\)</span> and the system’s impulse response <span class="math notranslate nohighlight">\(h[n]\)</span>.</p>
 <div class="math notranslate nohighlight">
-\[ y[n] = x[n] * h[n] = \sum_{-\infty}^{\infty}{x[n-m]h[m]}\]</div>
+\[ y[n] = x[n] * h[n] = \sum_{m=-\infty}^{\infty}{x[n-m]h[m]}\]</div>
 </div>
 </div>
 </div>
