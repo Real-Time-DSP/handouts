@@ -191,7 +191,7 @@ $$H(f) = \frac{1}{1 + 2\pi jf}$$
 ^^^
 Impulse response:
 
-$$h[n] = \delta[n] + \delta[n-1] + \cdots \delta(n-5)$$
+$$h[n] = \frac{1}{2} \left( \delta[n] + \delta[n-1] + \cdots \delta[n-4] \right)$$
 
 Frequency response:
 
