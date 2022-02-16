@@ -56,7 +56,7 @@ An LTI system is [uniquely characterized by its impulse response](#impulse-respo
 
 **Continuous time**
 ^^^
-A continuous time impulse, (also known as the Dirac delta) can be defined as a unit area pulse in the limit that it's duration approaches zero.
+A continuous time impulse, (also known as the Dirac delta) can be defined as a unit area pulse in the limit that its duration approaches zero.
 
 $$\delta(t) = \lim_{\epsilon \to 0}{\frac{\text{rect}(t/\epsilon)}{\epsilon}}$$
 
@@ -128,7 +128,7 @@ It is common to use the magnitude/phase representation when measuring and plotti
 
 $$\text{Magnitude response in decibels} = 10 \log_{10}{|H(\omega)|^2} = 20 \log_{10}{|H(\omega)|}$$
 
-In MATLAB, the `freqz` function will calculate and plot the magnitude and phase response of a discrete-time LTI system.
+In MATLAB, the `freqz` function will calculate and plot the magnitude and phase response of a discrete-time LTI system. The freqz function computes the the z-transform and replaces $z=e^{j\omega}$ to convert to the frequency domain, which might not always be valid.
 
 <div class="pagebreak"> </div>
 
@@ -181,7 +181,7 @@ $$h(t) = e^{-t} u(t)$$
 
 Frequency response:
 
-$$H(f) = \frac{1}{1 + 2\pi jf}$$
+$$H(f) = \frac{1}{1 + j2\pi f}$$
 
 ![](img/ct_lowpass.svg)
 
@@ -191,7 +191,7 @@ $$H(f) = \frac{1}{1 + 2\pi jf}$$
 ^^^
 Impulse response:
 
-$$h[n] = \frac{1}{2} \left( \delta[n] + \delta[n-1] + \cdots \delta[n-4] \right)$$
+$$h[n] = \frac{1}{5} \left( \delta[n] + \delta[n-1] + \cdots \delta[n-4] \right)$$
 
 Frequency response:
 
@@ -218,7 +218,7 @@ $$h(t) = \delta(t) - e^{-t} u(t)$$
 
 Frequency response:
 
-$$H(f) = \frac{2\pi jf}{1+2\pi jf}$$
+$$H(f) = \frac{j 2\pi f}{1+ j2\pi f}$$
 
 ![](img/ct_highpass.svg)
 
@@ -255,7 +255,7 @@ $$h(t) = e^{-t} \cos{(2\pi t)} u(t)$$
 
 Frequency response:
 
-$$H(f) = \frac{2 \pi jf}{(2\pi)^2 + (2 \pi jf)^2}$$
+$$H(f) = \frac{j 2 \pi f}{(2\pi)^2 + (j2 \pi f)^2}$$
 
 ![](img/ct_bandpass.svg)
 
