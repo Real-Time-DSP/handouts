@@ -3,4 +3,5 @@
 ```{toctree}
 :maxdepth: 2
 LTI_systems_filters
+time_frequency
 ```
