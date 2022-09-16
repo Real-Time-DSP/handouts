@@ -20,6 +20,8 @@
     <script src="_static/doctools.js"></script>
     <script src="_static/togglebutton.js"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="prev" title="LTI filters and frequency selectivity" href="LTI_systems_filters.html" />
@@ -46,21 +48,21 @@
 </style>
 <div class="tex2jax_ignore mathjax_ignore section" id="time-frequency-analysis">
 <h1>Time-Frequency Analysis<a class="headerlink" href="#time-frequency-analysis" title="Permalink to this headline">¶</a></h1>
-<p>The most ubiquitous form of time-frequency analysis can be observed in modern musical notation.</p>
+<p>An example of a joint time-frequency signal representation is standard musical notation.</p>
 <p><img alt="" src="_images/music.png" /></p>
 <p>Imagine that instead of this notation, we used a purely time-domain description that describes the shape of the acoustic waveform.</p>
 <p><img alt="" src="_images/time.svg" /></p>
-<p>Although the musician might be able to make out the rhythm and intensity clearly, it would be incredibly difficult to determine exactly which notes to play.</p>
+<p>Although the musician might be able to make out the rhythm and intensity clearly, it would be impossible to determine exactly which notes to play.</p>
 <p>Now imagine that we used a purely frequency domain description, e.g. the Fourier transform.</p>
 <p><img alt="" src="_images/freq.svg" /></p>
 <p>This would show which notes to play, but it would be impossible to know when to play them.</p>
-<p>For most audio applications neither the time-domain nor the frequency domain representations are sufficient.</p>
+<p>In many applications (especially audio) the joint representation can reveal the most important aspects of a signal which might be hidden in the time or frequency domains alone.</p>
 <p>Consider two more examples:</p>
 <ol class="simple">
-<li><p>Bird chirping</p></li>
-<li><p>Ping from marine sonar system
-<video width="740" height="400" style="float: right;" controls src="_static/chirp.mp4" />”</p></li>
+<li><p>The sound of a bird chirping</p></li>
+<li><p>The ping from marine sonar system</p></li>
 </ol>
+<p><video width="740" height="400" style="float: right;" controls src="_static/chirp.mp4" />”</p>
 <p><img alt="" src="_images/chirp.svg" /></p>
 <p><video width="740" height="400" style="float: right;" controls src="_static/ping.mp4" />”</p>
 <p><img alt="" src="_images/ping.svg" /></p>
@@ -68,9 +70,85 @@
 <p>Before we can dig deeper, we must take a step back and understand how time-frequency distributions like the ones above are constructed.</p>
 <div class="section" id="the-short-time-fourier-transform">
 <h2>The short-time Fourier transform<a class="headerlink" href="#the-short-time-fourier-transform" title="Permalink to this headline">¶</a></h2>
-<p>Other than musical notation, the most common method for constructing a time-frequency distribution is the magnitude spectrogram, which is in-turn computed using the short-time Fourier transform (STFT)</p>
-<p>To perform the STFT, we first divide the signal into (possibly overlapping) segments. The Fourier transform is computed independently for each segment, resulting in a two dimensional distribution.</p>
+<p>A common method for constructing a time-frequency distribution is the magnitude spectrogram, which is in-turn computed using a variation of the short-time Fourier transform (STFT)</p>
+<div class="section" id="continuous-stft">
+<h3>Continuous STFT<a class="headerlink" href="#continuous-stft" title="Permalink to this headline">¶</a></h3>
+<p>The continuous-time STFT of a one-dimensional signal <span class="math notranslate nohighlight">\(x(t)\)</span> is a two-dimensional (time and frequency) representation.</p>
+<p>Recall the definition of the conventional Fourier transform:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+\mathscr F \{ x(t) \} &amp;\equiv X(\omega) \\
+&amp;= \int_{t=-\infty}^{\infty}{ x(t) e^{j\omega t}dt}
+\end{align}\end{split}\]</div>
+<p><span class="math notranslate nohighlight">\(x(t)\)</span> is a function of time but <span class="math notranslate nohighlight">\(X(\omega)\)</span> is not because we’ve integrated over all time from <span class="math notranslate nohighlight">\(-\infty\)</span> to <span class="math notranslate nohighlight">\(\infty\)</span>.</p>
+<p>If we multiply <span class="math notranslate nohighlight">\(x(t)\)</span> by a <strong>window function</strong> centered on <span class="math notranslate nohighlight">\(\tau\)</span> before taking the Fourier transform, then the result would be similar to limiting the bounds of integration to the interval <span class="math notranslate nohighlight">\(\left[ \tau-\sigma, \tau + \sigma \right]\)</span></p>
+<div class="admonition-window-functions admonition">
+<p class="admonition-title">Window functions</p>
+<p>A window function <span class="math notranslate nohighlight">\(w(t)\)</span> is any function designed to ‘focus’ on a segment of a signal by suppressing everything outside of the window. Usually, <span class="math notranslate nohighlight">\(w(t)\)</span> is symmetric about the origin. If we want to focus on a signal <span class="math notranslate nohighlight">\(x(t)\)</span> near the origin then we use the product <span class="math notranslate nohighlight">\(x(t)w(t)\)</span>. To focus on <span class="math notranslate nohighlight">\(x(t)\)</span> at some location other than the origin <span class="math notranslate nohighlight">\(\tau\)</span>, we would shift the window function first, i.e. use the product <span class="math notranslate nohighlight">\(x(t)w(t-\tau)\)</span></p>
+</div>
+<div class="sphinx-bs container-lg pb-4 docutils">
+<div class="row docutils">
+<div class="d-flex col-lg-6 col-md-6 col-sm-6 col-xs-12 p-2 docutils">
+<div class="card w-100 shadow docutils">
+<div class="card-header text-center docutils">
+<p class="card-text"><strong>Rectangular window</strong></p>
+</div>
+<div class="card-body docutils">
+<div class="math notranslate nohighlight">
+\[w(t)=\sigma^{-1/2} \text{rect} \left(\frac{t}{\sigma} \right)\]</div>
+</div>
+</div>
+</div>
+<div class="d-flex col-lg-6 col-md-6 col-sm-6 col-xs-12 p-2 docutils">
+<div class="card w-100 shadow docutils">
+<div class="card-header text-center docutils">
+<p class="card-text"><strong>Gaussian window</strong></p>
+</div>
+<div class="card-body docutils">
+<div class="math notranslate nohighlight">
+\[w(t) = A \exp {\frac{-t^2}{2\sigma^2}} \]</div>
+<p class="card-text">Where <span class="math notranslate nohighlight">\(A=2^{1/2}\sigma^{-1/2}\pi^{-1/4}\)</span> so that the window has unit energy.</p>
+</div>
+</div>
+</div>
+<div class="d-flex col-lg-6 col-md-6 col-sm-6 col-xs-12 p-2 docutils">
+<div class="card w-100 shadow docutils">
+<div class="card-header text-center docutils">
+<p class="card-text"><strong>Lanczos window</strong></p>
+</div>
+<div class="card-body docutils">
+<div class="math notranslate nohighlight">
+\[ w(t) = \text{sinc} \left( \frac t \sigma \right) \text{rect} \left(\frac{t}{\sigma} \right)\]</div>
+</div>
+</div>
+</div>
+<div class="d-flex col-lg-6 col-md-6 col-sm-6 col-xs-12 p-2 docutils">
+<div class="card w-100 shadow docutils">
+<div class="card-header text-center docutils">
+<p class="card-text"><strong>Hann window</strong></p>
+</div>
+<div class="card-body docutils">
+<div class="math notranslate nohighlight">
+\[w(t) = \frac{1}{2}\left[1+\cos\left(\frac{2\pi t}{\sigma}\right) \right]\text{rect} \left(\frac{t}{\sigma} \right)\]</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p>In contrast to the conventional Fourier transform, the STFT uses a window function centered on <span class="math notranslate nohighlight">\(\tau, w(t-\tau)\)</span> to keep the time variable <span class="math notranslate nohighlight">\(t\)</span> while also introducing the frequency variable <span class="math notranslate nohighlight">\(\omega\)</span>.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+\text{STFT} \{x(t) \} &amp;\equiv X(\tau, \omega)\\
+&amp;= \mathscr F \{ x(t) w(t-\tau) \}\\
+&amp;= \int_{t=-\infty}^{\infty}{ x(t)w(t-\tau) e^{j\omega t}dt}
+\end{align}\end{split}\]</div>
+</div>
+<div class="section" id="discrete-stft">
+<h3>Discrete STFT<a class="headerlink" href="#discrete-stft" title="Permalink to this headline">¶</a></h3>
+<p>To perform the discrete version of the STFT, we choose a discrete window function <span class="math notranslate nohighlight">\(w[n]\)</span>. The window function can either be designed for a specific application or we can just use a sampled version of a continuous window function like the rectangular or Hann window.</p>
+<p>We divide the signal <span class="math notranslate nohighlight">\(x[n]\)</span> into segments which are the same length as w[n], then compute the discrete fourier transform of each windowed segment <span class="math notranslate nohighlight">\(x[n]w[n-k]\)</span>. For each segment, we get a vector containing a frequency domain representation of <span class="math notranslate nohighlight">\(x[n]\)</span> near <span class="math notranslate nohighlight">\(k\)</span>. Repeating this for many values of <span class="math notranslate nohighlight">\(k\)</span> results in a two-dimensional (time,frequency) representation of the signal.</p>
 <p>Since the Fourier transform is, in general, complex-valued, we rarely use the STFT directly. Instead, it is common to separate it into it’s magnitude and phase. The plot constructed from the magnitude of the STFT is called the magnitude spectrogram.</p>
+</div>
 </div>
 <div class="section" id="filter-banks">
 <h2>Filter banks<a class="headerlink" href="#filter-banks" title="Permalink to this headline">¶</a></h2>
@@ -141,7 +219,7 @@
       &copy;.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.3.2</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.4.0</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
       |
