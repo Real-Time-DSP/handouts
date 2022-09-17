@@ -68,23 +68,29 @@
 <p><img alt="" src="_images/ping.svg" /></p>
 <p>Although all three representations (time-domain, frequency-domain, and joint time-frequency) contain equivalent information, it is clear that the joint representation has several advantages.</p>
 <p>Before we can dig deeper, we must take a step back and understand how time-frequency distributions like the ones above are constructed.</p>
-<div class="section" id="the-short-time-fourier-transform">
-<h2>The short-time Fourier transform<a class="headerlink" href="#the-short-time-fourier-transform" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="the-short-time-fourier-transform-stft">
+<h2>The short-time Fourier transform (STFT)<a class="headerlink" href="#the-short-time-fourier-transform-stft" title="Permalink to this headline">¶</a></h2>
 <p>A common method for constructing a time-frequency distribution is the magnitude spectrogram, which is in-turn computed using a variation of the short-time Fourier transform (STFT)</p>
 <div class="section" id="continuous-stft">
 <h3>Continuous STFT<a class="headerlink" href="#continuous-stft" title="Permalink to this headline">¶</a></h3>
-<p>The continuous-time STFT of a one-dimensional signal <span class="math notranslate nohighlight">\(x(t)\)</span> is a two-dimensional (time and frequency) representation.</p>
+<p>The continuous-time STFT of a one-dimensional signal <span class="math notranslate nohighlight">\(x(t)\)</span> is a two-dimensional (time and frequency) representation <span class="math notranslate nohighlight">\(X(t,f)\)</span>.</p>
 <p>Recall the definition of the conventional Fourier transform:</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}\begin{align}
-\mathscr F \{ x(t) \} &amp;\equiv X(\omega) \\
-&amp;= \int_{t=-\infty}^{\infty}{ x(t) e^{j\omega t}dt}
+\mathscr F \{ x(t) \} &amp;\equiv X(f) \\
+&amp;= \int_{t=-\infty}^{\infty}{ x(t) e^{-2\pi j f t}dt}
 \end{align}\end{split}\]</div>
-<p><span class="math notranslate nohighlight">\(x(t)\)</span> is a function of time but <span class="math notranslate nohighlight">\(X(\omega)\)</span> is not because we’ve integrated over all time from <span class="math notranslate nohighlight">\(-\infty\)</span> to <span class="math notranslate nohighlight">\(\infty\)</span>.</p>
-<p>If we multiply <span class="math notranslate nohighlight">\(x(t)\)</span> by a <strong>window function</strong> centered on <span class="math notranslate nohighlight">\(\tau\)</span> before taking the Fourier transform, then the result would be similar to limiting the bounds of integration to the interval <span class="math notranslate nohighlight">\(\left[ \tau-\sigma, \tau + \sigma \right]\)</span></p>
+<p><span class="math notranslate nohighlight">\(x(t)\)</span> is a function of time but <span class="math notranslate nohighlight">\(X(f)\)</span> is not because we’ve integrated over all time from <span class="math notranslate nohighlight">\(-\infty\)</span> to <span class="math notranslate nohighlight">\(\infty\)</span>.</p>
+<p>In contrast, the STFT uses a window function <span class="math notranslate nohighlight">\(w(\tau)\)</span> to keep the time variable <span class="math notranslate nohighlight">\(t\)</span> while also introducing the frequency variable <span class="math notranslate nohighlight">\(f\)</span>.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+\text{STFT} \{x(t) \} &amp;\equiv X(t, f)\\
+&amp;= \mathscr F \{ x(\tau) w(\tau-t) \}\\
+&amp;= \int_{\tau=-\infty}^{\infty}{ x(\tau)w(\tau-t) e^{j\omega \tau}d\tau}
+\end{align}\end{split}\]</div>
 <div class="admonition-window-functions admonition">
 <p class="admonition-title">Window functions</p>
-<p>A window function <span class="math notranslate nohighlight">\(w(t)\)</span> is any function designed to ‘focus’ on a segment of a signal by suppressing everything outside of the window. Usually, <span class="math notranslate nohighlight">\(w(t)\)</span> is symmetric about the origin. If we want to focus on a signal <span class="math notranslate nohighlight">\(x(t)\)</span> near the origin then we use the product <span class="math notranslate nohighlight">\(x(t)w(t)\)</span>. To focus on <span class="math notranslate nohighlight">\(x(t)\)</span> at some location other than the origin <span class="math notranslate nohighlight">\(\tau\)</span>, we would shift the window function first, i.e. use the product <span class="math notranslate nohighlight">\(x(t)w(t-\tau)\)</span></p>
+<p>A window function <span class="math notranslate nohighlight">\(w(t)\)</span> is any function designed to ‘focus’ on a segment of a signal by suppressing everything outside of the window. Usually, <span class="math notranslate nohighlight">\(w(t)\)</span> is symmetric about the origin. If we want to focus on a signal <span class="math notranslate nohighlight">\(x(t)\)</span> near the origin then we use the product <span class="math notranslate nohighlight">\(x(t)w(t)\)</span>. To focus on <span class="math notranslate nohighlight">\(x(t)\)</span> at some location <span class="math notranslate nohighlight">\(a\)</span> instead of the origin, we shift the window function first, i.e. we use the product <span class="math notranslate nohighlight">\(x(t)w(t-a)\)</span>. We usually choose the amplitude <span class="math notranslate nohighlight">\(A\)</span> of a window so that it has unit energy, i.e. <span class="math notranslate nohighlight">\(\int{w^2 (t) dt} = 1\)</span>. The width of the window <span class="math notranslate nohighlight">\(\sigma\)</span> is an important parameter since it controls the trade-off between time and frequency resolution. Some common window functions are shown below.</p>
 </div>
 <div class="sphinx-bs container-lg pb-4 docutils">
 <div class="row docutils">
@@ -95,7 +101,8 @@
 </div>
 <div class="card-body docutils">
 <div class="math notranslate nohighlight">
-\[w(t)=\sigma^{-1/2} \text{rect} \left(\frac{t}{\sigma} \right)\]</div>
+\[w(t)= A \text{ rect} \left(t/2 \sigma \right)\]</div>
+<p class="card-text"><img alt="" src="_images/window_rect.svg" /></p>
 </div>
 </div>
 </div>
@@ -106,8 +113,8 @@
 </div>
 <div class="card-body docutils">
 <div class="math notranslate nohighlight">
-\[w(t) = A \exp {\frac{-t^2}{2\sigma^2}} \]</div>
-<p class="card-text">Where <span class="math notranslate nohighlight">\(A=2^{1/2}\sigma^{-1/2}\pi^{-1/4}\)</span> so that the window has unit energy.</p>
+\[w(t) = A e^{-t^2/2\sigma^2} \]</div>
+<p class="card-text"><img alt="" src="_images/window_gaussian.svg" /></p>
 </div>
 </div>
 </div>
@@ -118,7 +125,8 @@
 </div>
 <div class="card-body docutils">
 <div class="math notranslate nohighlight">
-\[ w(t) = \text{sinc} \left( \frac t \sigma \right) \text{rect} \left(\frac{t}{\sigma} \right)\]</div>
+\[ w(t) = A \text{ sinc} \left( \frac t \sigma \right) \text{rect} \left(\frac{t}{2\sigma} \right)\]</div>
+<p class="card-text"><img alt="" src="_images/window_lanczos.svg" /></p>
 </div>
 </div>
 </div>
@@ -129,19 +137,13 @@
 </div>
 <div class="card-body docutils">
 <div class="math notranslate nohighlight">
-\[w(t) = \frac{1}{2}\left[1+\cos\left(\frac{2\pi t}{\sigma}\right) \right]\text{rect} \left(\frac{t}{\sigma} \right)\]</div>
+\[w(t) = \frac{A}{2}\left[1+\cos\left(\frac{\pi t}{\sigma}\right) \right]\text{rect} \left(\frac{t}{2\sigma} \right)\]</div>
+<p class="card-text"><img alt="" src="_images/window_hann.svg" /></p>
 </div>
 </div>
 </div>
 </div>
 </div>
-<p>In contrast to the conventional Fourier transform, the STFT uses a window function centered on <span class="math notranslate nohighlight">\(\tau, w(t-\tau)\)</span> to keep the time variable <span class="math notranslate nohighlight">\(t\)</span> while also introducing the frequency variable <span class="math notranslate nohighlight">\(\omega\)</span>.</p>
-<div class="math notranslate nohighlight">
-\[\begin{split}\begin{align}
-\text{STFT} \{x(t) \} &amp;\equiv X(\tau, \omega)\\
-&amp;= \mathscr F \{ x(t) w(t-\tau) \}\\
-&amp;= \int_{t=-\infty}^{\infty}{ x(t)w(t-\tau) e^{j\omega t}dt}
-\end{align}\end{split}\]</div>
 </div>
 <div class="section" id="discrete-stft">
 <h3>Discrete STFT<a class="headerlink" href="#discrete-stft" title="Permalink to this headline">¶</a></h3>
@@ -179,7 +181,7 @@
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="LTI_systems_filters.html">LTI filters and frequency selectivity</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Time-Frequency Analysis</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#the-short-time-fourier-transform">The short-time Fourier transform</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#the-short-time-fourier-transform-stft">The short-time Fourier transform (STFT)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#filter-banks">Filter banks</a></li>
 </ul>
 </li>

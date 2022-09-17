@@ -42,27 +42,33 @@ Although all three representations (time-domain, frequency-domain, and joint tim
 
 Before we can dig deeper, we must take a step back and understand how time-frequency distributions like the ones above are constructed.
 
-## The short-time Fourier transform
+## The short-time Fourier transform (STFT)
 
 A common method for constructing a time-frequency distribution is the magnitude spectrogram, which is in-turn computed using a variation of the short-time Fourier transform (STFT)
 
 ### Continuous STFT
 
-The continuous-time STFT of a one-dimensional signal $x(t)$ is a two-dimensional (time and frequency) representation.
+The continuous-time STFT of a one-dimensional signal $x(t)$ is a two-dimensional (time and frequency) representation $X(t,f)$.
 
 Recall the definition of the conventional Fourier transform:
 
 $$\begin{align}
-\mathscr F \{ x(t) \} &\equiv X(\omega) \\
-&= \int_{t=-\infty}^{\infty}{ x(t) e^{j\omega t}dt}
+\mathscr F \{ x(t) \} &\equiv X(f) \\
+&= \int_{t=-\infty}^{\infty}{ x(t) e^{-2\pi j f t}dt}
 \end{align}$$
 
-$x(t)$ is a function of time but $X(\omega)$ is not because we've integrated over all time from $-\infty$ to $\infty$.
+$x(t)$ is a function of time but $X(f)$ is not because we've integrated over all time from $-\infty$ to $\infty$.
 
-If we multiply $x(t)$ by a **window function** centered on $\tau$ before taking the Fourier transform, then the result would be similar to limiting the bounds of integration to the interval $\left[ \tau-\sigma, \tau + \sigma \right]$
+In contrast, the STFT uses a window function $w(\tau)$ to keep the time variable $t$ while also introducing the frequency variable $f$.
+
+$$\begin{align}
+\text{STFT} \{x(t) \} &\equiv X(t, f)\\
+&= \mathscr F \{ x(\tau) w(\tau-t) \}\\
+&= \int_{\tau=-\infty}^{\infty}{ x(\tau)w(\tau-t) e^{j\omega \tau}d\tau}
+\end{align}$$
 
 ```{admonition} Window functions
-A window function $w(t)$ is any function designed to 'focus' on a segment of a signal by suppressing everything outside of the window. Usually, $w(t)$ is symmetric about the origin. If we want to focus on a signal $x(t)$ near the origin then we use the product $x(t)w(t)$. To focus on $x(t)$ at some location other than the origin $\tau$, we would shift the window function first, i.e. use the product $x(t)w(t-\tau)$
+A window function $w(t)$ is any function designed to 'focus' on a segment of a signal by suppressing everything outside of the window. Usually, $w(t)$ is symmetric about the origin. If we want to focus on a signal $x(t)$ near the origin then we use the product $x(t)w(t)$. To focus on $x(t)$ at some location $a$ instead of the origin, we shift the window function first, i.e. we use the product $x(t)w(t-a)$. We usually choose the amplitude $A$ of a window so that it has unit energy, i.e. $\int{w^2 (t) dt} = 1$. The width of the window $\sigma$ is an important parameter since it controls the trade-off between time and frequency resolution. Some common window functions are shown below.
 ```
 
 ::: {panels}
@@ -72,41 +78,41 @@ A window function $w(t)$ is any function designed to 'focus' on a segment of a s
 **Rectangular window**
 ^^^
 
-$$w(t)=\sigma^{-1/2} \text{rect} \left(\frac{t}{\sigma} \right)$$
+$$w(t)= A \text{ rect} \left(t/2 \sigma \right)$$
+
+![](img/window_rect.svg)
 
 ---
-
 **Gaussian window**
 ^^^
 
-$$w(t) = A \exp {\frac{-t^2}{2\sigma^2}} $$
+$$w(t) = A e^{-t^2/2\sigma^2} $$
 
-Where $A=2^{1/2}\sigma^{-1/2}\pi^{-1/4}$ so that the window has unit energy.
+![](img/window_gaussian.svg)
 
 ---
 
 **Lanczos window**
 ^^^
 
-$$ w(t) = \text{sinc} \left( \frac t \sigma \right) \text{rect} \left(\frac{t}{\sigma} \right)$$
+$$ w(t) = A \text{ sinc} \left( \frac t \sigma \right) \text{rect} \left(\frac{t}{2\sigma} \right)$$
+
+![](img/window_lanczos.svg)
 
 ---
 
 **Hann window**
 ^^^
 
-$$w(t) = \frac{1}{2}\left[1+\cos\left(\frac{2\pi t}{\sigma}\right) \right]\text{rect} \left(\frac{t}{\sigma} \right)$$
+$$w(t) = \frac{A}{2}\left[1+\cos\left(\frac{\pi t}{\sigma}\right) \right]\text{rect} \left(\frac{t}{2\sigma} \right)$$
+
+![](img/window_hann.svg)
 
 :::
 
 
-In contrast to the conventional Fourier transform, the STFT uses a window function centered on $\tau, w(t-\tau)$ to keep the time variable $t$ while also introducing the frequency variable $\omega$.
 
-$$\begin{align}
-\text{STFT} \{x(t) \} &\equiv X(\tau, \omega)\\
-&= \mathscr F \{ x(t) w(t-\tau) \}\\
-&= \int_{t=-\infty}^{\infty}{ x(t)w(t-\tau) e^{j\omega t}dt}
-\end{align}$$
+
 
 ### Discrete STFT
 
