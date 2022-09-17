@@ -54,7 +54,7 @@ Recall the definition of the conventional Fourier transform:
 
 $$\begin{align}
 \mathscr F \{ x(t) \} &\equiv X(f) \\
-&= \int_{t=-\infty}^{\infty}{ x(t) e^{-2\pi j f t}dt}
+&= \int_{t=-\infty}^{\infty}{ x(t) e^{-j 2\pi f t}dt}
 \end{align}$$
 
 $x(t)$ is a function of time but $X(f)$ is not because we've integrated over all time from $-\infty$ to $\infty$.
@@ -64,7 +64,7 @@ In contrast, the STFT uses a window function $w(\tau)$ to keep the time variable
 $$\begin{align}
 \text{STFT} \{x(t) \} &\equiv X(t, f)\\
 &= \mathscr F \{ x(\tau) w(\tau-t) \}\\
-&= \int_{\tau=-\infty}^{\infty}{ x(\tau)w(\tau-t) e^{j\omega \tau}d\tau}
+&= \int_{\tau=-\infty}^{\infty}{ x(\tau)w(\tau-t) e^{- j 2\pi f \tau}d\tau}
 \end{align}$$
 
 ```{admonition} Window functions
@@ -110,13 +110,59 @@ $$w(t) = \frac{A}{2}\left[1+\cos\left(\frac{\pi t}{\sigma}\right) \right]\text{r
 
 :::
 
+Note that if the window function we choose has a finite width of $L$, then the integral bounds in the STFT can be equivalently written as:
 
+$$\begin{align}
+\text{STFT} \{x(t) \} &= \mathscr F \{ x(\tau) w_L(\tau-t) \} \\
+&= \int_{\tau=-L/2}^{L/2}{ x(\tau)w(\tau-t) e^{-j 2\pi f \tau}d\tau}
+\end{align}$$
 
+At each time $t$, this is equivalent to finding the *Fourier series* coefficients of the signal created by taking the *length $L$ periodic extension* of $x(\tau)w_L(\tau-t)$
 
+In other words, once the window is applied, the Fourier transform is equivalent to a Fourier series. This fact will be useful as we move on to the discrete version of the STFT.
 
 ### Discrete STFT
 
-To perform the discrete version of the STFT, we choose a discrete window function $w[n]$. The window function can either be designed for a specific application or we can just use a sampled version of a continuous window function like the rectangular or Hann window.
+The discrete version of the STFT replaces the Fourier transform with the DTFT. However, the discrete window functions $w[n]$ that are typically used have finite width,
+
+$$\begin{align}
+\text{STFT} \{x[n] \} &\equiv X(t, f)\\
+&= \mathscr F \{ x(\tau) w(\tau-t) \}\\
+&= \int_{\tau=-\infty}^{\infty}{ x(\tau)w(\tau-t) e^{-j 2 \pi f \tau}d\tau}
+\end{align}$$
+
+```{admonition} Sampling and the DTFT
+
+The impulse train with sampling period $T_s$ is defined as
+
+$$Ш_{T_s}(t)=\sum_{k=-\infty}^{\infty}{\delta(t-kT_s})$$
+
+The fourier transform of an impulse train is another impulse train.
+
+$$\begin{align}
+\mathscr F \{ Ш_{T_s}(t) \} &= \frac {1}{T_s} Ш_{1/T_s}(f) \\
+&=  f_s Ш_{f_s}(f)
+\end{align}$$
+
+The operation of sampling can be modeled as multiplication with an impulse train.
+
+$$x[n] = x(t) \cdot Ш_{T_s}(t)$$
+
+The fourier transform of a sampled signal is called the discrete-time Fourier transform (DTFT).
+
+$$\begin{align}
+\text{DTFT}_ \{x[n] \} &= \sum_{n=-\infty}^{\infty}{x[n] e^{-j 2\pi f n}} \\
+&= \mathscr F \{ x(t) Ш_{T_s}(t) \} \\
+&= \frac{1}{2\pi} \mathscr F \{ x(t) \} * \mathscr F \{ Ш_{T_s}(t) \} \\
+&= \frac{f_s}{2\pi} X(f) * Ш_{f_s}(f) 
+\end{align}$$
+
+```
+
+If we want to work with a discrete signal $x[n]$, then the Fourier transform becomes a discrete-time Fourier transform (DTFT).
+
+
+To perform the discrete version of the STFT, we must first choose a *discrete* window function $w[n]$. The window function can either be designed for a specific application or we can just use a sampled version of a continuous window function like the rectangular or Hann window.
 
 We divide the signal $x[n]$ into segments which are the same length as w[n], then compute the discrete fourier transform of each windowed segment $x[n]w[n-k]$. For each segment, we get a vector containing a frequency domain representation of $x[n]$ near $k$. Repeating this for many values of $k$ results in a two-dimensional (time,frequency) representation of the signal.
 

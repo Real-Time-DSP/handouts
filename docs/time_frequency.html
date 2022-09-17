@@ -78,7 +78,7 @@
 <div class="math notranslate nohighlight">
 \[\begin{split}\begin{align}
 \mathscr F \{ x(t) \} &amp;\equiv X(f) \\
-&amp;= \int_{t=-\infty}^{\infty}{ x(t) e^{-2\pi j f t}dt}
+&amp;= \int_{t=-\infty}^{\infty}{ x(t) e^{-j 2\pi f t}dt}
 \end{align}\end{split}\]</div>
 <p><span class="math notranslate nohighlight">\(x(t)\)</span> is a function of time but <span class="math notranslate nohighlight">\(X(f)\)</span> is not because we’ve integrated over all time from <span class="math notranslate nohighlight">\(-\infty\)</span> to <span class="math notranslate nohighlight">\(\infty\)</span>.</p>
 <p>In contrast, the STFT uses a window function <span class="math notranslate nohighlight">\(w(\tau)\)</span> to keep the time variable <span class="math notranslate nohighlight">\(t\)</span> while also introducing the frequency variable <span class="math notranslate nohighlight">\(f\)</span>.</p>
@@ -86,7 +86,7 @@
 \[\begin{split}\begin{align}
 \text{STFT} \{x(t) \} &amp;\equiv X(t, f)\\
 &amp;= \mathscr F \{ x(\tau) w(\tau-t) \}\\
-&amp;= \int_{\tau=-\infty}^{\infty}{ x(\tau)w(\tau-t) e^{j\omega \tau}d\tau}
+&amp;= \int_{\tau=-\infty}^{\infty}{ x(\tau)w(\tau-t) e^{- j 2\pi f \tau}d\tau}
 \end{align}\end{split}\]</div>
 <div class="admonition-window-functions admonition">
 <p class="admonition-title">Window functions</p>
@@ -144,10 +144,49 @@
 </div>
 </div>
 </div>
+<p>Note that if the window function we choose has a finite width of <span class="math notranslate nohighlight">\(L\)</span>, then the integral bounds in the STFT can be equivalently written as:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+\text{STFT} \{x(t) \} &amp;= \mathscr F \{ x(\tau) w_L(\tau-t) \} \\
+&amp;= \int_{\tau=-L/2}^{L/2}{ x(\tau)w(\tau-t) e^{-j 2\pi f \tau}d\tau}
+\end{align}\end{split}\]</div>
+<p>At each time <span class="math notranslate nohighlight">\(t\)</span>, this is equivalent to finding the <em>Fourier series</em> coefficients of the signal created by taking the <em>length <span class="math notranslate nohighlight">\(L\)</span> periodic extension</em> of <span class="math notranslate nohighlight">\(x(\tau)w_L(\tau-t)\)</span></p>
+<p>In other words, once the window is applied, the Fourier transform is equivalent to a Fourier series. This fact will be useful as we move on to the discrete version of the STFT.</p>
 </div>
 <div class="section" id="discrete-stft">
 <h3>Discrete STFT<a class="headerlink" href="#discrete-stft" title="Permalink to this headline">¶</a></h3>
-<p>To perform the discrete version of the STFT, we choose a discrete window function <span class="math notranslate nohighlight">\(w[n]\)</span>. The window function can either be designed for a specific application or we can just use a sampled version of a continuous window function like the rectangular or Hann window.</p>
+<p>The discrete version of the STFT replaces the Fourier transform with the DTFT. However, the discrete window functions <span class="math notranslate nohighlight">\(w[n]\)</span> that are typically used have finite width,</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+\text{STFT} \{x[n] \} &amp;\equiv X(t, f)\\
+&amp;= \mathscr F \{ x(\tau) w(\tau-t) \}\\
+&amp;= \int_{\tau=-\infty}^{\infty}{ x(\tau)w(\tau-t) e^{-j 2 \pi f \tau}d\tau}
+\end{align}\end{split}\]</div>
+<div class="admonition-sampling-and-the-dtft admonition">
+<p class="admonition-title">Sampling and the DTFT</p>
+<p>The impulse train with sampling period <span class="math notranslate nohighlight">\(T_s\)</span> is defined as</p>
+<div class="math notranslate nohighlight">
+\[Ш_{T_s}(t)=\sum_{k=-\infty}^{\infty}{\delta(t-kT_s})\]</div>
+<p>The fourier transform of an impulse train is another impulse train.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+\mathscr F \{ Ш_{T_s}(t) \} &amp;= \frac {1}{T_s} Ш_{1/T_s}(f) \\
+&amp;=  f_s Ш_{f_s}(f)
+\end{align}\end{split}\]</div>
+<p>The operation of sampling can be modeled as multiplication with an impulse train.</p>
+<div class="math notranslate nohighlight">
+\[x[n] = x(t) \cdot Ш_{T_s}(t)\]</div>
+<p>The fourier transform of a sampled signal is called the discrete-time Fourier transform (DTFT).</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+\text{DTFT}_ \{x[n] \} &amp;= \sum_{n=-\infty}^{\infty}{x[n] e^{-j 2\pi f n}} \\
+&amp;= \mathscr F \{ x(t) Ш_{T_s}(t) \} \\
+&amp;= \frac{1}{2\pi} \mathscr F \{ x(t) \} * \mathscr F \{ Ш_{T_s}(t) \} \\
+&amp;= \frac{f_s}{2\pi} X(f) * Ш_{f_s}(f) 
+\end{align}\end{split}\]</div>
+</div>
+<p>If we want to work with a discrete signal <span class="math notranslate nohighlight">\(x[n]\)</span>, then the Fourier transform becomes a discrete-time Fourier transform (DTFT).</p>
+<p>To perform the discrete version of the STFT, we must first choose a <em>discrete</em> window function <span class="math notranslate nohighlight">\(w[n]\)</span>. The window function can either be designed for a specific application or we can just use a sampled version of a continuous window function like the rectangular or Hann window.</p>
 <p>We divide the signal <span class="math notranslate nohighlight">\(x[n]\)</span> into segments which are the same length as w[n], then compute the discrete fourier transform of each windowed segment <span class="math notranslate nohighlight">\(x[n]w[n-k]\)</span>. For each segment, we get a vector containing a frequency domain representation of <span class="math notranslate nohighlight">\(x[n]\)</span> near <span class="math notranslate nohighlight">\(k\)</span>. Repeating this for many values of <span class="math notranslate nohighlight">\(k\)</span> results in a two-dimensional (time,frequency) representation of the signal.</p>
 <p>Since the Fourier transform is, in general, complex-valued, we rarely use the STFT directly. Instead, it is common to separate it into it’s magnitude and phase. The plot constructed from the magnitude of the STFT is called the magnitude spectrogram.</p>
 </div>
