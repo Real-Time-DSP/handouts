@@ -110,25 +110,33 @@ $$w(t) = \frac{A}{2}\left[1+\cos\left(\frac{\pi t}{\sigma}\right) \right]\text{r
 
 :::
 
+```{admonition} Equivalence of Fourier transform and Fourier series for windowed signals
+
 Note that if the window function we choose has a finite width of $L$, then the integral bounds in the STFT can be equivalently written as:
 
 $$\begin{align}
 \text{STFT} \{x(t) \} &= \mathscr F \{ x(\tau) w_L(\tau-t) \} \\
-&= \int_{\tau=-L/2}^{L/2}{ x(\tau)w(\tau-t) e^{-j 2\pi f \tau}d\tau}
+&= \int_{\tau=-L/2}^{L/2}{ x(\tau)w_L(\tau-t) e^{-j 2\pi f \tau}d\tau}
 \end{align}$$
 
-At each time $t$, this is equivalent to finding the *Fourier series* coefficients of the signal created by taking the *length $L$ periodic extension* of $x(\tau)w_L(\tau-t)$
+At each time $t$, this is equivalent to finding the *Fourier series* coefficients of the signal created by taking the *length $L$ periodic extension* of $x(\tau)w_L(\tau-t)$.
 
-In other words, once the window is applied, the Fourier transform is equivalent to a Fourier series. This fact will be useful as we move on to the discrete version of the STFT.
+In other words, once the window is applied, the Fourier transform is equivalent to a Fourier series.
+
+The same is true in discrete time. If we first apply a finite length window $w_L[n]$, then the discrete-time Fourier transform (DTFT) is equivalent to the discrete Fourier transform (DFT).
+
+```
 
 ### Discrete STFT
 
-The discrete version of the STFT replaces the Fourier transform with the DTFT. However, the discrete window functions $w[n]$ that are typically used have finite width,
+The discrete version of the STFT replaces the Fourier transform with the discrete-time Fourier transform (DTFT). However, the discrete window function $w_L[n]$ is typically causal (instead of centered on the origin) and has finite length $L$. As a result of the finite length, the DTFT is equivalent to a discrete Fourier transform (DFT), and the discrete STFT $X[n,k]$ is sampled both time (indexed by $n$) and in frequency (indexed by $k$).
 
 $$\begin{align}
-\text{STFT} \{x[n] \} &\equiv X(t, f)\\
-&= \mathscr F \{ x(\tau) w(\tau-t) \}\\
-&= \int_{\tau=-\infty}^{\infty}{ x(\tau)w(\tau-t) e^{-j 2 \pi f \tau}d\tau}
+\text{STFT} \{x[n] \} &\equiv X[n,k]\\
+&= \text{DTFT} \{ x[m]w_L[m-n] \}\\
+&= \sum_{m=-\infty}^{\infty}{ x[m] w_L[m-n] e^{-j 2 \pi f m}} \\
+&= \sum_{m=0}^{L-1}{ x[m] w_L[m-n] e^{-j 2 \pi k m / L}} \\
+&= \text{DFT} \{ x[m]w_L[m-n] \}
 \end{align}$$
 
 ```{admonition} Sampling and the DTFT
@@ -158,22 +166,30 @@ $$\begin{align}
 \end{align}$$
 
 ```
+In other words, to construct the discrete STFT, we perform 3 steps:
 
-If we want to work with a discrete signal $x[n]$, then the Fourier transform becomes a discrete-time Fourier transform (DTFT).
+1. Divide the signal $x[n]$ into segments of length $L$
+2. Multiply each segment by the window function $w_L[n]$ 
+3. Compute the discrete Fourier transform of each windowed segment using the fast Fourier transform (FFT) algorithm.
 
-
-To perform the discrete version of the STFT, we must first choose a *discrete* window function $w[n]$. The window function can either be designed for a specific application or we can just use a sampled version of a continuous window function like the rectangular or Hann window.
-
-We divide the signal $x[n]$ into segments which are the same length as w[n], then compute the discrete fourier transform of each windowed segment $x[n]w[n-k]$. For each segment, we get a vector containing a frequency domain representation of $x[n]$ near $k$. Repeating this for many values of $k$ results in a two-dimensional (time,frequency) representation of the signal.
-
-Since the Fourier transform is, in general, complex-valued, we rarely use the STFT directly. Instead, it is common to separate it into it's magnitude and phase. The plot constructed from the magnitude of the STFT is called the magnitude spectrogram.
+Since the Fourier transform is, in general, complex-valued, we rarely use the STFT directly. Instead, it is common to separate it into it's magnitude and phase. The plot constructed from the magnitude of the STFT, like the ones shown earlier, is called the **magnitude spectrogram**.
 
 ## Filter banks
 
-Although the STFT has become ubiquitous for analyzing audio, another method existed long before computers and fast Fourier transform algorithms.
+Although the STFT has become ubiquitous for analyzing audio, another method of of time-frequency analysis existed long before computers and fast Fourier transform algorithms: the **filter bank**.
 
 ![](img/helmholtz.svg)
 
-Much of the theory of time-frequency analysis was developed by Helmholtz, who built what would now be considered an analog 'spectrum analyzer'. At its core, it consists of an array of filters, each of which respond to a narrow range of frequencies.
+An example of an analog filter bank used for time-frequency analysis, called the *Koenig flame apparatus*, is shown above. It utilizes an array of acoustic bandpass filters, called *Helmholtz resonators*, to visualize the frequency content of incoming sound using a rotating mirror to display the flame manometers which are connected to the array of Helmholtz resonators.
 
-The Haar decomposition can be considered a two-channel filter bank that decomposes the signal into a high-pass and a low-pass component. By recursively application of this process, we can divide the signal into arbitrarily many bands while maintaining a simple process to recover the signal. This is another way to construct a time-frequency distribution, and is the simplest example of a discrete wavelet transform.
+Even in the realm of digital implementation, the filter bank approach to time-frequency analysis has some advantages. When we use the DFT for frequency analysis, we are limited to equally spaced frequency bins and an average latency of $L/2$ samples. However, we can design the array of bandpass filters in a filter bank to have whatever spacing, frequency response, or delay characteristics necessary for our application.
+
+However, if we wanted to produce a similar number of frequency bands as we would typically get from the DFT (anywhere from tens to thousands of bands), then we would need to apply tens or thousands of discrete-time filters in parallel. This gets expensive very quickly! Fortunately, there is a more efficient method.
+
+## Multirate filter banks
+
+To demonstrate the theory underlying multirate filter banks, let us consider one of the simplest examples: the **Haar decomposition.** 
+
+### Haar Decomposition
+
+The Haar decomposition can be considered a two-channel filter bank that decomposes the signal into a high-pass and a low-pass component. By recursive application of this process, we can divide the signal into arbitrarily many bands while maintaining a simple process to recover the signal. The Haar decomposition is simplest example of a **discrete wavelet transform**.
