@@ -20,8 +20,8 @@
     <script src="_static/doctools.js"></script>
     <script src="_static/togglebutton.js"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="prev" title="LTI filters and frequency selectivity" href="LTI_systems_filters.html" />
@@ -206,14 +206,90 @@
 <p><img alt="" src="_images/helmholtz.svg" /></p>
 <p>An example of an analog filter bank used for time-frequency analysis, called the <em>Koenig flame apparatus</em>, is shown above. It utilizes an array of acoustic bandpass filters, called <em>Helmholtz resonators</em>, to visualize the frequency content of incoming sound using a rotating mirror to display the flame manometers which are connected to the array of Helmholtz resonators.</p>
 <p>Even in the realm of digital implementation, the filter bank approach to time-frequency analysis has some advantages. When we use the DFT for frequency analysis, we are limited to equally spaced frequency bins and an average latency of <span class="math notranslate nohighlight">\(L/2\)</span> samples. However, we can design the array of bandpass filters in a filter bank to have whatever spacing, frequency response, or delay characteristics necessary for our application.</p>
-<p>However, if we wanted to produce a similar number of frequency bands as we would typically get from the DFT (anywhere from tens to thousands of bands), then we would need to apply tens or thousands of discrete-time filters in parallel. This gets expensive very quickly! Fortunately, there is a more efficient method.</p>
-</div>
+<p>If we wanted to produce a similar number of frequency bands as we would typically get from the DFT (anywhere from tens to thousands of bands), then we would need to apply tens or thousands of discrete-time filters in parallel. This gets expensive very quickly! Fortunately, there is a more efficient method.</p>
 <div class="section" id="multirate-filter-banks">
-<h2>Multirate filter banks<a class="headerlink" href="#multirate-filter-banks" title="Permalink to this headline">¶</a></h2>
+<h3>Multirate filter banks<a class="headerlink" href="#multirate-filter-banks" title="Permalink to this headline">¶</a></h3>
 <p>To demonstrate the theory underlying multirate filter banks, let us consider one of the simplest examples: the <strong>Haar decomposition.</strong></p>
 <div class="section" id="haar-decomposition">
-<h3>Haar Decomposition<a class="headerlink" href="#haar-decomposition" title="Permalink to this headline">¶</a></h3>
-<p>The Haar decomposition can be considered a two-channel filter bank that decomposes the signal into a high-pass and a low-pass component. By recursive application of this process, we can divide the signal into arbitrarily many bands while maintaining a simple process to recover the signal. The Haar decomposition is simplest example of a <strong>discrete wavelet transform</strong>.</p>
+<h4>Haar Decomposition<a class="headerlink" href="#haar-decomposition" title="Permalink to this headline">¶</a></h4>
+<p>In 1909, mathematician Alfréd Haar used a procedure which we would now call a <em>discrete wavelet transform</em> using sums of differences of a list of numbers.</p>
+<p>Consider the finite length signal <span class="math notranslate nohighlight">\(x[n]\)</span> below consisting of eight samples:</p>
+<table class="colwidths-auto docutils align-default">
+<thead>
+<tr class="row-odd"><th class="text-align:center head"><p><span class="math notranslate nohighlight">\(x[0]\)</span></p></th>
+<th class="text-align:center head"><p><span class="math notranslate nohighlight">\(x[1]\)</span></p></th>
+<th class="text-align:center head"><p><span class="math notranslate nohighlight">\(x[2]\)</span></p></th>
+<th class="text-align:center head"><p><span class="math notranslate nohighlight">\(x[3]\)</span></p></th>
+<th class="text-align:center head"><p><span class="math notranslate nohighlight">\(x[4]\)</span></p></th>
+<th class="text-align:center head"><p><span class="math notranslate nohighlight">\(x[5]\)</span></p></th>
+<th class="text-align:center head"><p><span class="math notranslate nohighlight">\(x[6]\)</span></p></th>
+<th class="text-align:center head"><p><span class="math notranslate nohighlight">\(x[7]\)</span></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-align:center"><p>7</p></td>
+<td class="text-align:center"><p>1</p></td>
+<td class="text-align:center"><p>−13</p></td>
+<td class="text-align:center"><p>20</p></td>
+<td class="text-align:center"><p>4</p></td>
+<td class="text-align:center"><p>7</p></td>
+<td class="text-align:center"><p>−18</p></td>
+<td class="text-align:center"><p>5</p></td>
+</tr>
+</tbody>
+</table>
+<p>The transformation we will apply consists of creating two other signals <span class="math notranslate nohighlight">\(s[k]\)</span> and <span class="math notranslate nohighlight">\(d[k]\)</span> by taking sums and differences of adjacent samples from <span class="math notranslate nohighlight">\(x[n]\)</span>. However, the signals <span class="math notranslate nohighlight">\(s[k]\)</span> and <span class="math notranslate nohighlight">\(d[k]\)</span> will both half the length of the original signal <span class="math notranslate nohighlight">\(x[n]\)</span>.</p>
+<div class="math notranslate nohighlight">
+\[s[k] = x[2k] + x[2k+1]\]</div>
+<div class="math notranslate nohighlight">
+\[d[k] = x[2k+1] - x[2k]\]</div>
+<table class="colwidths-auto docutils align-default">
+<thead>
+<tr class="row-odd"><th class="text-align:center head"><p><span class="math notranslate nohighlight">\(d[0]\)</span></p></th>
+<th class="text-align:center head"><p><span class="math notranslate nohighlight">\(d[0]\)</span></p></th>
+<th class="text-align:center head"><p><span class="math notranslate nohighlight">\(s[1]\)</span></p></th>
+<th class="text-align:center head"><p><span class="math notranslate nohighlight">\(d[1]\)</span></p></th>
+<th class="text-align:center head"><p><span class="math notranslate nohighlight">\(s[2]\)</span></p></th>
+<th class="text-align:center head"><p><span class="math notranslate nohighlight">\(d[2]\)</span></p></th>
+<th class="text-align:center head"><p><span class="math notranslate nohighlight">\(s[3]\)</span></p></th>
+<th class="text-align:center head"><p><span class="math notranslate nohighlight">\(d[3]\)</span></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-align:center"><p>7+1</p></td>
+<td class="text-align:center"><p>1−7</p></td>
+<td class="text-align:center"><p>−13+20</p></td>
+<td class="text-align:center"><p>20+13</p></td>
+<td class="text-align:center"><p>4+7</p></td>
+<td class="text-align:center"><p>7−4</p></td>
+<td class="text-align:center"><p>−18+5</p></td>
+<td class="text-align:center"><p>5+18</p></td>
+</tr>
+<tr class="row-odd"><td class="text-align:center"><p>8</p></td>
+<td class="text-align:center"><p>−6</p></td>
+<td class="text-align:center"><p>7</p></td>
+<td class="text-align:center"><p>33</p></td>
+<td class="text-align:center"><p>11</p></td>
+<td class="text-align:center"><p>3</p></td>
+<td class="text-align:center"><p>−13</p></td>
+<td class="text-align:center"><p>23</p></td>
+</tr>
+</tbody>
+</table>
+<p>Although these equations look similar to an LTI system specified by a difference equation, these relationships do not constitute LTI systems because they include <strong>downsampling operations</strong></p>
+<p>We can equivalently express these two systems in terms of convolution (i.e. application of an LTI filter) and a downsampling operation.</p>
+<div class="math notranslate nohighlight">
+\[s[k] = \downarrow_2 \left(x[n]*\left(\delta[k] + \delta[k-1]\right)\right)\]</div>
+<div class="math notranslate nohighlight">
+\[d[k] = \downarrow_2 \left(x[n]*\left(\delta[k] - \delta[k-1]\right)\right)\]</div>
+<p>This transformation, the Haar decomposition, can be considered a two-channel filter bank that decomposes the signal into a high-pass and a low-pass component, followed by downsampling by two. By recursive application of this process, we can divide the signal into arbitrarily many bands while maintaining a simple process to recover the signal.</p>
+<p>In particular, the <span class="math notranslate nohighlight">\(n\)</span>th sample of the original signal can be recovered using the following procedure:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+\hat x [n] &amp;= \left( \uparrow_2 s[k] \right) * \left( \frac 1 2 \delta[n-1] - \frac 1 2 \delta[n] \right) \\
+&amp;+ \left( \uparrow_2  d[k] \right) * \left(\frac 1 2 \delta[n-1] + \frac 1 2 \delta[n] \right)
+\end{align}\end{split}\]</div>
+</div>
 </div>
 </div>
 </div>
@@ -240,7 +316,6 @@
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Time-Frequency Analysis</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#the-short-time-fourier-transform-stft">The short-time Fourier transform (STFT)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#filter-banks">Filter banks</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#multirate-filter-banks">Multirate filter banks</a></li>
 </ul>
 </li>
 </ul>
@@ -279,7 +354,7 @@
       &copy;.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.4.0</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.3.2</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
       |

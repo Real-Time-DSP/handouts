@@ -184,12 +184,50 @@ An example of an analog filter bank used for time-frequency analysis, called the
 
 Even in the realm of digital implementation, the filter bank approach to time-frequency analysis has some advantages. When we use the DFT for frequency analysis, we are limited to equally spaced frequency bins and an average latency of $L/2$ samples. However, we can design the array of bandpass filters in a filter bank to have whatever spacing, frequency response, or delay characteristics necessary for our application.
 
-However, if we wanted to produce a similar number of frequency bands as we would typically get from the DFT (anywhere from tens to thousands of bands), then we would need to apply tens or thousands of discrete-time filters in parallel. This gets expensive very quickly! Fortunately, there is a more efficient method.
+If we wanted to produce a similar number of frequency bands as we would typically get from the DFT (anywhere from tens to thousands of bands), then we would need to apply tens or thousands of discrete-time filters in parallel. This gets expensive very quickly! Fortunately, there is a more efficient method.
 
-## Multirate filter banks
+### Multirate filter banks
 
 To demonstrate the theory underlying multirate filter banks, let us consider one of the simplest examples: the **Haar decomposition.** 
 
-### Haar Decomposition
+#### Haar Decomposition
 
-The Haar decomposition can be considered a two-channel filter bank that decomposes the signal into a high-pass and a low-pass component. By recursive application of this process, we can divide the signal into arbitrarily many bands while maintaining a simple process to recover the signal. The Haar decomposition is simplest example of a **discrete wavelet transform**.
+In 1909, mathematician Alfréd Haar used a procedure which we would now call a *discrete wavelet transform* using sums of differences of a list of numbers.
+
+Consider the finite length signal $x[n]$ below consisting of eight samples:
+
+| $x[0]$ | $x[1]$ | $x[2]$ | $x[3]$ | $x[4]$ | $x[5]$ | $x[6]$ | $x[7]$ |
+|:----:|:----:|:----:|:----:|:----:|:----:|:----:|:----:|
+| 7    | 1    | −13  | 20   | 4    | 7    | −18  | 5    |
+
+The transformation we will apply consists of creating two other signals $s[k]$ and $d[k]$ by taking sums and differences of adjacent samples from $x[n]$. However, the signals $s[k]$ and $d[k]$ will both half the length of the original signal $x[n]$.
+
+$$s[k] = x[2k] + x[2k+1]$$
+$$d[k] = x[2k+1] - x[2k]$$
+
+| $d[0]$ | $d[0]$ | $s[1]$ | $d[1]$ | $s[2]$ | $d[2]$ | $s[3]$ | $d[3]$ |
+|:------:|:------:|:------:|:------:|:------:|:------:|:------:|:------:|
+| 7+1    | 1−7    | −13+20 | 20+13  | 4+7    | 7−4    | −18+5  | 5+18   |
+| 8      | −6     | 7      | 33     | 11     | 3      | −13    | 23     |
+
+Although these equations look similar to an LTI system specified by a difference equation, these relationships do not constitute LTI systems because they include **downsampling operations**
+
+```{admonition} Upsampling and downsampling
+```
+
+We can equivalently express these two systems in terms of convolution (i.e. application of an LTI filter) and a downsampling operation.
+
+$$s[k] = \downarrow_2 \left(x[n]*\left(\delta[k] + \delta[k-1]\right)\right)$$
+$$d[k] = \downarrow_2 \left(x[n]*\left(\delta[k] - \delta[k-1]\right)\right)$$
+
+This transformation, the Haar decomposition, can be considered a two-channel filter bank that decomposes the signal into a high-pass and a low-pass component, followed by downsampling by two. By recursive application of this process, we can divide the signal into arbitrarily many bands while maintaining a simple process to recover the signal.
+
+```{admonition} Frequency response of two-sample sum and difference
+```
+
+In particular, the $n$th sample of the original signal can be recovered using the following procedure:
+
+$$\begin{align}
+\hat x [n] &= \left( \uparrow_2 s[k] \right) * \left( \frac 1 2 \delta[n-1] - \frac 1 2 \delta[n] \right) \\
+&+ \left( \uparrow_2  d[k] \right) * \left(\frac 1 2 \delta[n-1] + \frac 1 2 \delta[n] \right)
+\end{align}$$
