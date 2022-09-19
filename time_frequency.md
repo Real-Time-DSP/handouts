@@ -213,21 +213,56 @@ $$d[k] = x[2k+1] - x[2k]$$
 Although these equations look similar to an LTI system specified by a difference equation, these relationships do not constitute LTI systems because they include **downsampling operations**
 
 ```{admonition} Upsampling and downsampling
+
+The operations of upsampling and downsampling can be thought of as the discrete-time versions of *expansion* and *compression*.
+
+Consider a continuous-time signal $x(t)=\sin{(\pi t^2)} \mathbf{1}_{[0,2]}(t)$.
+
+$x(t/2)$ is the *expansion* of the signal by a factor of two.
+
+$x(2t)$ is the *compression* of the signal by a factor of two.
+
+Sampling $x(t)$ at a rate $f_s=10 \text{Hz}$ produces $x[n] = \sin{\left(\frac{\pi}{100} n^2\right)}\mathbf{1}_{[0,2]}(n)$
+
+$x[n/2]$ is the signal *upsampled* by a factor of two.
+
+$x[2n]$ is the signal *downsampled* by a factor of two.
+
+![](img/upsample_downsample.svg)
+
+A common convention is to use $\uparrow$ to represent upsampling and $\downarrow$ to represent downsampling. For example:
+
+$$\uparrow_2\{x[n]\} = x[n] \text{ upsampled by a factor of two} = x[n/2]$$
+$$\downarrow_2\{x[n]\} = x[n] \text{ downsampled by a factor of two} = x[2n]$$
+
 ```
 
 We can equivalently express these two systems in terms of convolution (i.e. application of an LTI filter) and a downsampling operation.
 
-$$s[k] = \downarrow_2 \left(x[n]*\left(\delta[k] + \delta[k-1]\right)\right)$$
-$$d[k] = \downarrow_2 \left(x[n]*\left(\delta[k] - \delta[k-1]\right)\right)$$
+$$s[k] = \downarrow_2 \left\{x[n]*\left(\delta[k] + \delta[k-1]\right)\right\}$$
+$$d[k] = \downarrow_2 \left\{x[n]*\left(\delta[k] - \delta[k-1]\right)\right\}$$
 
-This transformation, the Haar decomposition, can be considered a two-channel filter bank that decomposes the signal into a high-pass and a low-pass component, followed by downsampling by two. By recursive application of this process, we can divide the signal into arbitrarily many bands while maintaining a simple process to recover the signal.
+This transformation, the Haar decomposition, can be considered a two-channel filter bank that decomposes the signal into a high-pass and a low-pass component, followed by downsampling by two.
 
 ```{admonition} Frequency response of two-sample sum and difference
-```
+The sum of two adjacent samples [is a low-pass filter with frequency response $H_s(\omega)=1+e^{-j\omega}$](LTI_systems_filters.html#lowpass)
 
-In particular, the $n$th sample of the original signal can be recovered using the following procedure:
+The difference [is a highpass filter with frequency response $H_d(\omega)=1-e^{-j\omega}$](LTI_systems_filters.html#highpass).
+
+It should come as no suprise then that by adding the outputs of these two filters, the result is an all-pass filter:
 
 $$\begin{align}
-\hat x [n] &= \left( \uparrow_2 s[k] \right) * \left( \frac 1 2 \delta[n-1] - \frac 1 2 \delta[n] \right) \\
-&+ \left( \uparrow_2  d[k] \right) * \left(\frac 1 2 \delta[n-1] + \frac 1 2 \delta[n] \right)
+H_{s+d}(\omega) &=H_{s}(\omega) + H_{d}(\omega) \\
+&= \left( 1+e^{-j\omega} \right) + \left( 1-e^{-j\omega} \right)\\
+&= 2
+\end{align}$$ 
+
+
+```
+
+By recursive application of this process, we can divide the signal into arbitrarily many bands while maintaining a simple process to recover the signal. In particular, the $n$th sample of the original signal can be recovered using the following procedure:
+
+$$\begin{align}
+\hat x [n] &= \uparrow_2 \{s[k]\} * \left( \frac 1 2 \delta[n-1] - \frac 1 2 \delta[n] \right) \\
+&+ \uparrow_2  \{ d[k] \} * \left(\frac 1 2 \delta[n-1] + \frac 1 2 \delta[n] \right)
 \end{align}$$

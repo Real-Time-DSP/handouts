@@ -20,8 +20,8 @@
     <script src="_static/doctools.js"></script>
     <script src="_static/togglebutton.js"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="prev" title="LTI filters and frequency selectivity" href="LTI_systems_filters.html" />
@@ -277,17 +277,45 @@
 </tbody>
 </table>
 <p>Although these equations look similar to an LTI system specified by a difference equation, these relationships do not constitute LTI systems because they include <strong>downsampling operations</strong></p>
+<div class="admonition-upsampling-and-downsampling admonition">
+<p class="admonition-title">Upsampling and downsampling</p>
+<p>The operations of upsampling and downsampling can be thought of as the discrete-time versions of <em>expansion</em> and <em>compression</em>.</p>
+<p>Consider a continuous-time signal <span class="math notranslate nohighlight">\(x(t)=\sin{(\pi t^2)} \mathbf{1}_{[0,2]}(t)\)</span>.</p>
+<p><span class="math notranslate nohighlight">\(x(t/2)\)</span> is the <em>expansion</em> of the signal by a factor of two.</p>
+<p><span class="math notranslate nohighlight">\(x(2t)\)</span> is the <em>compression</em> of the signal by a factor of two.</p>
+<p>Sampling <span class="math notranslate nohighlight">\(x(t)\)</span> at a rate <span class="math notranslate nohighlight">\(f_s=10 \text{Hz}\)</span> produces <span class="math notranslate nohighlight">\(x[n] = \sin{\left(\frac{\pi}{100} n^2\right)}\mathbf{1}_{[0,2]}(n)\)</span></p>
+<p><span class="math notranslate nohighlight">\(x[n/2]\)</span> is the signal <em>upsampled</em> by a factor of two.</p>
+<p><span class="math notranslate nohighlight">\(x[2n]\)</span> is the signal <em>downsampled</em> by a factor of two.</p>
+<p><img alt="" src="_images/upsample_downsample.svg" /></p>
+<p>A common convention is to use <span class="math notranslate nohighlight">\(\uparrow\)</span> to represent upsampling and <span class="math notranslate nohighlight">\(\downarrow\)</span> to represent downsampling. For example:</p>
+<div class="math notranslate nohighlight">
+\[\uparrow_2\{x[n]\} = x[n] \text{ upsampled by a factor of two} = x[n/2]\]</div>
+<div class="math notranslate nohighlight">
+\[\downarrow_2\{x[n]\} = x[n] \text{ downsampled by a factor of two} = x[2n]\]</div>
+</div>
 <p>We can equivalently express these two systems in terms of convolution (i.e. application of an LTI filter) and a downsampling operation.</p>
 <div class="math notranslate nohighlight">
-\[s[k] = \downarrow_2 \left(x[n]*\left(\delta[k] + \delta[k-1]\right)\right)\]</div>
+\[s[k] = \downarrow_2 \left\{x[n]*\left(\delta[k] + \delta[k-1]\right)\right\}\]</div>
 <div class="math notranslate nohighlight">
-\[d[k] = \downarrow_2 \left(x[n]*\left(\delta[k] - \delta[k-1]\right)\right)\]</div>
-<p>This transformation, the Haar decomposition, can be considered a two-channel filter bank that decomposes the signal into a high-pass and a low-pass component, followed by downsampling by two. By recursive application of this process, we can divide the signal into arbitrarily many bands while maintaining a simple process to recover the signal.</p>
-<p>In particular, the <span class="math notranslate nohighlight">\(n\)</span>th sample of the original signal can be recovered using the following procedure:</p>
+\[d[k] = \downarrow_2 \left\{x[n]*\left(\delta[k] - \delta[k-1]\right)\right\}\]</div>
+<p>This transformation, the Haar decomposition, can be considered a two-channel filter bank that decomposes the signal into a high-pass and a low-pass component, followed by downsampling by two.</p>
+<div class="admonition-frequency-response-of-two-sample-sum-and-difference admonition">
+<p class="admonition-title">Frequency response of two-sample sum and difference</p>
+<p>The sum of two adjacent samples <a class="reference external" href="LTI_systems_filters.html#lowpass">is a low-pass filter with frequency response <span class="math notranslate nohighlight">\(H_s(\omega)=1+e^{-j\omega}\)</span></a></p>
+<p>The difference <a class="reference external" href="LTI_systems_filters.html#highpass">is a highpass filter with frequency response <span class="math notranslate nohighlight">\(H_d(\omega)=1-e^{-j\omega}\)</span></a>.</p>
+<p>It should come as no suprise then that by adding the outputs of these two filters, the result is an all-pass filter:</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}\begin{align}
-\hat x [n] &amp;= \left( \uparrow_2 s[k] \right) * \left( \frac 1 2 \delta[n-1] - \frac 1 2 \delta[n] \right) \\
-&amp;+ \left( \uparrow_2  d[k] \right) * \left(\frac 1 2 \delta[n-1] + \frac 1 2 \delta[n] \right)
+H_{s+d}(\omega) &amp;=H_{s}(\omega) + H_{d}(\omega) \\
+&amp;= \left( 1+e^{-j\omega} \right) + \left( 1-e^{-j\omega} \right)\\
+&amp;= 2
+\end{align}\end{split}\]</div>
+</div>
+<p>By recursive application of this process, we can divide the signal into arbitrarily many bands while maintaining a simple process to recover the signal. In particular, the <span class="math notranslate nohighlight">\(n\)</span>th sample of the original signal can be recovered using the following procedure:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+\hat x [n] &amp;= \uparrow_2 \{s[k]\} * \left( \frac 1 2 \delta[n-1] - \frac 1 2 \delta[n] \right) \\
+&amp;+ \uparrow_2  \{ d[k] \} * \left(\frac 1 2 \delta[n-1] + \frac 1 2 \delta[n] \right)
 \end{align}\end{split}\]</div>
 </div>
 </div>
@@ -354,7 +382,7 @@
       &copy;.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.3.2</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.4.0</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
       |
