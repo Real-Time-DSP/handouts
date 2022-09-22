@@ -20,8 +20,8 @@
     <script src="_static/doctools.js"></script>
     <script src="_static/togglebutton.js"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="prev" title="LTI filters and frequency selectivity" href="LTI_systems_filters.html" />
@@ -46,6 +46,7 @@
     .pagebreak { page-break-before: always; } /* page-break-after works, as well */
 }
 </style>
+<p><strong>This is a draft. Please let me know if you see any errors.</strong></p>
 <div class="tex2jax_ignore mathjax_ignore section" id="time-frequency-analysis">
 <h1>Time-Frequency Analysis<a class="headerlink" href="#time-frequency-analysis" title="Permalink to this headline">¶</a></h1>
 <p>An example of a joint time-frequency signal representation is standard musical notation.</p>
@@ -156,6 +157,19 @@
 <p>In other words, once the window is applied, the Fourier transform is equivalent to a Fourier series.</p>
 <p>The same is true in discrete time. If we first apply a finite length window <span class="math notranslate nohighlight">\(w_L[n]\)</span>, then the discrete-time Fourier transform (DTFT) is equivalent to the discrete Fourier transform (DFT).</p>
 </div>
+</div>
+<div class="section" id="time-resolution-and-frequency-resolution">
+<h3>Time resolution and frequency resolution<a class="headerlink" href="#time-resolution-and-frequency-resolution" title="Permalink to this headline">¶</a></h3>
+<p>When analyzing a signal, there is a fundamental trade off between <strong>time resolution</strong> and <strong>frequency resolution</strong>.</p>
+<p><img alt="" src="_images/time_freq_compare.svg" /></p>
+<p>To understand this trade-off, consider a special case of the STFT where the window function is Gaussian $<span class="math notranslate nohighlight">\(w(t) = g_\sigma(t) = A e^{-t^2/2\sigma^2} \)</span>$. This is also known as the <strong>Gabor transform</strong>.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+\mathscr G_\sigma \{x(t)\} &amp;= \text{STFT}_{\text{Gaussian window}} \{x(t)\} \\
+&amp;= \mathscr F \{ x(\tau) w(\tau-t) \} \\
+&amp;= \mathscr F \{ x(\tau) g_\sigma(\tau-t) \} \\
+&amp;= \mathscr F \{ x(\tau) \} * \mathscr F \{ g_\sigma(\tau-t) \} \\
+\end{align}\end{split}\]</div>
 </div>
 <div class="section" id="discrete-stft">
 <h3>Discrete STFT<a class="headerlink" href="#discrete-stft" title="Permalink to this headline">¶</a></h3>
@@ -382,7 +396,7 @@ H_{s+d}(\omega) &amp;=H_{s}(\omega) + H_{d}(\omega) \\
       &copy;.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.4.0</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.3.2</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
       |

@@ -4,6 +4,8 @@
 }
 </style>
 
+**This is a draft. Please let me know if you see any errors.**
+
 # Time-Frequency Analysis
 
 An example of a joint time-frequency signal representation is standard musical notation.
@@ -126,6 +128,22 @@ In other words, once the window is applied, the Fourier transform is equivalent 
 The same is true in discrete time. If we first apply a finite length window $w_L[n]$, then the discrete-time Fourier transform (DTFT) is equivalent to the discrete Fourier transform (DFT).
 
 ```
+
+### Time resolution and frequency resolution
+
+When analyzing a signal, there is a fundamental trade off between **time resolution** and **frequency resolution**.
+
+![](img/time_freq_compare.svg)
+
+To understand this trade-off, consider a special case of the STFT where the window function is Gaussian $$w(t) = g_\sigma(t) = A e^{-t^2/2\sigma^2} $$. This is also known as the **Gabor transform**.
+
+$$\begin{align}
+\mathscr G_\sigma \{x(t)\} &= \text{STFT}_{\text{Gaussian window}} \{x(t)\} \\
+&= \mathscr F \{ x(\tau) w(\tau-t) \} \\
+&= \mathscr F \{ x(\tau) g_\sigma(\tau-t) \} \\
+&= \mathscr F \{ x(\tau) \} * \mathscr F \{ g_\sigma(\tau-t) \} \\
+\end{align}$$
+
 
 ### Discrete STFT
 
