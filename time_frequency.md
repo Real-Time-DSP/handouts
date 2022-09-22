@@ -146,7 +146,7 @@ $$\begin{align}
 &= X(f) * g_{\frac 1 \sigma}(f) e^{-2\pi j t} \\
 \end{align}$$
 
-At a particular time $t$, $\mathscr G_\sigma$ is the Fourier transform of a signal multiplied by a Gaussian window $g_\sigma(\tau)$ centered on $t$ with variance $\sigma^2$. If a transient signal component is present, we are able to **localize it in time** with an uncertainty that increases with $\sigma$.
+At a particular time $t$, $\mathscr G_\sigma$ is the Fourier transform of a signal multiplied by a Gaussian window centered on $t$ with variance $\sigma^2$, $g_\sigma(\tau-t)$. If a transient signal component is present, we are able to **localize it in time** with an uncertainty that increases with $\sigma$.
 
 Recall that the Fourier transform of a variance-$\sigma^2$ Gaussian $g_\sigma(t)$ is a variance-$\frac{1}{\sigma ^2}$ Gaussian $g_{\frac 1 \sigma}(f)$. This means that if a particular frequency component is present, we can **localize it in frequency** with uncertainty that increases with $\frac{1}{\sigma}$.
 
