@@ -139,11 +139,9 @@ To understand this trade-off, consider a special case of the STFT where the wind
 
 $$\begin{align}
 \mathscr G_\sigma \{x(t)\} &= \text{STFT}_{\text{Gaussian window}} \{x(t)\} \\
-&= \mathscr F \{ x(\tau) w(\tau-t) \} \\
 &= \mathscr F \{ x(\tau) g_\sigma(\tau-t) \} \\
-&= \mathscr F \{ x(\tau) \} * \mathscr F \{ g_\sigma(\tau-t) \} \\
-&= \mathscr F \{ x(\tau) \} * \mathscr F \{ g_\sigma(\tau) \} e^{-2\pi j f} \\
-&= X(f) * g_{\frac 1 \sigma}(f) e^{-2\pi j t} \\
+&= \mathscr F \{ x(\tau) \} * \mathscr F \{ g_\sigma(\tau) \} e^{-2\pi j f t} \\
+&= X(f) * g_{\frac 1 \sigma}(f) e^{-2\pi j f t} \\
 \end{align}$$
 
 At a particular time $t$, $\mathscr G_\sigma$ is the Fourier transform of a signal multiplied by a Gaussian window centered on $t$ with variance $\sigma^2$, $g_\sigma(\tau-t)$. If a transient signal component is present, we are able to **localize it in time** to with an uncertainty of roughly $\pm \sigma$.

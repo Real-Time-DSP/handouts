@@ -166,11 +166,9 @@
 <div class="math notranslate nohighlight">
 \[\begin{split}\begin{align}
 \mathscr G_\sigma \{x(t)\} &amp;= \text{STFT}_{\text{Gaussian window}} \{x(t)\} \\
-&amp;= \mathscr F \{ x(\tau) w(\tau-t) \} \\
 &amp;= \mathscr F \{ x(\tau) g_\sigma(\tau-t) \} \\
-&amp;= \mathscr F \{ x(\tau) \} * \mathscr F \{ g_\sigma(\tau-t) \} \\
-&amp;= \mathscr F \{ x(\tau) \} * \mathscr F \{ g_\sigma(\tau) \} e^{-2\pi j f} \\
-&amp;= X(f) * g_{\frac 1 \sigma}(f) e^{-2\pi j t} \\
+&amp;= \mathscr F \{ x(\tau) \} * \mathscr F \{ g_\sigma(\tau) \} e^{-2\pi j f t} \\
+&amp;= X(f) * g_{\frac 1 \sigma}(f) e^{-2\pi j f t} \\
 \end{align}\end{split}\]</div>
 <p>At a particular time <span class="math notranslate nohighlight">\(t\)</span>, <span class="math notranslate nohighlight">\(\mathscr G_\sigma\)</span> is the Fourier transform of a signal multiplied by a Gaussian window centered on <span class="math notranslate nohighlight">\(t\)</span> with variance <span class="math notranslate nohighlight">\(\sigma^2\)</span>, <span class="math notranslate nohighlight">\(g_\sigma(\tau-t)\)</span>. If a transient signal component is present, we are able to <strong>localize it in time</strong> to with an uncertainty of roughly <span class="math notranslate nohighlight">\(\pm \sigma\)</span>.</p>
 <p>Recall that the Fourier transform of a variance<span class="math notranslate nohighlight">\(-\sigma^2\)</span> Gaussian <span class="math notranslate nohighlight">\(g_\sigma(t)\)</span> is a variance<span class="math notranslate nohighlight">\(-\frac{1}{\sigma ^2}\)</span> Gaussian <span class="math notranslate nohighlight">\(g_{\frac 1 \sigma}(f)\)</span>. This means that if a particular frequency component is present, we can <strong>localize it in frequency</strong> with an uncertainty of roughly <span class="math notranslate nohighlight">\(\pm \frac{1}{\sigma}\)</span>.</p>
