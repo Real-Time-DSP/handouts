@@ -162,7 +162,7 @@
 <h3>Time resolution and frequency resolution<a class="headerlink" href="#time-resolution-and-frequency-resolution" title="Permalink to this headline">¶</a></h3>
 <p>When analyzing a signal, there is a fundamental trade off between <strong>time resolution</strong> and <strong>frequency resolution</strong>.</p>
 <p><img alt="" src="_images/time_freq_compare.svg" /></p>
-<p>To understand this trade-off, consider a special case of the STFT where the window function is Gaussian <span class="math notranslate nohighlight">\(w(t) = g_\sigma(t) = A e^{-t^2/2\sigma^2} \)</span>. This is also known as the <strong>Gabor transform</strong>.</p>
+<p>To understand this trade-off, consider a special case of the STFT where the window function is Gaussian <span class="math notranslate nohighlight">\(w(t) = g_\sigma(t) = A e^{-t^2/2\sigma^2} \)</span>. This is also known as the <strong>Gabor transform</strong> <span class="math notranslate nohighlight">\(\mathscr G_\sigma\)</span>.</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}\begin{align}
 \mathscr G_\sigma \{x(t)\} &amp;= \text{STFT}_{\text{Gaussian window}} \{x(t)\} \\
@@ -170,11 +170,11 @@
 &amp;= \mathscr F \{ x(\tau) g_\sigma(\tau-t) \} \\
 &amp;= \mathscr F \{ x(\tau) \} * \mathscr F \{ g_\sigma(\tau-t) \} \\
 &amp;= \mathscr F \{ x(\tau) \} * \mathscr F \{ g_\sigma(\tau) \} e^{-2\pi j f} \\
-&amp;= X(f) * \mathscr F \{ g_{\frac 1 \sigma}(f) \} e^{-2\pi j t} \\
+&amp;= X(f) * g_{\frac 1 \sigma}(f) e^{-2\pi j t} \\
 \end{align}\end{split}\]</div>
-<p>At a particular time <span class="math notranslate nohighlight">\(t\)</span>, \mathscr G_\sigma is the Fourier transform of a signal multiplied by a Gaussian window <span class="math notranslate nohighlight">\(g_\sigma(\tau)\)</span> centered on <span class="math notranslate nohighlight">\(t\)</span> with variance <span class="math notranslate nohighlight">\(\sigma^2\)</span>. If a transient signal component is present, we are able to <strong>localize it in time</strong> with an uncertainty that increases with <span class="math notranslate nohighlight">\(\sigma\)</span>.</p>
+<p>At a particular time <span class="math notranslate nohighlight">\(t\)</span>, \mathscr G_\sigma<span class="math notranslate nohighlight">\( is the Fourier transform of a signal multiplied by a Gaussian window \)</span>g_\sigma(\tau)<span class="math notranslate nohighlight">\( centered on \)</span>t<span class="math notranslate nohighlight">\( with variance \)</span>\sigma^2<span class="math notranslate nohighlight">\(. If a transient signal component is present, we are able to **localize it in time** with an uncertainty that increases with \)</span>\sigma$.</p>
 <p>Recall that the Fourier transform of a variance-<span class="math notranslate nohighlight">\(\sigma^2\)</span> Gaussian <span class="math notranslate nohighlight">\(g_\sigma(t)\)</span> is a variance-<span class="math notranslate nohighlight">\(\frac{1}{\sigma ^2}\)</span> Gaussian <span class="math notranslate nohighlight">\(g_{\frac 1 \sigma}(f)\)</span>. This means that if a particular frequency component is present, we can <strong>localize it in frequency</strong> with uncertainty that increases with <span class="math notranslate nohighlight">\(\frac{1}{\sigma}\)</span>.</p>
-<p>In summary, as we increase <span class="math notranslate nohighlight">\(\sigma\)</span>, we have greater uncertainty in time but less uncertainty in frequency. If we decrease <span class="math notranslate nohighlight">\(\sigma\)</span>, we have greater uncertainty in frequency but less uncertainty in time.</p>
+<p>In summary, as we increase <span class="math notranslate nohighlight">\(\sigma\)</span>, we have greater uncertainty in time but less uncertainty in frequency, and vice versa. We could also state this in terms of the <strong>resolution</strong> which is the inverse of the uncertainty. As the time resolution increases, the frequency resolution decreases and vice versa.</p>
 </div>
 <div class="section" id="discrete-stft">
 <h3>Discrete STFT<a class="headerlink" href="#discrete-stft" title="Permalink to this headline">¶</a></h3>

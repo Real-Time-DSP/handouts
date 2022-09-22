@@ -135,7 +135,7 @@ When analyzing a signal, there is a fundamental trade off between **time resolut
 
 ![](img/time_freq_compare.svg)
 
-To understand this trade-off, consider a special case of the STFT where the window function is Gaussian $w(t) = g_\sigma(t) = A e^{-t^2/2\sigma^2} $. This is also known as the **Gabor transform**.
+To understand this trade-off, consider a special case of the STFT where the window function is Gaussian $w(t) = g_\sigma(t) = A e^{-t^2/2\sigma^2} $. This is also known as the **Gabor transform** $\mathscr G_\sigma$.
 
 $$\begin{align}
 \mathscr G_\sigma \{x(t)\} &= \text{STFT}_{\text{Gaussian window}} \{x(t)\} \\
@@ -143,14 +143,14 @@ $$\begin{align}
 &= \mathscr F \{ x(\tau) g_\sigma(\tau-t) \} \\
 &= \mathscr F \{ x(\tau) \} * \mathscr F \{ g_\sigma(\tau-t) \} \\
 &= \mathscr F \{ x(\tau) \} * \mathscr F \{ g_\sigma(\tau) \} e^{-2\pi j f} \\
-&= X(f) * \mathscr F \{ g_{\frac 1 \sigma}(f) \} e^{-2\pi j t} \\
+&= X(f) * g_{\frac 1 \sigma}(f) e^{-2\pi j t} \\
 \end{align}$$
 
-At a particular time $t$, \mathscr G_\sigma is the Fourier transform of a signal multiplied by a Gaussian window $g_\sigma(\tau)$ centered on $t$ with variance $\sigma^2$. If a transient signal component is present, we are able to **localize it in time** with an uncertainty that increases with $\sigma$.
+At a particular time $t$, \mathscr G_\sigma$ is the Fourier transform of a signal multiplied by a Gaussian window $g_\sigma(\tau)$ centered on $t$ with variance $\sigma^2$. If a transient signal component is present, we are able to **localize it in time** with an uncertainty that increases with $\sigma$.
 
 Recall that the Fourier transform of a variance-$\sigma^2$ Gaussian $g_\sigma(t)$ is a variance-$\frac{1}{\sigma ^2}$ Gaussian $g_{\frac 1 \sigma}(f)$. This means that if a particular frequency component is present, we can **localize it in frequency** with uncertainty that increases with $\frac{1}{\sigma}$.
 
-In summary, as we increase $\sigma$, we have greater uncertainty in time but less uncertainty in frequency. If we decrease $\sigma$, we have greater uncertainty in frequency but less uncertainty in time.   
+In summary, as we increase $\sigma$, we have greater uncertainty in time but less uncertainty in frequency, and vice versa. We could also state this in terms of the **resolution** which is the inverse of the uncertainty. As the time resolution increases, the frequency resolution decreases and vice versa. 
 
 ### Discrete STFT
 
