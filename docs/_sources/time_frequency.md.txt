@@ -138,17 +138,21 @@ When analyzing a signal, there is a fundamental trade off between **time resolut
 To understand this trade-off, consider a special case of the STFT where the window function is Gaussian $w(t) = g_\sigma(t) = A e^{-t^2/2\sigma^2} $. This is also known as the **Gabor transform** $\mathscr G_\sigma$.
 
 $$\begin{align}
-\mathscr G_\sigma \{x(t)\} &= \text{STFT}_{\text{Gaussian window}} \{x(t)\} \\
+\mathscr G_\sigma \{x(t)\} &= \text{STFT} \{x(t)\} \left(\text{with Gaussian window} \right) \\
 &= \mathscr F \{ x(\tau) g_\sigma(\tau-t) \} \\
 &= \mathscr F \{ x(\tau) \} * \mathscr F \{ g_\sigma(\tau) \} e^{-2\pi j f t} \\
 &= X(f) * g_{\frac 1 \sigma}(f) e^{-2\pi j f t} \\
 \end{align}$$
 
-At a particular time $t$, $\mathscr G_\sigma$ is the Fourier transform of a signal multiplied by a Gaussian window centered on $t$ with variance $\sigma^2$, $g_\sigma(\tau-t)$. If a transient signal component is present, we are able to **localize it in time** to with an uncertainty of roughly $\pm \sigma$.
+The width of the window $g_\sigma(\tau-t)$ is proportional to $\sigma$, so our ability to localize a transient signal in time is related to $\sigma$. As the width of the window $\sigma$ increases, the uncertainty of our time localization $H_t$ increases and the the time resolution $R_t$ decreases.
 
-Recall that the Fourier transform of a variance$-\sigma^2$ Gaussian $g_\sigma(t)$ is a variance$-\frac{1}{\sigma ^2}$ Gaussian $g_{\frac 1 \sigma}(f)$. This means that if a particular frequency component is present, we can **localize it in frequency** with an uncertainty of roughly $\pm \frac{1}{\sigma}$.
+$$\uparrow \sigma \equiv \uparrow H_t \equiv \downarrow R_t$$
 
-In summary, as we increase $\sigma$, we have greater uncertainty in time but less uncertainty in frequency, and vice versa. We could also state this in terms of the **resolution** which is the inverse of the uncertainty. As the time resolution increases, the frequency resolution decreases and vice versa. 
+Recall that the Fourier transform of a Gaussian $g_1(t)$ is another Gaussian $g_2(f)$ with $\sigma_2 = \frac{1}{\sigma_1}$. Therefore, our ability localize a tone in frequency is also related to $\sigma$. As $\sigma decreases$ with an uncertainty of roughly $\pm \frac{1}{\sigma}$.
+
+
+
+As $\sigma$ increases, the uncertainty of our localization in time increa but less uncertainty in frequency, and vice versa. We could also state this in terms of the **resolution** which is the inverse of the uncertainty. As the time resolution increases, the frequency resolution decreases and vice versa. 
 
 ### Discrete STFT
 
