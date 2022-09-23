@@ -129,7 +129,7 @@ The same is true in discrete time. If we first apply a finite length window $w_L
 
 ```
 
-### Time resolution and frequency resolution
+## Time resolution and frequency resolution
 
 When analyzing a signal, there is a fundamental trade off between **time resolution** and **frequency resolution**.
 
@@ -144,17 +144,53 @@ $$\begin{align}
 &= X(f) * g_{\frac 1 \sigma}(f) e^{-2\pi j f t} \\
 \end{align}$$
 
-The width of the window $g_\sigma(\tau-t)$ is proportional to $\sigma$, so our ability to localize a transient signal in time is related to $\sigma$. As the width of the window $\sigma$ increases, the uncertainty of our time localization $H_t$ increases and the the time resolution $R_t$ decreases.
+The width of the window $g_\sigma(\tau-t)$ is proportional to $\sigma$, so our ability to localize a transient signal in time is related to $\sigma$. As the width of the window increases, the uncertainty $H_t$ of our time localization increases and the the time resolution $R_t$ decreases.
 
-$$\uparrow \sigma \equiv \uparrow H_t \equiv \downarrow R_t$$
+```{admonition} Transient and tonal signal components
 
-Recall that the Fourier transform of a Gaussian $g_1(t)$ is another Gaussian $g_2(f)$ with $\sigma_2 = \frac{1}{\sigma_1}$. Therefore, our ability localize a tone in frequency is also related to $\sigma$. As $\sigma decreases$ with an uncertainty of roughly $\pm \frac{1}{\sigma}$.
+A **transient** is any signal component that is present for a short duration.
 
+A **tonal** signal component is highly concentrated at particular frequencies.
 
+Transient signals are easy to localize in the time domain but can be easy to overlook in the frequency domain. In contrast, a tonal signal is easy to localize in the frequency domain.
 
-As $\sigma$ increases, the uncertainty of our localization in time increa but less uncertainty in frequency, and vice versa. We could also state this in terms of the **resolution** which is the inverse of the uncertainty. As the time resolution increases, the frequency resolution decreases and vice versa. 
+A signal can be both tonal and transient, in which case the joint time-frequency domain is often preferred. For example, consider a 1-ms sinusoidal pulse with frequency $f_0 =$ 4 kHz.
 
-### Discrete STFT
+$$\begin{align}
+x(t) &= 2\cos{(2\pi f_0 t)} \text{rect}(1000t) \\
+X(f) &= \mathscr F \{ 2\cos{(2\pi f_0 t)} \} * \mathscr F \{ \text{rect}(1000t) \} \\
+&= \left( \delta(f-f_0) + \delta(f+f_0) \right) * \frac{1}{1000} \text{sinc}\left( \frac{f}{1000} \right) \\
+&= \frac{1}{1000} \left( 
+\text{sinc}\left( \frac{f-f_0}{1000}\right) + 
+\text{sinc}\left( \frac{f+f_0}{1000}\right) 
+\right)
+\end{align}$$
+
+```
+
+Recall that the Fourier transform of a Gaussian $g_1(t)$ is another Gaussian $g_2(f)$ with $\sigma_2 = \frac{1}{\sigma_1}$. Therefore, our ability localize a tone in frequency is also related to $\sigma$. As the width of the window increases, the uncertainty $H_f$ of our frequency localization decreases and the frequency resolution increases.
+
+$${\sigma \uparrow \atop \text{longer window}}
+\begin{matrix}
+& H_t \uparrow & & R_t \downarrow \\ 
+\nearrow & \text{more uncertainty in time} & \to & \text{lower time resolution} \\
+& & &\\
+\searrow & \text{less uncertainty in frequency} & \to & \text{better frequency resolution} \\
+& H_f \downarrow & & R_f \uparrow
+\end{matrix}$$ 
+
+---
+
+$${\sigma \downarrow \atop \text{shorter window}}
+\begin{matrix}
+& H_t \downarrow & & R_t \uparrow \\ 
+\nearrow & \text{less uncertainty in time} & \to & \text{better time resolution} \\
+& & &\\
+\searrow & \text{more uncertainty in frequency} & \to & \text{lower frequency resolution} \\
+& H_f \uparrow & & R_f \downarrow
+\end{matrix}$$ 
+
+## Discrete STFT
 
 The discrete version of the STFT replaces the Fourier transform with the discrete-time Fourier transform (DTFT). However, the discrete window function $w_L[n]$ is typically causal (instead of centered on the origin) and has finite length $L$. As a result of the finite length, the DTFT is equivalent to a discrete Fourier transform (DFT), and the discrete STFT $X[n,k]$ is sampled both time (indexed by $n$) and in frequency (indexed by $k$).
 

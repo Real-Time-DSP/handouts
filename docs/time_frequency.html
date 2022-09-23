@@ -158,8 +158,9 @@
 <p>The same is true in discrete time. If we first apply a finite length window <span class="math notranslate nohighlight">\(w_L[n]\)</span>, then the discrete-time Fourier transform (DTFT) is equivalent to the discrete Fourier transform (DFT).</p>
 </div>
 </div>
+</div>
 <div class="section" id="time-resolution-and-frequency-resolution">
-<h3>Time resolution and frequency resolution<a class="headerlink" href="#time-resolution-and-frequency-resolution" title="Permalink to this headline">¶</a></h3>
+<h2>Time resolution and frequency resolution<a class="headerlink" href="#time-resolution-and-frequency-resolution" title="Permalink to this headline">¶</a></h2>
 <p>When analyzing a signal, there is a fundamental trade off between <strong>time resolution</strong> and <strong>frequency resolution</strong>.</p>
 <p><img alt="" src="_images/time_freq_compare.svg" /></p>
 <p>To understand this trade-off, consider a special case of the STFT where the window function is Gaussian <span class="math notranslate nohighlight">\(w(t) = g_\sigma(t) = A e^{-t^2/2\sigma^2} \)</span>. This is also known as the <strong>Gabor transform</strong> <span class="math notranslate nohighlight">\(\mathscr G_\sigma\)</span>.</p>
@@ -170,14 +171,47 @@
 &amp;= \mathscr F \{ x(\tau) \} * \mathscr F \{ g_\sigma(\tau) \} e^{-2\pi j f t} \\
 &amp;= X(f) * g_{\frac 1 \sigma}(f) e^{-2\pi j f t} \\
 \end{align}\end{split}\]</div>
-<p>The width of the window <span class="math notranslate nohighlight">\(g_\sigma(\tau-t)\)</span> is proportional to <span class="math notranslate nohighlight">\(\sigma\)</span>, so our ability to localize a transient signal in time is related to <span class="math notranslate nohighlight">\(\sigma\)</span>. As the width of the window <span class="math notranslate nohighlight">\(\sigma\)</span> increases, the uncertainty of our time localization <span class="math notranslate nohighlight">\(H_t\)</span> increases and the the time resolution <span class="math notranslate nohighlight">\(R_t\)</span> decreases.</p>
+<p>The width of the window <span class="math notranslate nohighlight">\(g_\sigma(\tau-t)\)</span> is proportional to <span class="math notranslate nohighlight">\(\sigma\)</span>, so our ability to localize a transient signal in time is related to <span class="math notranslate nohighlight">\(\sigma\)</span>. As the width of the window increases, the uncertainty <span class="math notranslate nohighlight">\(H_t\)</span> of our time localization increases and the the time resolution <span class="math notranslate nohighlight">\(R_t\)</span> decreases.</p>
+<div class="admonition-transient-and-tonal-signal-components admonition">
+<p class="admonition-title">Transient and tonal signal components</p>
+<p>A <strong>transient</strong> is any signal component that is present for a short duration.</p>
+<p>A <strong>tonal</strong> signal component is highly concentrated at particular frequencies.</p>
+<p>Transient signals are easy to localize in the time domain but can be easy to overlook in the frequency domain. In contrast, a tonal signal is easy to localize in the frequency domain.</p>
+<p>A signal can be both tonal and transient, in which case the joint time-frequency domain is often preferred. For example, consider a 1-ms sinusoidal pulse with frequency <span class="math notranslate nohighlight">\(f_0 =\)</span> 4 kHz.</p>
 <div class="math notranslate nohighlight">
-\[\uparrow \sigma \equiv \uparrow H_t \equiv \downarrow R_t\]</div>
-<p>Recall that the Fourier transform of a Gaussian <span class="math notranslate nohighlight">\(g_1(t)\)</span> is another Gaussian <span class="math notranslate nohighlight">\(g_2(f)\)</span> with <span class="math notranslate nohighlight">\(\sigma_2 = \frac{1}{\sigma_1}\)</span>. Therefore, our ability localize a tone in frequency is also related to <span class="math notranslate nohighlight">\(\sigma\)</span>. As <span class="math notranslate nohighlight">\(\sigma decreases\)</span> with an uncertainty of roughly <span class="math notranslate nohighlight">\(\pm \frac{1}{\sigma}\)</span>.</p>
-<p>As <span class="math notranslate nohighlight">\(\sigma\)</span> increases, the uncertainty of our localization in time increa but less uncertainty in frequency, and vice versa. We could also state this in terms of the <strong>resolution</strong> which is the inverse of the uncertainty. As the time resolution increases, the frequency resolution decreases and vice versa.</p>
+\[\begin{split}\begin{align}
+x(t) &amp;= 2\cos{(2\pi f_0 t)} \text{rect}(1000t) \\
+X(f) &amp;= \mathscr F \{ 2\cos{(2\pi f_0 t)} \} * \mathscr F \{ \text{rect}(1000t) \} \\
+&amp;= \left( \delta(f-f_0) + \delta(f+f_0) \right) * \frac{1}{1000} \text{sinc}\left( \frac{f}{1000} \right) \\
+&amp;= \frac{1}{1000} \left( 
+\text{sinc}\left( \frac{f-f_0}{1000}\right) + 
+\text{sinc}\left( \frac{f+f_0}{1000}\right) 
+\right)
+\end{align}\end{split}\]</div>
+</div>
+<p>Recall that the Fourier transform of a Gaussian <span class="math notranslate nohighlight">\(g_1(t)\)</span> is another Gaussian <span class="math notranslate nohighlight">\(g_2(f)\)</span> with <span class="math notranslate nohighlight">\(\sigma_2 = \frac{1}{\sigma_1}\)</span>. Therefore, our ability localize a tone in frequency is also related to <span class="math notranslate nohighlight">\(\sigma\)</span>. As the width of the window increases, the uncertainty <span class="math notranslate nohighlight">\(H_f\)</span> of our frequency localization decreases and the frequency resolution increases.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}{\sigma \uparrow \atop \text{longer window}}
+\begin{matrix}
+&amp; H_t \uparrow &amp; &amp; R_t \downarrow \\ 
+\nearrow &amp; \text{more uncertainty in time} &amp; \to &amp; \text{lower time resolution} \\
+&amp; &amp; &amp;\\
+\searrow &amp; \text{less uncertainty in frequency} &amp; \to &amp; \text{better frequency resolution} \\
+&amp; H_f \downarrow &amp; &amp; R_f \uparrow
+\end{matrix}\end{split}\]</div>
+<hr class="docutils" />
+<div class="math notranslate nohighlight">
+\[\begin{split}{\sigma \downarrow \atop \text{shorter window}}
+\begin{matrix}
+&amp; H_t \downarrow &amp; &amp; R_t \uparrow \\ 
+\nearrow &amp; \text{less uncertainty in time} &amp; \to &amp; \text{better time resolution} \\
+&amp; &amp; &amp;\\
+\searrow &amp; \text{more uncertainty in frequency} &amp; \to &amp; \text{lower frequency resolution} \\
+&amp; H_f \uparrow &amp; &amp; R_f \downarrow
+\end{matrix}\end{split}\]</div>
 </div>
 <div class="section" id="discrete-stft">
-<h3>Discrete STFT<a class="headerlink" href="#discrete-stft" title="Permalink to this headline">¶</a></h3>
+<h2>Discrete STFT<a class="headerlink" href="#discrete-stft" title="Permalink to this headline">¶</a></h2>
 <p>The discrete version of the STFT replaces the Fourier transform with the discrete-time Fourier transform (DTFT). However, the discrete window function <span class="math notranslate nohighlight">\(w_L[n]\)</span> is typically causal (instead of centered on the origin) and has finite length <span class="math notranslate nohighlight">\(L\)</span>. As a result of the finite length, the DTFT is equivalent to a discrete Fourier transform (DFT), and the discrete STFT <span class="math notranslate nohighlight">\(X[n,k]\)</span> is sampled both time (indexed by <span class="math notranslate nohighlight">\(n\)</span>) and in frequency (indexed by <span class="math notranslate nohighlight">\(k\)</span>).</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}\begin{align}
@@ -217,7 +251,6 @@
 <li><p>Compute the discrete Fourier transform of each windowed segment using the fast Fourier transform (FFT) algorithm.</p></li>
 </ol>
 <p>Since the Fourier transform is, in general, complex-valued, we rarely use the STFT directly. Instead, it is common to separate it into it’s magnitude and phase. The plot constructed from the magnitude of the STFT, like the ones shown earlier, is called the <strong>magnitude spectrogram</strong>.</p>
-</div>
 </div>
 <div class="section" id="filter-banks">
 <h2>Filter banks<a class="headerlink" href="#filter-banks" title="Permalink to this headline">¶</a></h2>
@@ -362,6 +395,8 @@ H_{s+d}(\omega) &amp;=H_{s}(\omega) + H_{d}(\omega) \\
 <li class="toctree-l1"><a class="reference internal" href="LTI_systems_filters.html">LTI filters and frequency selectivity</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Time-Frequency Analysis</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#the-short-time-fourier-transform-stft">The short-time Fourier transform (STFT)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#time-resolution-and-frequency-resolution">Time resolution and frequency resolution</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#discrete-stft">Discrete STFT</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#filter-banks">Filter banks</a></li>
 </ul>
 </li>
