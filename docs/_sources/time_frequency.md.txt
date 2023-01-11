@@ -222,7 +222,7 @@ $$x[n] = x(t) \cdot Ш_{T_s}(t)$$
 The fourier transform of a sampled signal is called the discrete-time Fourier transform (DTFT).
 
 $$\begin{align}
-\text{DTFT}_ \{x[n] \} &= \sum_{n=-\infty}^{\infty}{x[n] e^{-j 2\pi f n}} \\
+\text{DTFT} \{x[n] \} &= \sum_{n=-\infty}^{\infty}{x[n] e^{-j 2\pi f n}} \\
 &= \mathscr F \{ x(t) Ш_{T_s}(t) \} \\
 &= \frac{1}{2\pi} \mathscr F \{ x(t) \} * \mathscr F \{ Ш_{T_s}(t) \} \\
 &= \frac{f_s}{2\pi} X(f) * Ш_{f_s}(f) 
@@ -268,7 +268,7 @@ The transformation we will apply consists of creating two other signals $s[k]$ a
 $$s[k] = x[2k] + x[2k+1]$$
 $$d[k] = x[2k+1] - x[2k]$$
 
-| $d[0]$ | $d[0]$ | $s[1]$ | $d[1]$ | $s[2]$ | $d[2]$ | $s[3]$ | $d[3]$ |
+| $s[0]$ | $d[0]$ | $s[1]$ | $d[1]$ | $s[2]$ | $d[2]$ | $s[3]$ | $d[3]$ |
 |:------:|:------:|:------:|:------:|:------:|:------:|:------:|:------:|
 | 7+1    | 1−7    | −13+20 | 20+13  | 4+7    | 7−4    | −18+5  | 5+18   |
 | 8      | −6     | 7      | 33     | 11     | 3      | −13    | 23     |
@@ -311,6 +311,12 @@ This transformation, the Haar decomposition, can be considered a two-channel fil
 The sum of two adjacent samples [is a low-pass filter with frequency response $H_s(\omega)=1+e^{-j\omega}$](LTI_systems_filters.html#lowpass)
 
 The difference [is a highpass filter with frequency response $H_d(\omega)=1-e^{-j\omega}$](LTI_systems_filters.html#highpass).
+
+![](img/two_sample_sum_diff.svg)
+
+This pair of filters are called *quadrature mirror filters* because their magnitude responses are mirror images about $pi/2$. In other words,
+
+$$\left|H_s(\omega)\right| = \left|H_d(\pi-\omega)\right|$$
 
 It should come as no suprise then that by adding the outputs of these two filters, the result is an all-pass filter:
 
